@@ -1,2 +1,2 @@
 # cadasta-test
-Cadasta Test
+Cadasta Test is for test scripts related to automated testing. 
