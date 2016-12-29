@@ -61,13 +61,13 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
         self.wd.wait_for_css("#signup_form")
 
-        self.wd.find_css('#id_username').send_keys("user")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user2")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
         self.wd.find_element_by_xpath('//button[@name="register"]').click()
-        self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]")
+        text = self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]")
 
-def tearDown(self):
+    def tearDown(self):
         self.wd.quit()
 
