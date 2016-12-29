@@ -1,11 +1,10 @@
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 
 # Make sure your class inherits from your base class
-class Auth(SeleniumTestCase):
+class Login(SeleniumTestCase):
 
     def setUp(self):
         # setUp is where you setup call fixture creation scripts
