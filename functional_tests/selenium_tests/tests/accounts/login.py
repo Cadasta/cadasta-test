@@ -50,3 +50,20 @@ class Login(SeleniumTestCase):
         # method and pass as a CSS selector, an id that will only exist
         # on the index page and not the login page
         self.wd.find_css("#cadasta")
+
+
+class LoginFailure(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_login_failure(self):
+        self.open("/account/login/")
+        self.wd.find_css('#id_login').send_keys("admin")
+        self.wd.find_css("#id_password").send_keys('admin')
+        self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
+        elem = self.wd.find_element_by_xpath("//div[contains(@role, 'alert')]")
+        assert elem != []
+
+    def tearDown(self):
+        self.wd.quit()

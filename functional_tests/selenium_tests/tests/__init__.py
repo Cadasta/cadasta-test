@@ -12,5 +12,6 @@ from functional_tests.selenium_tests.tests.accounts.registration_form_validation
     EmptyConfirmPasswordValidation
 )
 from functional_tests.selenium_tests.tests.accounts.login import (
-     Login,
+    Login,
+    LoginFailure
 )
