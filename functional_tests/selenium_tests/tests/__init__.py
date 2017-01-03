@@ -15,3 +15,6 @@ from functional_tests.selenium_tests.tests.accounts.login import (
     Login,
     LoginFailure
 )
+from functional_tests.selenium_tests.tests.accounts.user_profile import (
+    PasswordReset
+)
