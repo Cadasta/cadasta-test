@@ -85,8 +85,26 @@ class FullnameChange(SeleniumTestCase):
         self.wd.wait_for_css('.btn-user')
         self.open("/account/profile/")
 
-        self.wd.find_css('#id_fullname').clear()
-        self.wd.find_css('#id_fullname').send_keys("cadasta-test-user-1-fullname")
+        self.wd.find_css('#id_full_name').clear()
+        self.wd.find_css('#id_full_name').send_keys("cadasta-test-user-1-fullname")
+        self.wd.find_element_by_xpath('//button[@name="update"]').click()
+
+    def tearDown(self):
+        self.wd.quit()
+
+
+class EmailChange(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_username_change(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.open("/account/profile/")
+
+        self.wd.find_css('#id_email').clear()
+        self.wd.find_css('#id_email').send_keys("cadasta-test-user-1@abc.com")
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def tearDown(self):
