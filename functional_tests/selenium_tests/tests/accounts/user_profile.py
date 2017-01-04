@@ -51,3 +51,43 @@ class PasswordChange(SeleniumTestCase):
 
     def tearDown(self):
         self.wd.quit()
+
+
+class UsernameChange(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_username_change(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.open("/account/profile/")
+
+        self.wd.find_css('#id_username').clear()
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user-11")
+        self.wd.find_element_by_xpath('//button[@name="update"]').click()
+
+        # text = self.wd.find_elements_by_xpath("//span[@class, 'username')]").text
+        # print text
+        # assert text == "cadasta-test-user-11"
+
+    def tearDown(self):
+        self.wd.quit()
+
+
+class FullnameChange(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_username_change(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.open("/account/profile/")
+
+        self.wd.find_css('#id_fullname').clear()
+        self.wd.find_css('#id_fullname').send_keys("cadasta-test-user-1-fullname")
+        self.wd.find_element_by_xpath('//button[@name="update"]').click()
+
+    def tearDown(self):
+        self.wd.quit()
