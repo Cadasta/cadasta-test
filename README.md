@@ -13,8 +13,8 @@ To install the dependencies :
 
 To configure geckodriver :
 
-Download from https://github.com/mozilla/geckodriver/releases
-Unzip it and add to PATH variable
+`Download from https://github.com/mozilla/geckodriver/releases
+Unzip it and add to PATH variable`
 
 To run the tests :
 
