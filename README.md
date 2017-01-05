@@ -9,13 +9,13 @@ First you have to create a user with the following credentials in your cadasta s
 
 To install the dependencies :
 
-	`pip install -r requirements.pip`
+`pip install -r requirements.pip`
 
 To configure geckodriver :
 
-	Download from https://github.com/mozilla/geckodriver/releases
-	Unzip it and add to PATH variable
+Download from https://github.com/mozilla/geckodriver/releases
+Unzip it and add to PATH variable
 
 To run the tests :
 
-       `./manage.py test selenium_tests`
+`./manage.py test selenium_tests`
