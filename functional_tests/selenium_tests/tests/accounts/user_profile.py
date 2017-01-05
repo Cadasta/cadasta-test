@@ -50,6 +50,7 @@ class PasswordChange(SeleniumTestCase):
         assert text == "Change your password"
 
     def tearDown(self):
+        self.restore_password("XYZ#qwerty", "XYZ#qwertyA")
         self.wd.quit()
 
 
@@ -72,6 +73,7 @@ class UsernameChange(SeleniumTestCase):
         # assert text == "cadasta-test-user-11"
 
     def tearDown(self):
+        self.restore_username("cadasta-test-user-1")
         self.wd.quit()
 
 
@@ -80,7 +82,7 @@ class FullnameChange(SeleniumTestCase):
     def setUp(self):
         self.wd = CustomWebDriver()
 
-    def test_username_change(self):
+    def test_fullname_change(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
         self.open("/account/profile/")
@@ -90,6 +92,7 @@ class FullnameChange(SeleniumTestCase):
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def tearDown(self):
+        self.restore_fullname("")
         self.wd.quit()
 
 
@@ -98,7 +101,7 @@ class EmailChange(SeleniumTestCase):
     def setUp(self):
         self.wd = CustomWebDriver()
 
-    def test_username_change(self):
+    def test_email_change(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
         self.open("/account/profile/")
