@@ -5,7 +5,7 @@ First you have to create a user with the following credentials in your cadasta s
 `username : cadasta-test-user-1
  password : XYZ#qwerty`
 
-To install the dependencies :
+To install the dependencies :\n
 	`pip install -r requirements.pip`
 
 To configure geckodriver :
