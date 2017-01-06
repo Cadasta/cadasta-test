@@ -22,3 +22,6 @@ from functional_tests.selenium_tests.tests.accounts.user_profile import (
     FullnameChange,
     EmailChange
 )
+from functional_tests.selenium_tests.tests.organizations.organization import (
+    NewOrganization
+)

@@ -29,3 +29,10 @@ class CustomWebDriver(web_driver_module.WebDriver):
             return WebDriverWait(self, timeout).until(lambda driver : driver.find_css(css_selector))
         except:
             self.quit()
+
+    def wait_for_xpath(self, xpath, timeout=7):
+        """ Shortcut for WebDriverWait"""
+        try:
+            return WebDriverWait(self, timeout).until(lambda driver : driver.find_element_by_xpath(xpath))
+        except:
+            self.quit()
