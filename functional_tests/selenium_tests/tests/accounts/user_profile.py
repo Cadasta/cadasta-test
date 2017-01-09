@@ -8,6 +8,7 @@ class PasswordReset(SeleniumTestCase):
 
     def test_password_reset(self):
         self.user_login()
+        self.wd.wait_for_css('.btn-user')
         self.open("/account/password/reset/")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_element_by_xpath('//input[@value="Reset password"]').click()
