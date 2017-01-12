@@ -43,3 +43,7 @@ from functional_tests.selenium_tests.tests.organizations.organization_members im
     RemoveMember,
     SearchMembers
 )
+from functional_tests.selenium_tests.tests.projects.project import (
+    CreateProject,
+    EditProject
+)
