@@ -45,5 +45,10 @@ from functional_tests.selenium_tests.tests.organizations.organization_members im
 )
 from functional_tests.selenium_tests.tests.projects.project import (
     CreateProject,
-    EditProject
+    CreatePrivateProject,
+    EditProject,
+)
+from functional_tests.selenium_tests.tests.projects.project_draw_on_map import (
+    AddProjectWithExtent,
+    AddLocation
 )
