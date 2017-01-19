@@ -20,17 +20,18 @@ class AddProjectWithExtent(SeleniumTestCase):
             page_state = self.wd.execute_script('return document.readyState;')
         print page_state
 
-        script = (
-            'map = window.maps[0];'+
+        self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-polygon"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//div[@id="id_extents_extent_map"]')
+        action.move_to_element(elem).move_by_offset(10, 10).click().perform()
+        action.move_to_element(elem).move_by_offset(15, 10).click().perform()
+        action.move_to_element(elem).move_by_offset(15, 15).click().perform()
+        action.move_to_element(elem).move_by_offset(10, 15).click().perform()
+        action.move_to_element(elem).move_by_offset(10, 10).click().perform()
 
-            'var polygon = L.polygon([' +
-            '    [56.51, 20.047],' +
-            '    [51.509, 10.08],' +
-            '    [53.503, -0.06],' +
-            '    [58.51, 0.047]' +
-            ']).addTo(map);'
-        )
-        self.wd.execute_script(script)
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
 
         self.wd.find_element_by_xpath('//button[@type="submit"]').click()
         self.wd.wait_for_xpath("//h3[contains(text(), '1. General Information')]")
@@ -75,97 +76,23 @@ class AddLocation(SeleniumTestCase):
             page_state = self.wd.execute_script('return document.readyState;')
         print page_state
 
-        ###############################################################
-        # [17/Jan/2017 07:57:19] "POST /organizations/organization-1/projects/project-1/records/locations/new/ HTTP/1.1" 302 0
-        # [17/Jan/2017 07:57:19] "GET /organizations/organization-1/projects/project-1/records/locations/qdkj9wf2c5bsj92uacgwb9z4/ HTTP/1.1" 200 24274
-        # [17/Jan/2017 07:57:20] "GET /jsi18n/ HTTP/1.1" 200 3189
-        # [17/Jan/2017 07:57:20] "GET /static/js/leaflet.groupedlayercontrol.min.js.map HTTP/1.1" 404 1736
-        # [17/Jan/2017 07:57:20] "GET /api/v1/organizations/organization-1/projects/project-1/spatialresources/ HTTP/1.1" 200 2
-        # [17/Jan/2017 07:57:20] "GET /async/organizations/organization-1/projects/project-1/spatial/?exclude=qdkj9wf2c5bsj92uacgwb9z4 HTTP/1.1" 200 80
-        # [17/Jan/2017 07:58:03] "GET /organizations/organization-1/projects/project-1/records/locations/new/ HTTP/1.1" 200 26587
-        # [17/Jan/2017 07:58:03] "GET /jsi18n/ HTTP/1.1" 200 3189
-        # [17/Jan/2017 07:58:04] "GET /static/js/leaflet.groupedlayercontrol.min.js.map HTTP/1.1" 404 1736
-        # [17/Jan/2017 07:58:05] "GET /api/v1/organizations/organization-1/projects/project-1/spatialresources/ HTTP/1.1" 200 2
-        # [17/Jan/2017 07:58:05] "GET /async/organizations/organization-1/projects/project-1/spatial/ HTTP/1.1" 200 467
-        ###############################################################
-
-        ################################################################
-        # from seleniumrequests import Firefox
-        #
-        # webdriver = Firefox()
-        # response = webdriver.request('POST', 'url here', data={"param1": "value1"})
-        # print(response)
-        # https://pypi.python.org/pypi/selenium-requests/
-        ################################################################
-
-
-        ##################################################################
-        # script = (
-        #     'map = window.maps[0];'+
-        #
-        #     'var layer = L.marker([51.5, -0.09]).addTo(map);'+
-        #     'layer.addTo(map);'
-        #
-        #     'var polygon = L.polygon([' +
-        #     '    [56.51, 20.047],' +
-        #     '    [51.509, 10.08],' +
-        #     '    [53.503, -0.06],' +
-        #     '    [58.51, 0.047]' +
-        #     ']).addTo(map);' +
-        #
-        #     'console.log(polygon);'
-        # )
-        # self.wd.execute_script(script)
-        #################################################################
-
-        # elem = self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-marker"]')
-        # elem.click()
-        # action = ActionChains(self.wd)
-        # action.move_to_element_with_offset(elem, 10, 10)
-        # action.click()
-        # action.perform()
-
         self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-marker"]').click()
-
         action = ActionChains(self.wd)
         elem = self.wd.find_element_by_xpath('//div[@id="id_geometry_map"]')
         action.move_to_element(elem).move_by_offset(10, 10).click().perform()
-        # action.move_to_element_with_offset(elem, 10, 10)
-        # action.click()
-        # action.perform()
 
-        ################################################################
-
-        self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-polygon"]').click()
-        action = ActionChains(self.wd)
-        elem = self.wd.find_element_by_xpath('//div[@id="id_geometry_map"]')
-        action.move_to_element(elem).move_by_offset(5, 5).click().perform()
-        action.move_to_element(elem).move_by_offset(15, 5).click().perform()
-        action.move_to_element(elem).move_by_offset(15, 15).click().perform()
-        action.move_to_element(elem).move_by_offset(5, 15).click().perform()
-        action.move_to_element(elem).move_by_offset(5, 5).click().perform()
-
-        #################################################################
-
-        # location = elem.location
-        # size = elem.size
-        # print(location)
-        # print(size)
-
-        ################################################################
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
 
         self.wd.find_element_by_xpath('//select[@name="type"]').click()
         self.wd.find_element_by_xpath('//option[@value="PA"]').click()
         self.wd.find_element_by_xpath('//input[@value="Save"]').click()
 
-        # self.wd.find_element_by_xpath('//button[@type="submit"]').click()
-        # self.wd.wait_for_xpath("//h3[contains(text(), 'Assign permissions to members')]")
-        # text = self.wd.find_element_by_xpath('//button[@type="submit"]').text
-        # self.wd.find_element_by_xpath('//button[@type="submit"]').click()
-        # self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        # text = self.wd.find_element_by_xpath("//div/section/p").text
-        # assert text == "Test project-1 description edited."
+        self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
+        text = self.wd.find_element_by_xpath("//h2/span").text
+        assert text == "LOCATION"
 
-    # def tearDown(self):
-    #     self.wd.quit()
+    def tearDown(self):
+        self.wd.quit()
 
