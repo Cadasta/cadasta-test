@@ -17,6 +17,7 @@ To configure geckodriver (If you run the tests with firefox):
 Unzip it and add to PATH variable`
 
 To configure chromedriver (If you run the tests with chrome):
+
 `Download from https://sites.google.com/a/chromium.org/chromedriver/downloads
 Unzip it and add to PATH variable`
 
