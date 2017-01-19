@@ -11,9 +11,13 @@ To install the dependencies :
 
 `pip install -r requirements.pip`
 
-To configure geckodriver :
+To configure geckodriver (If you run the tests with firefox):
 
 `Download from https://github.com/mozilla/geckodriver/releases
+Unzip it and add to PATH variable`
+
+To configure chromedriver (If you run the tests with chrome):
+`Download from https://sites.google.com/a/chromium.org/chromedriver/downloads
 Unzip it and add to PATH variable`
 
 To run the tests :
