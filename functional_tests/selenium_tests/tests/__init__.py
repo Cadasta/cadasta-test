@@ -44,11 +44,15 @@ from functional_tests.selenium_tests.tests.organizations.organization_members im
     SearchMembers
 )
 from functional_tests.selenium_tests.tests.projects.project import (
-    CreateProject,
+    CreatePublicProject,
     CreatePrivateProject,
-    EditProject,
+    EditProjectDetails,
+    ProjectAccessibility
 )
 from functional_tests.selenium_tests.tests.projects.project_draw_on_map import (
     AddProjectWithExtent,
-    AddLocation
+    AddLocation,
+)
+from functional_tests.selenium_tests.tests.projects.project_resources import (
+    AddResource
 )

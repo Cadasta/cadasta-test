@@ -18,7 +18,6 @@ class AddProjectWithExtent(SeleniumTestCase):
         page_state = self.wd.execute_script('return document.readyState;')
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
-        print page_state
 
         self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-polygon"]').click()
         action = ActionChains(self.wd)
