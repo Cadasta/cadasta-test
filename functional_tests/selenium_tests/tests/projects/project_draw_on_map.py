@@ -1,6 +1,8 @@
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
+
 
 class AddProjectWithExtent(SeleniumTestCase):
 
@@ -10,7 +12,7 @@ class AddProjectWithExtent(SeleniumTestCase):
     def test_new_project_with_extent(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
@@ -63,12 +65,12 @@ class AddLocation(SeleniumTestCase):
     def test_edit_add_location(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
+        self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.open("/organizations/organization-1/projects/project-1/records/locations/new/")
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Add new location')]")
+        self.wd.find_element_by_link_text("Add location").click()
+        self.wd.wait_for_xpath("//h3[contains(text(), 'Draw location on map')]")
 
         page_state = self.wd.execute_script('return document.readyState;')
         while page_state != 'complete':
@@ -84,8 +86,7 @@ class AddLocation(SeleniumTestCase):
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
 
-        self.wd.find_element_by_xpath('//select[@name="type"]').click()
-        self.wd.find_element_by_xpath('//option[@value="PA"]').click()
+        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text("Parcel")
         self.wd.find_element_by_xpath('//input[@value="Save"]').click()
 
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")

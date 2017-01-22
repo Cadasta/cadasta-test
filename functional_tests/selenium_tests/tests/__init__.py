@@ -56,3 +56,6 @@ from functional_tests.selenium_tests.tests.projects.project_draw_on_map import (
 from functional_tests.selenium_tests.tests.projects.project_resources import (
     AddResource
 )
+from functional_tests.selenium_tests.tests.projects.location_resources import (
+    AddLocationResource
+)

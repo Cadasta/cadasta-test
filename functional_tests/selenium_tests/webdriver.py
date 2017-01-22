@@ -36,3 +36,14 @@ class CustomWebDriver(web_driver_module.WebDriver):
             return WebDriverWait(self, timeout).until(lambda driver : driver.find_element_by_xpath(xpath))
         except:
             self.quit()
+
+    def switch_to_modal_dialog(self):
+        modal_dialog_window_handle = None
+        main_window_handle = self.current_window_handle
+        print main_window_handle
+        for handle in self.window_handles:
+            print handle
+            if handle != main_window_handle:
+                modal_dialog_window_handle = handle
+                break
+        self.switch_to.window(modal_dialog_window_handle)

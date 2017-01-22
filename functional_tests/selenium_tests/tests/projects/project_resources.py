@@ -11,13 +11,13 @@ class AddResource(SeleniumTestCase):
     def test_add_resource(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
+        self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="resources"]/a').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Resources')]")
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/resources/add/new/"]').click()
+        self.wd.find_element_by_link_text("Attach").click()
 
         self.wd.switch_to_window(self.wd.window_handles[-1])
         path = os.path.abspath("resources/resource-1.pdf")
