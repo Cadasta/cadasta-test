@@ -9,7 +9,7 @@ class CreatePublicProject(SeleniumTestCase):
     def test_new_project(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
@@ -48,7 +48,7 @@ class CreatePrivateProject(SeleniumTestCase):
     def test_new_project(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
@@ -88,7 +88,7 @@ class EditProjectDetails(SeleniumTestCase):
     def test_edit_project(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
@@ -115,7 +115,7 @@ class ProjectAccessibility(SeleniumTestCase):
     def test_public_project_to_private(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
@@ -129,7 +129,7 @@ class ProjectAccessibility(SeleniumTestCase):
     def test_private_project_to_public(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
-        self.open("/projects/")
+        self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
