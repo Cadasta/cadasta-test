@@ -65,3 +65,9 @@ from functional_tests.selenium_tests.tests.projects.location_resources import (
 from functional_tests.selenium_tests.tests.projects.location_relationships import (
     AddLocationRelationship
 )
+from functional_tests.selenium_tests.tests.projects.project_parties import (
+    ViewParty,
+    PartyResource,
+    EditParty,
+    DeleteParty
+)
