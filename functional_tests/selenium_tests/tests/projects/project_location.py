@@ -9,7 +9,7 @@ class AddLocation(SeleniumTestCase):
     def setUp(self):
         self.wd = CustomWebDriver()
 
-    def test_edit_add_location(self):
+    def test_add_location(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
         self.wd.find_element_by_link_text("Projects").click()
