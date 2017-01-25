@@ -8,7 +8,7 @@ class AddLocationResource(SeleniumTestCase):
     def setUp(self):
         self.wd = CustomWebDriver()
 
-    def test_attach_resource_to_location(self):
+    def test_attach_resource_to_new_location(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
         self.wd.find_element_by_link_text("Projects").click()
@@ -38,7 +38,32 @@ class AddLocationResource(SeleniumTestCase):
 
         self.wd.find_element_by_xpath("//a[contains(text(),'Resources')]").click()
         self.wd.find_element_by_link_text("Attach").click()
-        self.wd.find_element_by_xpath('//tr/td/label/strong[contains(text(), "resource")]').click()
+        self.wd.find_element_by_xpath('//tr/td/label/strong[contains(text(), "resource-1")]').click()
+        self.wd.find_element_by_name("submit").click()
+        self.wd.wait_for_xpath('//a[@href="#resources"]')
+
+    def test_attach_resource_to_existing_location(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.wd.find_element_by_link_text("Projects").click()
+        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
+
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//div[@id="project-map"]')
+        action.move_to_element(elem).perform()
+        self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
+        self.wd.find_element_by_link_text("Open location").click()
+        self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
+        self.wd.find_element_by_xpath("//a[contains(text(),'Resources')]").click()
+        self.wd.find_element_by_link_text("Attach").click()
+
+        self.wd.find_element_by_xpath('//tr/td/label/strong[contains(text(), "resource-1")]').click()
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath('//a[@href="#resources"]')
 
