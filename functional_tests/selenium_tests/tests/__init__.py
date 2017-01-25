@@ -60,7 +60,8 @@ from functional_tests.selenium_tests.tests.projects.project_resources import (
 )
 from functional_tests.selenium_tests.tests.projects.project_location import (
     AddLocation,
-    EditLocation
+    EditLocation,
+    DeleteLocation
 )
 from functional_tests.selenium_tests.tests.projects.location_resources import (
     AddLocationResource

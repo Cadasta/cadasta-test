@@ -78,3 +78,33 @@ class EditLocation(SeleniumTestCase):
     def tearDown(self):
         self.wd.quit()
 
+
+class DeleteLocation(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_delete_location(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.wd.find_element_by_link_text("Projects").click()
+        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
+
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//div[@id="project-map"]')
+        action.move_to_element(elem).perform()
+        self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
+        self.wd.find_element_by_link_text("Open location").click()
+        self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
+        self.wd.find_element_by_xpath("//a[@title='Delete location']").click()
+        self.wd.switch_to_window(self.wd.window_handles[-1])
+        self.wd.wait_for_xpath("//button[@value='Confirm']").click()
+
+    def tearDown(self):
+        self.wd.quit()
