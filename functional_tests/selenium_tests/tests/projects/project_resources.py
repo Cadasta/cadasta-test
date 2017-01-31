@@ -1,6 +1,7 @@
 import os
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
+from functional_tests.selenium_tests.pages import ProjectsPage
 
 
 class AddResource(SeleniumTestCase):
@@ -9,10 +10,9 @@ class AddResource(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_add_resource(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="resources"]/a').click()

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
 from selenium.common.exceptions import NoSuchElementException
-
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
+from functional_tests.selenium_tests.pages import RegistrationPage
+
 
 class NewRegistration(SeleniumTestCase):
 
@@ -10,9 +10,8 @@ class NewRegistration(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_new_registration(self):
-        self.open("/dashboard/")
-        self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
-        self.wd.wait_for_css("#signup_form")
+        registration_page = RegistrationPage(self.wd, self)
+        registration_page.go_to()
 
         self.wd.find_css('#id_username').send_keys("cadasta-test-user1")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
@@ -37,9 +36,8 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_registration_attempt_already_taken_username(self):
-        self.open("/dashboard/")
-        self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
-        self.wd.wait_for_css("#signup_form")
+        registration_page = RegistrationPage(self.wd, self)
+        registration_page.go_to()
 
         self.wd.find_css('#id_username').send_keys("cadasta-test-user1")
         self.wd.find_css('#id_email').send_keys("user@abc.com")
@@ -57,9 +55,8 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_registration_attempt_already_taken_email(self):
-        self.open("/dashboard/")
-        self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
-        self.wd.wait_for_css("#signup_form")
+        registration_page = RegistrationPage(self.wd, self)
+        registration_page.go_to()
 
         self.wd.find_css('#id_username').send_keys("cadasta-test-user2")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")

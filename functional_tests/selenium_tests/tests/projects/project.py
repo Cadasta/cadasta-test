@@ -1,5 +1,7 @@
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
+from functional_tests.selenium_tests.pages import ProjectsPage
+
 
 class CreatePublicProject(SeleniumTestCase):
 
@@ -7,10 +9,9 @@ class CreatePublicProject(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_new_project(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
         self.wd.wait_for_xpath('//button[@type="submit"]')
@@ -46,10 +47,9 @@ class CreatePrivateProject(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_new_project(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
         self.wd.wait_for_xpath('//button[@type="submit"]')
@@ -86,10 +86,9 @@ class EditProjectDetails(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_edit_project(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
@@ -113,10 +112,9 @@ class ProjectAccessibility(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_public_project_to_private(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
@@ -127,10 +125,9 @@ class ProjectAccessibility(SeleniumTestCase):
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 
     def test_private_project_to_public(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()

@@ -3,6 +3,7 @@ from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementNotVisibleException
+from functional_tests.selenium_tests.pages import ProjectsPage
 
 
 class AddLocationRelationship(SeleniumTestCase):
@@ -11,10 +12,9 @@ class AddLocationRelationship(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_attach_relationship_to_new_location(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_link_text("Add location").click()
@@ -54,10 +54,9 @@ class AddLocationRelationship(SeleniumTestCase):
         self.wd.wait_for_xpath('//a[@href="#relationships"]')
 
     def test_attach_relationship_to_existing_location(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 

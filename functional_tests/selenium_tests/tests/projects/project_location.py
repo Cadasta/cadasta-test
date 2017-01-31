@@ -2,6 +2,7 @@ from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
+from functional_tests.selenium_tests.pages import ProjectsPage
 
 
 class AddLocation(SeleniumTestCase):
@@ -10,10 +11,9 @@ class AddLocation(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_add_location(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_link_text("Add location").click()
@@ -50,10 +50,9 @@ class EditLocation(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_edit_location_details(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 
@@ -85,10 +84,9 @@ class DeleteLocation(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_delete_location(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 

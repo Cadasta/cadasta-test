@@ -1,6 +1,7 @@
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.common.exceptions import NoSuchElementException
+from functional_tests.selenium_tests.pages import OrganizationsPage
 
 
 class CreateOrganization(SeleniumTestCase):
@@ -9,10 +10,9 @@ class CreateOrganization(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_new_organization(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Organizations").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/new/"]').click()
         self.wd.wait_for_css(".modal-title")
         self.wd.wait_for_css("#id_name")
@@ -38,10 +38,9 @@ class EditOrganization(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_edit_organization(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Organizations").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_link_text("organization-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
@@ -64,10 +63,9 @@ class OrganizationArchive(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_archive_organization(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Organizations").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_link_text("organization-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.open("/organizations/organization-1/archive/")
@@ -76,10 +74,9 @@ class OrganizationArchive(SeleniumTestCase):
         assert text == "ARCHIVED"
 
     def test_unarchive_organization(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Organizations").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_css("#archive-filter").click()
         self.wd.find_element_by_xpath('//option[@value="archived-True"]').click()
         self.wd.find_element_by_link_text("organization-1").click()

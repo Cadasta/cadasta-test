@@ -1,6 +1,7 @@
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
+from functional_tests.selenium_tests.pages import ProjectsPage
 
 
 class AddProjectWithExtent(SeleniumTestCase):
@@ -9,10 +10,9 @@ class AddProjectWithExtent(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_new_project_with_extent(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/projects/new/"]').click()
         self.wd.wait_for_css(".wizard")
 

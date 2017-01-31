@@ -2,6 +2,7 @@ import os
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.support.ui import Select
+from functional_tests.selenium_tests.pages import ProjectsPage
 
 
 class ViewParty(SeleniumTestCase):
@@ -10,10 +11,9 @@ class ViewParty(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_view_party(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
@@ -33,10 +33,9 @@ class PartyResource(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_attach_resource_to_party(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
@@ -51,10 +50,9 @@ class PartyResource(SeleniumTestCase):
         assert self.wd.find_element_by_xpath('//td/div/p/a/strong[contains(text(), "resource-1")]')
 
     def test_detach_resource_from_party(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
@@ -74,10 +72,9 @@ class EditParty(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_edit_party(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
@@ -101,10 +98,9 @@ class DeleteParty(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_delete_party(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.wd.find_element_by_link_text("Projects").click()
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
         self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()

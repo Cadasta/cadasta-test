@@ -1,6 +1,8 @@
 from functional_tests.selenium_tests.test import SeleniumTestCase
 from functional_tests.selenium_tests.webdriver import CustomWebDriver
 from selenium.common.exceptions import NoSuchElementException
+from functional_tests.selenium_tests.pages import OrganizationsPage
+
 
 class ViewMembers(SeleniumTestCase):
 
@@ -8,10 +10,9 @@ class ViewMembers(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_view_members(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -29,10 +30,9 @@ class ViewMemberProfile(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_view_member_profile(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -52,10 +52,9 @@ class AddMember(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_add_member(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -78,10 +77,9 @@ class AddNonExistingMember(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_add_member(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -104,10 +102,9 @@ class RemoveMember(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_remove_member(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -133,10 +130,9 @@ class SearchMembers(SeleniumTestCase):
         self.wd = CustomWebDriver()
 
     def test_search_member(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/"]').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/members/"]').click()
@@ -146,10 +142,9 @@ class SearchMembers(SeleniumTestCase):
         assert len(elems) != 0
 
     def test_search_non_existing_member(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/organizations/")
-        self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
+        organizations_page = OrganizationsPage(self.wd, self)
+        organizations_page.go_to()
+
         self.wd.find_element_by_xpath('//input[@type="search"]').send_keys("user-x")
         text = self.wd.find_css(".dataTables_empty").text
         assert text == "No matching records found"
