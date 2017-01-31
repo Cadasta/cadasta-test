@@ -28,6 +28,12 @@ class OrganizationsPage:
         self.wd.switch_to_window(self.wd.window_handles[-1])
         self.wd.wait_for_css(".modal-title")
 
+    def open_members_page(self):
+        self.wd.find_element_by_link_text("organization-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
+        self.wd.find_element_by_css_selector("span.icon.members").click()
+        self.wd.wait_for_css('.table')
+
 
 class ProjectsPage:
 
