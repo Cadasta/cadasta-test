@@ -13,13 +13,9 @@ class ViewParty(SeleniumTestCase):
     def test_view_party(self):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
+        projects_page.open_parties_page()
 
-        self.wd.find_element_by_link_text("project-1").click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
         self.wd.find_element_by_link_text("party-1").click()
-
         text = self.wd.find_element_by_xpath("//div[@class='page-title']/h2").text
         assert text == "PARTY DETAIL"
 
@@ -35,11 +31,8 @@ class PartyResource(SeleniumTestCase):
     def test_attach_resource_to_party(self):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
+        projects_page.open_parties_page()
 
-        self.wd.find_element_by_link_text("project-1").click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
         self.wd.find_element_by_link_text("Attach").click()
@@ -52,11 +45,8 @@ class PartyResource(SeleniumTestCase):
     def test_detach_resource_from_party(self):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
+        projects_page.open_parties_page()
 
-        self.wd.find_element_by_link_text("project-1").click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
         self.wd.find_element_by_link_text("Detach").click()
@@ -74,11 +64,8 @@ class EditParty(SeleniumTestCase):
     def test_edit_party(self):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
+        projects_page.open_parties_page()
 
-        self.wd.find_element_by_link_text("project-1").click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
         self.wd.find_element_by_xpath("//a[@title='Edit party']").click()
@@ -100,11 +87,8 @@ class DeleteParty(SeleniumTestCase):
     def test_delete_party(self):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
+        projects_page.open_parties_page()
 
-        self.wd.find_element_by_link_text("project-1").click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
-        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.find_element_by_xpath("//a[@title='Delete party']").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])

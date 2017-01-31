@@ -47,4 +47,10 @@ class ProjectsPage:
         self.wd.find_element_by_link_text("Projects").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
 
+    def open_parties_page(self):
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
+
 

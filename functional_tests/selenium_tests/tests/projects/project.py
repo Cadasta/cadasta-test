@@ -89,7 +89,7 @@ class EditProjectDetails(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
+        self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
         self.wd.find_element_by_link_text("Edit project details").click()
@@ -115,7 +115,7 @@ class ProjectAccessibility(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
+        self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
         self.wd.find_element_by_link_text("Edit project details").click()
@@ -128,7 +128,7 @@ class ProjectAccessibility(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_xpath('//a[@href="/organizations/organization-1/projects/project-1/"]').click()
+        self.wd.find_element_by_link_text("project-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
         self.wd.find_element_by_link_text("Edit project details").click()
