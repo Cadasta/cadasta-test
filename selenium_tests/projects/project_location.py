@@ -1,8 +1,8 @@
-from functional_tests.selenium_tests.test import SeleniumTestCase
-from functional_tests.selenium_tests.webdriver import CustomWebDriver
+from selenium_tests.test import SeleniumTestCase
+from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-from functional_tests.selenium_tests.pages import ProjectsPage
+from selenium_tests.pages import ProjectsPage
 
 
 class AddLocation(SeleniumTestCase):
