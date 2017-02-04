@@ -25,4 +25,4 @@ Unzip it and add to PATH variable`
 
 To run the tests :
 
-`./manage.py test selenium_tests`
+`./runtests`
