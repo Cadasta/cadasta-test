@@ -45,11 +45,13 @@ class EditOrganization(SeleniumTestCase):
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_xpath("(//button[@type='button'])[2]").click()
         self.wd.find_element_by_link_text("Edit organization").click()
-        self.wd.wait_for_css(".modal-title")
+        self.wd.switch_to_window(self.wd.window_handles[-1])
+        self.wd.wait_for_css("#id_description")
         self.wd.find_element_by_id("id_description").clear()
         self.wd.find_element_by_id("id_description").send_keys("Test organization-1 description edited.")
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
+        self.wd.wait_for_xpath("//div/section/p")
         text = self.wd.find_element_by_xpath("//div/section/p").text
         assert text == "Test organization-1 description edited."
 

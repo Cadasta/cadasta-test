@@ -19,6 +19,9 @@ class OrganizationsPage:
     def go_to(self):
         self.test.user_login()
         self.wd.wait_for_css('.btn-user')
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
         self.wd.find_element_by_link_text("Organizations").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
 
