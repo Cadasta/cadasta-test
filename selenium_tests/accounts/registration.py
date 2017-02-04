@@ -1,7 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
-from functional_tests.selenium_tests.test import SeleniumTestCase
-from functional_tests.selenium_tests.webdriver import CustomWebDriver
-from functional_tests.selenium_tests.pages import RegistrationPage
+from selenium_tests.test import SeleniumTestCase
+from selenium_tests.webdriver import CustomWebDriver
+from selenium_tests.pages import RegistrationPage
 
 
 class NewRegistration(SeleniumTestCase):
@@ -13,7 +13,7 @@ class NewRegistration(SeleniumTestCase):
         registration_page = RegistrationPage(self.wd, self)
         registration_page.go_to()
 
-        self.wd.find_css('#id_username').send_keys("cadasta-test-user1")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user-1")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
@@ -39,7 +39,7 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         registration_page = RegistrationPage(self.wd, self)
         registration_page.go_to()
 
-        self.wd.find_css('#id_username').send_keys("cadasta-test-user1")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user-1")
         self.wd.find_css('#id_email').send_keys("user@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
@@ -58,7 +58,7 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         registration_page = RegistrationPage(self.wd, self)
         registration_page.go_to()
 
-        self.wd.find_css('#id_username').send_keys("cadasta-test-user2")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user")
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')

@@ -1,6 +1,7 @@
-from django.test import LiveServerTestCase
+# from django.test import LiveServerTestCase
+import unittest
 
-class SeleniumTestCase(LiveServerTestCase):
+class SeleniumTestCase(unittest.TestCase):
     """
     A base test case for selenium, providing hepler methods for generating
     clients and logging in profiles.

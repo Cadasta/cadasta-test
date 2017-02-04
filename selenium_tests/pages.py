@@ -5,7 +5,7 @@ class RegistrationPage:
         self.test = test_case
 
     def go_to(self):
-        self.open("/dashboard/")
+        self.test.open("/dashboard/")
         self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
         self.wd.wait_for_css("#signup_form")
 

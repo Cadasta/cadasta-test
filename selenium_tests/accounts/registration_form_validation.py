@@ -1,5 +1,5 @@
-from functional_tests.selenium_tests.test import SeleniumTestCase
-from functional_tests.selenium_tests.webdriver import CustomWebDriver
+from selenium_tests.test import SeleniumTestCase
+from selenium_tests.webdriver import CustomWebDriver
 
 class PasswordValidation(SeleniumTestCase):
 

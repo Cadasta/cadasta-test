@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./cadasta_test_suites.py
