@@ -36,13 +36,17 @@ In case if you need to run tests on a local setup with a clean DB, please follow
  
  Then drop the DB and recreate it using following commands.
  
- `sudo -u postgres psql
- drop database cadasta;
- create database cadasta with owner cadasta;`
+ `sudo -u postgres psql`
+ 
+ `drop database cadasta;`
+ 
+ `create database cadasta with owner cadasta;`
  
  Type `\q` and then press `ENTER` to quit psql
  
  Now run following Django management commands
  
- `./manage.py migrate
- ./manage.py loadstatic`
+ `./manage.py migrate`
+ 
+ `./manage.py loadstatic`
+ 
