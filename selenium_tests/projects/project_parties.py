@@ -22,7 +22,7 @@ class ViewParty(SeleniumTestCase):
     def tearDown(self):
         self.wd.quit()
 
-
+        
 class EditParty(SeleniumTestCase):
 
     def setUp(self):

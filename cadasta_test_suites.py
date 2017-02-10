@@ -2,10 +2,8 @@
 
 import unittest
 
-from selenium_tests.accounts.login import (
-    Login,
-    LoginFailure
-)
+
+# Accounts
 from selenium_tests.accounts.registration import (
     NewRegistration,
     RegistrationAttemptUsernameNotAvailable,
@@ -19,6 +17,10 @@ from selenium_tests.accounts.registration_form_validation import (
     EmptyPasswordValidation,
     EmptyConfirmPasswordValidation
 )
+from selenium_tests.accounts.login import (
+    Login,
+    LoginFailure
+)
 from selenium_tests.accounts.user_profile import (
     PasswordReset,
     PasswordChange,
@@ -26,6 +28,7 @@ from selenium_tests.accounts.user_profile import (
     FullnameChange,
     EmailChange
 )
+# Organizations
 from selenium_tests.organizations.organization import (
     CreateOrganization,
     EditOrganization,
@@ -47,9 +50,7 @@ from selenium_tests.organizations.organization_members import (
 from selenium_tests.organizations.organization_search import (
     OrganizationSearch
 )
-from selenium_tests.projects.location_relationships import (
-    AddLocationRelationship
-)
+# Projects
 from selenium_tests.projects.project import (
     CreatePublicProject,
     CreatePrivateProject,
@@ -71,6 +72,15 @@ from selenium_tests.projects.project_parties import (
 )
 from selenium_tests.projects.search_project import (
     ProjectSearch
+)
+from selenium_tests.projects.location_relationships import (
+    AddLocationRelationship
+)
+from selenium_tests.projects.project_parties import (
+    ViewParty,
+    PartyResource,
+    EditParty,
+    DeleteParty
 )
 from selenium_tests.resources.project_resources import (
     AddResource,
@@ -195,17 +205,13 @@ cadasta_projects_test_suite = unittest.TestSuite([
     project_accessibility,
     add_project_with_extent,
     project_search,
-    add_resource,
     add_location,
     edit_location,
     delete_location,
-    add_location_resource,
     add_location_relationship,
     view_party,
     edit_party,
-    delete_party,
-    add_gpx_resources,
-    load_gpx_file_on_map
+    delete_party
 ])
 
 # Create Cadasta Resources test suite

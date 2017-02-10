@@ -51,7 +51,6 @@ class EditOrganization(SeleniumTestCase):
         self.wd.find_element_by_id("id_description").send_keys("Test organization-1 description edited.")
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
-        self.wd.wait_for_xpath("//div/section/p")
         text = self.wd.find_element_by_xpath("//div/section/p").text
         assert text == "Test organization-1 description edited."
 
