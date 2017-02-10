@@ -87,6 +87,10 @@ from selenium_tests.resources.location_resources import (
 from selenium_tests.resources.party_resources import (
     PartyResource
 )
+from selenium_tests.resources.relationship_resources import (
+    AddRelationshipResource,
+    DetachRelationshipResource
+)
 
 
 # Get all tests from accounts test classes
@@ -145,6 +149,8 @@ load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOn
 add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
 detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
+add_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(AddRelationshipResource)
+detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 
 # Create Cadasta Accounts test suite
 cadasta_accounts_test_suite = unittest.TestSuite([
@@ -210,7 +216,9 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_location_resource,
     detach_location_resource
     party_resource,
-    remove_resource,
+    add_relationship_resource,
+    detach_relationship_resource
+    remove_resource
 ])
 
 # Run the suites
