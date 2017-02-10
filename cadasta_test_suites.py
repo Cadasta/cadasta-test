@@ -65,11 +65,6 @@ from selenium_tests.projects.project_location import (
     EditLocation,
     DeleteLocation
 )
-from selenium_tests.projects.project_parties import (
-    ViewParty,
-    EditParty,
-    DeleteParty
-)
 from selenium_tests.projects.search_project import (
     ProjectSearch
 )
@@ -78,7 +73,6 @@ from selenium_tests.projects.location_relationships import (
 )
 from selenium_tests.projects.project_parties import (
     ViewParty,
-    PartyResource,
     EditParty,
     DeleteParty
 )
@@ -220,10 +214,10 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_gpx_resources,
     load_gpx_file_on_map,
     add_location_resource,
-    detach_location_resource
+    detach_location_resource,
     party_resource,
     add_relationship_resource,
-    detach_relationship_resource
+    detach_relationship_resource,
     remove_resource
 ])
 
