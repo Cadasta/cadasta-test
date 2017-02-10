@@ -84,6 +84,10 @@ from selenium_tests.projects.project_parties import (
     EditParty,
     DeleteParty
 )
+from selenium_tests.projects.gpx_resources import (
+    AddGPXResource,
+    LoadGPXFileOnMap
+)
 
 
 # Get all tests from accounts test classes
@@ -136,6 +140,8 @@ view_party = unittest.TestLoader().loadTestsFromTestCase(ViewParty)
 party_resources = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
 edit_party = unittest.TestLoader().loadTestsFromTestCase(EditParty)
 delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
+add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
+load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
 
 
 # Create Cadasta Accounts test suite
@@ -190,7 +196,9 @@ cadasta_projects_test_suite = unittest.TestSuite([
     view_party,
     party_resources,
     edit_party,
-    delete_party
+    delete_party,
+    add_gpx_resources,
+    load_gpx_file_on_map
 ])
 
 # Run the suites
