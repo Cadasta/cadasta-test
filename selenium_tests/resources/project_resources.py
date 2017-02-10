@@ -33,3 +33,37 @@ class AddResource(SeleniumTestCase):
 
     def tearDown(self):
         self.wd.quit()
+
+
+class RemoveResource(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_detach_resource_from_project(self):
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="resources"]/a').click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Resources')]")
+        self.wd.find_element_by_xpath("//button[@type='submit']").click()
+        assert self.wd.find_element_by_xpath('//td[contains(text(), "Unattached")]')
+
+    def test_delete_resource(self):
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+        self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="resources"]/a').click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Resources')]")
+        self.wd.find_element_by_link_text("deramola-gpx").click()
+        self.wd.find_element_by_xpath("//a[@title='Delete resource']").click()
+        self.wd.switch_to_window(self.wd.window_handles[-1])
+        self.wd.wait_for_css(".modal-title")
+        self.wd.find_element_by_xpath("//a[@role='button']").click()
+
+    def tearDown(self):
+        self.wd.quit()

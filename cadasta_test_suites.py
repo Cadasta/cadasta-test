@@ -73,7 +73,8 @@ from selenium_tests.projects.search_project import (
     ProjectSearch
 )
 from selenium_tests.resources.project_resources import (
-    AddResource
+    AddResource,
+    RemoveResource
 )
 from selenium_tests.resources.gpx_resources import (
     AddGPXResource,
@@ -137,6 +138,7 @@ delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
 
 # Get all tests from resources test classes
 add_resource = unittest.TestLoader().loadTestsFromTestCase(AddResource)
+remove_resource = unittest.TestLoader().loadTestsFromTestCase(RemoveResource)
 add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
 load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
 add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
@@ -204,7 +206,8 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_gpx_resources,
     load_gpx_file_on_map,
     add_location_resource,
-    party_resource
+    party_resource,
+    remove_resource,
 ])
 
 # Run the suites
