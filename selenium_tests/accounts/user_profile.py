@@ -24,6 +24,20 @@ class PasswordChange(SeleniumTestCase):
     def setUp(self):
         self.wd = CustomWebDriver()
 
+    def test_password_change_success(self):
+        self.user_login()
+        self.wd.wait_for_css('.btn-user')
+        self.open("/account/password/change/")
+        self.wd.wait_for_css('#id_oldpassword')
+
+        self.wd.find_css('#id_oldpassword').send_keys("XYZ#qwerty")
+        self.wd.find_css('#id_password1').send_keys("XYZ#qwertyA")
+        self.wd.find_css('#id_password2').send_keys("XYZ#qwertyA")
+        self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
+        text = self.wd.find_element_by_xpath("//h1").text
+        self.restore_password("XYZ#qwerty", "XYZ#qwertyA")
+        assert text == "Change your password"
+
     def test_password_change_failure(self):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
@@ -37,21 +51,7 @@ class PasswordChange(SeleniumTestCase):
         text = self.wd.find_element_by_xpath("//h1").text
         assert text == "Change your password"
 
-    def test_password_change_success(self):
-        self.user_login()
-        self.wd.wait_for_css('.btn-user')
-        self.open("/account/password/change/")
-        self.wd.wait_for_css('#id_oldpassword')
-
-        self.wd.find_css('#id_oldpassword').send_keys("XYZ#qwerty")
-        self.wd.find_css('#id_password1').send_keys("XYZ#qwertyA")
-        self.wd.find_css('#id_password2').send_keys("XYZ#qwertyA")
-        self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
-        text = self.wd.find_element_by_xpath("//h1").text
-        assert text == "Change your password"
-
     def tearDown(self):
-        self.restore_password("XYZ#qwerty", "XYZ#qwertyA")
         self.wd.quit()
 
 

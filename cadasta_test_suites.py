@@ -2,6 +2,7 @@
 
 import unittest
 
+
 # Accounts
 from selenium_tests.accounts.registration import (
     NewRegistration,
@@ -27,15 +28,11 @@ from selenium_tests.accounts.user_profile import (
     FullnameChange,
     EmailChange
 )
-
 # Organizations
 from selenium_tests.organizations.organization import (
     CreateOrganization,
     EditOrganization,
     OrganizationArchive
-)
-from selenium_tests.organizations.organization_search import (
-    OrganizationSearch
 )
 from selenium_tests.organizations.organization_create_form_validation import (
     DuplicateOrganizationNameValidation,
@@ -50,7 +47,9 @@ from selenium_tests.organizations.organization_members import (
     RemoveMember,
     SearchMembers
 )
-
+from selenium_tests.organizations.organization_search import (
+    OrganizationSearch
+)
 # Projects
 from selenium_tests.projects.project import (
     CreatePublicProject,
@@ -61,19 +60,18 @@ from selenium_tests.projects.project import (
 from selenium_tests.projects.project_draw_on_map import (
     AddProjectWithExtent,
 )
-from selenium_tests.projects.search_project import (
-    ProjectSearch
-)
-from selenium_tests.projects.project_resources import (
-    AddResource
-)
 from selenium_tests.projects.project_location import (
     AddLocation,
     EditLocation,
     DeleteLocation
 )
-from selenium_tests.projects.location_resources import (
-    AddLocationResource
+from selenium_tests.projects.project_parties import (
+    ViewParty,
+    EditParty,
+    DeleteParty
+)
+from selenium_tests.projects.search_project import (
+    ProjectSearch
 )
 from selenium_tests.projects.location_relationships import (
     AddLocationRelationship
@@ -83,6 +81,25 @@ from selenium_tests.projects.project_parties import (
     PartyResource,
     EditParty,
     DeleteParty
+)
+from selenium_tests.resources.project_resources import (
+    AddResource,
+    RemoveResource
+)
+from selenium_tests.resources.gpx_resources import (
+    AddGPXResource,
+    LoadGPXFileOnMap
+)
+from selenium_tests.resources.location_resources import (
+    AddLocationResource,
+    DetachLocationResource
+)
+from selenium_tests.resources.party_resources import (
+    PartyResource
+)
+from selenium_tests.resources.relationship_resources import (
+    AddRelationshipResource,
+    DetachRelationshipResource
 )
 
 
@@ -126,17 +143,24 @@ edit_project_details = unittest.TestLoader().loadTestsFromTestCase(EditProjectDe
 project_accessibility = unittest.TestLoader().loadTestsFromTestCase(ProjectAccessibility)
 add_project_with_extent = unittest.TestLoader().loadTestsFromTestCase(AddProjectWithExtent)
 project_search = unittest.TestLoader().loadTestsFromTestCase(ProjectSearch)
-add_resource = unittest.TestLoader().loadTestsFromTestCase(AddResource)
 add_location = unittest.TestLoader().loadTestsFromTestCase(AddLocation)
 edit_location = unittest.TestLoader().loadTestsFromTestCase(EditLocation)
 delete_location = unittest.TestLoader().loadTestsFromTestCase(DeleteLocation)
-add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
 add_location_relationship = unittest.TestLoader().loadTestsFromTestCase(AddLocationRelationship)
 view_party = unittest.TestLoader().loadTestsFromTestCase(ViewParty)
-party_resources = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
 edit_party = unittest.TestLoader().loadTestsFromTestCase(EditParty)
 delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
 
+# Get all tests from resources test classes
+add_resource = unittest.TestLoader().loadTestsFromTestCase(AddResource)
+remove_resource = unittest.TestLoader().loadTestsFromTestCase(RemoveResource)
+add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
+load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
+add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
+detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
+party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
+add_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(AddRelationshipResource)
+detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 
 # Create Cadasta Accounts test suite
 cadasta_accounts_test_suite = unittest.TestSuite([
@@ -150,7 +174,7 @@ cadasta_accounts_test_suite = unittest.TestSuite([
     empty_password_validation,
     empty_confirm_password_validation,
     password_reset,
-    password_change,
+    # password_change,
     username_change,
     fullname_change,
     email_change
@@ -181,19 +205,30 @@ cadasta_projects_test_suite = unittest.TestSuite([
     project_accessibility,
     add_project_with_extent,
     project_search,
-    add_resource,
     add_location,
     edit_location,
     delete_location,
-    add_location_resource,
     add_location_relationship,
     view_party,
-    party_resources,
     edit_party,
     delete_party
+])
+
+# Create Cadasta Resources test suite
+cadasta_resources_test_suite = unittest.TestSuite([
+    add_resource,
+    add_gpx_resources,
+    load_gpx_file_on_map,
+    add_location_resource,
+    detach_location_resource
+    party_resource,
+    add_relationship_resource,
+    detach_relationship_resource
+    remove_resource
 ])
 
 # Run the suites
 unittest.TextTestRunner(verbosity=2).run(cadasta_accounts_test_suite)
 unittest.TextTestRunner(verbosity=2).run(cadasta_organizations_test_suite)
 unittest.TextTestRunner(verbosity=2).run(cadasta_projects_test_suite)
+unittest.TextTestRunner(verbosity=2).run(cadasta_resources_test_suite)
