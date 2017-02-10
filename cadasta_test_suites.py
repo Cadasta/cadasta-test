@@ -81,7 +81,8 @@ from selenium_tests.resources.gpx_resources import (
     LoadGPXFileOnMap
 )
 from selenium_tests.resources.location_resources import (
-    AddLocationResource
+    AddLocationResource,
+    DetachLocationResource
 )
 from selenium_tests.resources.party_resources import (
     PartyResource
@@ -142,6 +143,7 @@ remove_resource = unittest.TestLoader().loadTestsFromTestCase(RemoveResource)
 add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
 load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
 add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
+detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
 
 # Create Cadasta Accounts test suite
@@ -206,6 +208,7 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_gpx_resources,
     load_gpx_file_on_map,
     add_location_resource,
+    detach_location_resource
     party_resource,
     remove_resource,
 ])
