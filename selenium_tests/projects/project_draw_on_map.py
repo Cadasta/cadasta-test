@@ -41,9 +41,14 @@ class AddProjectWithExtent(SeleniumTestCase):
         self.wd.find_element_by_xpath('//textarea[@id="id_details-description"]').send_keys("Project-with-extent-1 description")
 
         try:
-            self.wd.find_element_by_xpath('//button[@type="submit"]').click()
+            elem = self.wd.find_element_by_xpath('//button[@type="submit"]')
+            try :
+                elem.click()
+            except WebDriverException: # Fix : element not clickable in Chrome
+                action = ActionChains(self.wd)
+                action.move_to_element(elem).send_keys(Keys.TAB * 11).send_keys(Keys.RETURN).perform()
+
             self.wd.wait_for_xpath("//h3[contains(text(), 'Assign permissions to members')]")
-            text = self.wd.find_element_by_xpath('//button[@type="submit"]').text
             self.wd.find_element_by_xpath('//button[@type="submit"]').click()
             self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
             text = self.wd.find_element_by_xpath("//h1[contains(@class, 'short')]").text
