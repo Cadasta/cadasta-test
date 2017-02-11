@@ -1,5 +1,8 @@
 # from django.test import LiveServerTestCase
 import unittest
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
 
 class SeleniumTestCase(unittest.TestCase):
     """
@@ -47,3 +50,20 @@ class SeleniumTestCase(unittest.TestCase):
         self.wd.find_css('#id_full_name').send_keys(fullname)
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
+    def register_new_user(self):
+        self.open("/dashboard/")
+        self.wd.find_element_by_xpath('//a[@href="/account/signup/"]').click()
+        self.wd.wait_for_css("#signup_form")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user-2")
+        self.wd.find_css('#id_email').send_keys("user2@abc.com")
+        self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_full_name").send_keys('')
+        action = ActionChains(self.wd)
+        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+
+        try:
+            self.wd.find_elements_by_xpath("//*[contains(text(), 'Confirmation email sent to user2@abc.com.')]")
+            self.open("/account/logout/")
+        except Exception:
+            self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")

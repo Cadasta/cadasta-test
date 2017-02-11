@@ -189,9 +189,9 @@ cadasta_organizations_test_suite = unittest.TestSuite([
     org_url_validation,
     view_members,
     view_member_profile,
-    # add_member,
+    add_member,
     add_non_existing_member,
-    # remove_member,
+    remove_member,
     search_member
 ])
 
@@ -219,11 +219,11 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_resource,
     add_gpx_resources,
     load_gpx_file_on_map,
-    add_location_resource,
-    detach_location_resource,
+    # add_location_resource,
+    # detach_location_resource,
     party_resource,
-    add_relationship_resource,
-    detach_relationship_resource,
+    # add_relationship_resource,
+    # detach_relationship_resource,
     remove_resource
 ])
 
