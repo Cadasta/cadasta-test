@@ -89,3 +89,68 @@ class AddLocationRelationship(SeleniumTestCase):
     def tearDown(self):
         self.wd.quit()
 
+
+class ViewRelationshipDetails(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_view_relationship_details(self):
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
+
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//div[@id="project-map"]')
+        action.move_to_element(elem).perform()
+        self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
+        self.wd.find_element_by_link_text("Open location").click()
+        self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
+        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath("//tr/td/a").click()
+        assert self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
+
+    def tearDown(self):
+        self.wd.quit()
+
+
+class EditRelationshipDetails(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_edit_relationship_details(self):
+        projects_page = ProjectsPage(self.wd, self)
+        projects_page.go_to()
+
+        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
+
+        page_state = self.wd.execute_script('return document.readyState;')
+        while page_state != 'complete':
+            page_state = self.wd.execute_script('return document.readyState;')
+
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//div[@id="project-map"]')
+        action.move_to_element(elem).perform()
+        self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
+        self.wd.find_element_by_link_text("Open location").click()
+        self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
+        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath("//tr/td/a").click()
+        self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
+        self.wd.wait_for_xpath('//a[@title="Edit relationship"]').click()
+        self.wd.wait_for_xpath('//*[contains(text(), "Edit Relationship")]')
+        Select(self.wd.find_element_by_id("id_tenure_type")).select_by_visible_text("Leasehold")
+        self.wd.find_element_by_xpath('//button[@type="submit"]').click()
+        self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
+        assert self.wd.wait_for_xpath('//*[contains(text(), "Leasehold")]')
+
+    def tearDown(self):
+        self.wd.quit()
