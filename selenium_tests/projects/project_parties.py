@@ -37,12 +37,17 @@ class EditParty(SeleniumTestCase):
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
         self.wd.find_element_by_xpath("//a[@title='Edit party']").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
-        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text("Group")
+        self.wd.find_element_by_id("id_name").clear()
+        self.wd.find_element_by_id("id_name").send_keys("party-2")
         self.wd.find_element_by_name("submit").click()
-        text = self.wd.find_element_by_xpath("//table/tbody/tr[2]/td[2]").text
-        assert text == "Group"
+        assert self.wd.wait_for_xpath("//*[contains(text(), 'party-2')]")
 
     def tearDown(self):
+        self.wd.find_element_by_xpath("//a[@title='Edit party']").click()
+        self.wd.switch_to_window(self.wd.window_handles[-1])
+        self.wd.find_element_by_id("id_name").clear()
+        self.wd.find_element_by_id("id_name").send_keys("party-1")
+        self.wd.find_element_by_name("submit").click()
         self.wd.quit()
 
 
