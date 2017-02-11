@@ -189,9 +189,9 @@ cadasta_organizations_test_suite = unittest.TestSuite([
     org_url_validation,
     view_members,
     view_member_profile,
-    # add_member,
+    add_member,
     add_non_existing_member,
-    # remove_member,
+    remove_member,
     search_member
 ])
 

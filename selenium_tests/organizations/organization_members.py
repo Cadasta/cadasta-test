@@ -47,6 +47,7 @@ class AddMember(SeleniumTestCase):
 
     def setUp(self):
         self.wd = CustomWebDriver()
+        self.register_new_user()
 
     def test_add_member(self):
         organizations_page = OrganizationsPage(self.wd, self)
@@ -56,7 +57,7 @@ class AddMember(SeleniumTestCase):
         self.wd.find_element_by_link_text("Add").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
         self.wd.wait_for_css("#id_identifier")
-        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys("cadasta-test-user1")
+        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys("cadasta-test-user-2")
         self.wd.find_element_by_xpath('//button[@type="submit"]').click()
         self.wd.wait_for_css(".member-info")
         text = self.wd.find_css("h2").text
@@ -99,15 +100,14 @@ class RemoveMember(SeleniumTestCase):
         organizations_page.go_to()
         organizations_page.open_members_page()
 
-        self.wd.find_element_by_link_text('cadasta-test-user1').click()
+        self.wd.find_element_by_link_text('cadasta-test-user-2').click()
         self.wd.wait_for_css(".member-info")
         self.wd.find_element_by_xpath('//button[@name="remove"]').click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
-        self.wd.wait_for_css(".modal-title")
-        self.wd.find_element_by_link_text("Yes, remove this member").click()
-
+        self.wd.get("%s%s" % (self.wd.current_url, "remove"))
+        self.wd.wait_for_css('.table')
         try:
-            self.wd.find_element_by_link_text('cadasta-test-user1')
+            self.wd.find_element_by_link_text('cadasta-test-user-2')
         except NoSuchElementException:
             assert True
 
