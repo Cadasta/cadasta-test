@@ -3,6 +3,7 @@ from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium_tests.pages import RegistrationPage
+from selenium.webdriver.common.keys import Keys
 
 
 class NewRegistration(SeleniumTestCase):
@@ -18,9 +19,9 @@ class NewRegistration(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_full_name").send_keys('')
         action = ActionChains(self.wd)
-        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
-        action.move_to_element(elem).click().perform()
+        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
         try:
             self.wd.find_elements_by_xpath("//*[contains(text(), 'Confirmation email sent to user1@abc.com.')]")
@@ -46,10 +47,11 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_full_name").send_keys('')
         action = ActionChains(self.wd)
-        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
-        action.move_to_element(elem).click().perform()
-        self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
+        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+
+        assert self.wd.wait_for_xpath("//*[contains(text(), 'A user with that username already exists.')]")
 
     def tearDown(self):
         self.wd.quit()
@@ -67,10 +69,11 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_full_name").send_keys('')
         action = ActionChains(self.wd)
-        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
-        action.move_to_element(elem).click().perform()
-        self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]")
+        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+
+        assert self.wd.wait_for_xpath("//*[contains(text(), 'Another user with this email already exists')]")
 
     def tearDown(self):
         self.wd.quit()
