@@ -22,6 +22,10 @@ class AddGPXResource(SeleniumTestCase):
 
         self.wd.switch_to_window(self.wd.window_handles[-1])
         path = os.path.abspath("resources/Deramola.gpx")
+        try :
+            self.wd.find_element_by_xpath("//*[contains(text(), 'Select the file to upload')]")
+        except :
+            self.wd.find_element_by_link_text("Upload new").click()
         self.wd.find_element_by_css_selector("input.file-input").clear()
         self.wd.find_element_by_css_selector("input.file-input").send_keys(path)
         self.wd.find_element_by_id("id_name").clear()
