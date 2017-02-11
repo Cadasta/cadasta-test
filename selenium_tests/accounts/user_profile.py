@@ -13,7 +13,7 @@ class PasswordReset(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_element_by_xpath('//input[@value="Reset password"]').click()
         text = self.wd.find_element_by_xpath("//h1").text
-        assert text == "Reset your password"
+        assert text == "Password reset"
 
     def tearDown(self):
         self.wd.quit()

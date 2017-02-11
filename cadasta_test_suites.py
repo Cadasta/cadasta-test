@@ -69,7 +69,9 @@ from selenium_tests.projects.search_project import (
     ProjectSearch
 )
 from selenium_tests.projects.location_relationships import (
-    AddLocationRelationship
+    AddLocationRelationship,
+    ViewRelationshipDetails,
+    EditRelationshipDetails
 )
 from selenium_tests.projects.project_parties import (
     ViewParty,
@@ -141,6 +143,8 @@ add_location = unittest.TestLoader().loadTestsFromTestCase(AddLocation)
 edit_location = unittest.TestLoader().loadTestsFromTestCase(EditLocation)
 delete_location = unittest.TestLoader().loadTestsFromTestCase(DeleteLocation)
 add_location_relationship = unittest.TestLoader().loadTestsFromTestCase(AddLocationRelationship)
+view_relationship_details = unittest.TestLoader().loadTestsFromTestCase(ViewRelationshipDetails)
+edit_relationship_details = unittest.TestLoader().loadTestsFromTestCase(EditRelationshipDetails)
 view_party = unittest.TestLoader().loadTestsFromTestCase(ViewParty)
 edit_party = unittest.TestLoader().loadTestsFromTestCase(EditParty)
 delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
@@ -154,7 +158,7 @@ add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationR
 detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
 add_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(AddRelationshipResource)
-detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
+detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachRelationshipResource)
 
 # Create Cadasta Accounts test suite
 cadasta_accounts_test_suite = unittest.TestSuite([
@@ -203,6 +207,8 @@ cadasta_projects_test_suite = unittest.TestSuite([
     edit_location,
     delete_location,
     add_location_relationship,
+    view_relationship_details,
+    edit_relationship_details,
     view_party,
     edit_party,
     delete_party
