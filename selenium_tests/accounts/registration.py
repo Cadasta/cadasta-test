@@ -1,6 +1,7 @@
 from selenium.common.exceptions import NoSuchElementException
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium_tests.pages import RegistrationPage
 
 
@@ -17,7 +18,9 @@ class NewRegistration(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         try:
             self.wd.find_elements_by_xpath("//*[contains(text(), 'Confirmation email sent to user1@abc.com.')]")
@@ -43,7 +46,9 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
         self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
 
     def tearDown(self):
@@ -62,8 +67,10 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user1@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
-        text = self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]")
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
+        self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]")
 
     def tearDown(self):
         self.wd.quit()

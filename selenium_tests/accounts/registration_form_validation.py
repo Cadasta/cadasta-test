@@ -1,5 +1,7 @@
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 class PasswordValidation(SeleniumTestCase):
 
@@ -13,7 +15,9 @@ class PasswordValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user2@abc.com")
         self.wd.find_css("#id_password1").send_keys('password123')
         self.wd.find_css("#id_password2").send_keys('password123')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "Your password must contain at least 3 of the following: lowercase characters, uppercase characters, special characters, and/or numerical characters."
@@ -34,7 +38,9 @@ class ConfirmPasswordValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user2@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('password')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This value should be the same."
@@ -55,7 +61,9 @@ class EmptyUsernameValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user2@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
@@ -76,7 +84,9 @@ class EmptyEmailValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
@@ -97,7 +107,9 @@ class EmptyPasswordValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user2@abc.com")
         self.wd.find_css("#id_password1").send_keys('')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
@@ -118,7 +130,9 @@ class EmptyConfirmPasswordValidation(SeleniumTestCase):
         self.wd.find_css('#id_email').send_keys("user2@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('')
-        self.wd.find_element_by_xpath('//button[@name="register"]').click()
+        action = ActionChains(self.wd)
+        elem = self.wd.find_element_by_xpath('//button[@name="register"]')
+        action.move_to_element(elem).click().perform()
 
         text = self.wd.find_element_by_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
