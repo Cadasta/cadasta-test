@@ -2,11 +2,11 @@
 
 #### This repository contains Selenium UI automated test scripts that can be run against a cadasta server run on http://localhost:8000
 
-To install the dependencies :
+#### To install the dependencies :
 
 `pip install -r requirements.pip`
 
-To configure geckodriver (This is required if you run the tests with firefox version > 48):
+#### To configure geckodriver (This is required if you run the tests with firefox version > 48):
 
  Geckodriver is the new Selenium driver shipped with Firefox 48+ <br/>
  But there are some test cases in cadasta-test which require the Firefox version to be lower than 48. <br/>
@@ -21,12 +21,12 @@ If you are running with newer version of firefox (48+) some tests will fail sinc
 `Download from https://github.com/mozilla/geckodriver/releases
 Unzip it and add to PATH variable`
 
-To configure chromedriver (If you run the tests with chrome):
+#### To configure chromedriver (If you run the tests with chrome):
 
 `Download from https://sites.google.com/a/chromium.org/chromedriver/downloads
 Unzip it and add to PATH variable`
 
-To run the tests :
+#### To run the tests :
 
 `./runtests`
 
