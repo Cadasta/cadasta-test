@@ -6,9 +6,17 @@ To install the dependencies :
 
 `pip install -r requirements.pip`
 
-To configure geckodriver (If you run the tests with firefox version > 48):
+To configure geckodriver (This is required if you run the tests with firefox version > 48):
 
-There are some test cases that require firefox version to be lower than 48. If you are running with newer version of firefox they will fail since the geckodriver still doesn't support the implementation of those test cases.
+ Geckodriver is the new Selenium driver shipped with Firefox 48+
+ But there are some test cases in cadasta-test which require the Firefox version to be lower than 48.
+ The reason for this is, we use Python Selenium Action classes in some test cases of cadasta-test, but
+  as per [1]W3C Actions API is not yet implemented in geckodriver.
+ [1] https://github.com/mozilla/geckodriver/issues/159
+ [2] https://github.com/facebook/php-webdriver/issues/359#issuecomment-262073021
+ So, it is recommend to run tests on Firefox version < 48 until the above[1] is supported by geckodriver.
+
+If you are running with newer version of firefox (48+) some tests will fail since the geckodriver doesn't support[1].
 
 `Download from https://github.com/mozilla/geckodriver/releases
 Unzip it and add to PATH variable`
