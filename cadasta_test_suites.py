@@ -87,7 +87,10 @@ from selenium_tests.resources.gpx_resources import (
     LoadGPXFileOnMap
 )
 from selenium_tests.resources.resource_types import (
-    AddResourceType
+    AcceptedResourceTypes
+)
+from selenium_tests.resources.invalid_resource_types import (
+    InvalidFileTypes
 )
 from selenium_tests.resources.location_resources import (
     AddLocationResource,
@@ -157,7 +160,8 @@ add_resource = unittest.TestLoader().loadTestsFromTestCase(AddResource)
 remove_resource = unittest.TestLoader().loadTestsFromTestCase(RemoveResource)
 add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
 load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
-add_resource_type = unittest.TestLoader().loadTestsFromTestCase(AddResourceType)
+accepted_resource_types = unittest.TestLoader().loadTestsFromTestCase(AcceptedResourceTypes)
+invalid_resource_types = unittest.TestLoader().loadTestsFromTestCase(InvalidFileTypes)
 add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
 detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
@@ -223,7 +227,8 @@ cadasta_resources_test_suite = unittest.TestSuite([
     add_resource,
     add_gpx_resources,
     load_gpx_file_on_map,
-    add_resource_type,
+    accepted_resource_types,
+    invalid_resource_types,
     # add_location_resource,
     # detach_location_resource,
     party_resource,
