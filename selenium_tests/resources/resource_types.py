@@ -4,7 +4,7 @@ from selenium_tests.webdriver import CustomWebDriver
 from selenium_tests.pages import ProjectsPage
 
 
-class AddResourceType(SeleniumTestCase):
+class AcceptedResourceTypes(SeleniumTestCase):
 
     def setUp(self):
         self.wd = CustomWebDriver()
