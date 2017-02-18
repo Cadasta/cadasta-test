@@ -20,7 +20,7 @@ class AddResource(SeleniumTestCase):
         self.wd.find_element_by_link_text("Attach").click()
 
         self.wd.switch_to_window(self.wd.window_handles[-1])
-        path = os.path.abspath("resources/resource-1.pdf")
+        path = os.path.abspath("resources/pdf_file.pdf")
         try :
             self.wd.find_element_by_xpath("//*[contains(text(), 'Select the file to upload')]")
         except :

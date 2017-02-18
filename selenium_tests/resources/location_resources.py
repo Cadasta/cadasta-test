@@ -93,7 +93,7 @@ class AddLocationResource(SeleniumTestCase):
         self.wd.find_element_by_link_text("Upload new").click()
         self.wd.wait_for_css("input.file-input")
 
-        path = os.path.abspath("resources/resource-1.pdf")
+        path = os.path.abspath("resources/pdf_file.pdf")
         self.wd.find_element_by_css_selector("input.file-input").clear()
         self.wd.find_element_by_css_selector("input.file-input").send_keys(path)
         self.wd.find_element_by_id("id_name").clear()
