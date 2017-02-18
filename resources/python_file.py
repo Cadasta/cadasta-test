@@ -1,1 +1,4 @@
-This is a sample txt file
+class InvalidFileType:
+
+    def doPrint(self):
+        print ("Sample file")
