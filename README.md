@@ -31,7 +31,8 @@ Unzip it and add to PATH variable`
 You can run the Selenium test by executing one of the below two commands. If you give `./runtests` without giving a
 server url, the default url http://localhost:8000 will be considered as the server url.
 
-`./runtests`<br/>
+`./runtests`
+
 `./runtests <server-url>`
 
 
