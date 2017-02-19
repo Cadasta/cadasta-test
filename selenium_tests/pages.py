@@ -1,3 +1,5 @@
+from selenium_tests.entities import Organization, Project
+
 class RegistrationPage:
 
     def __init__(self, web_driver, test_case):
@@ -29,7 +31,7 @@ class OrganizationsPage:
         self.wd.wait_for_css(".modal-title")
 
     def open_members_page(self):
-        self.wd.find_element_by_link_text("organization-1").click()
+        self.wd.find_element_by_link_text(Organization.get_test_org_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_css_selector("span.icon.members").click()
         self.wd.wait_for_css('.table')
@@ -48,7 +50,7 @@ class ProjectsPage:
         self.wd.wait_for_xpath("//h1[contains(text(), 'Projects')]")
 
     def open_parties_page(self):
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="parties"]/a').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Parties')]")
@@ -60,7 +62,7 @@ class ResourcesPage:
         self.test = test_case
 
     def go_to(self):
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="resources"]/a').click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Resources')]")

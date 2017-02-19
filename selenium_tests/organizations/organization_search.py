@@ -1,6 +1,7 @@
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium_tests.pages import OrganizationsPage
+from selenium_tests.entities import Organization
 
 
 class OrganizationSearch(SeleniumTestCase):
@@ -12,7 +13,7 @@ class OrganizationSearch(SeleniumTestCase):
         organizations_page = OrganizationsPage(self.wd, self)
         organizations_page.go_to()
 
-        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys("organization-1")
+        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys(Organization.get_test_org_name())
         elems = self.wd.find_elements_by_css_selector(".linked")
         assert len(elems) != 0
 
