@@ -4,6 +4,7 @@ from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium_tests.pages import ProjectsPage
 from selenium_tests.pages import ResourcesPage
+from selenium_tests.entities import Project
 
 
 class AddGPXResource(SeleniumTestCase):
@@ -50,7 +51,7 @@ class LoadGPXFileOnMap(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 
         self.wd.find_element_by_xpath('//div[@id="sidebar"]/ul/li[@class="map"]/a').click()

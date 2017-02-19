@@ -1,5 +1,6 @@
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
+from selenium_tests.entities import Credentials
 
 class PasswordReset(SeleniumTestCase):
 
@@ -10,7 +11,7 @@ class PasswordReset(SeleniumTestCase):
         self.user_login()
         self.wd.wait_for_css('.btn-user')
         self.open("/account/password/reset/")
-        self.wd.find_css('#id_email').send_keys("user1@abc.com")
+        self.wd.find_css('#id_email').send_keys(Credentials.get_test_email())
         self.wd.find_element_by_xpath('//input[@value="Reset password"]').click()
         text = self.wd.find_element_by_xpath("//h1").text
         assert text == "Password reset"
@@ -74,7 +75,7 @@ class UsernameChange(SeleniumTestCase):
         # assert text == "cadasta-test-user-11"
 
     def tearDown(self):
-        self.restore_username("cadasta-test-user-1")
+        self.restore_username(Credentials.get_test_username())
         self.wd.quit()
 
 
@@ -112,4 +113,5 @@ class EmailChange(SeleniumTestCase):
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def tearDown(self):
+        self.restore_username(Credentials.get_test_email())
         self.wd.quit()

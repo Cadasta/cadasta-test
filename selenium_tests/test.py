@@ -2,6 +2,7 @@ import unittest
 import sys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from  selenium_tests.entities import Credentials
 
 
 class SeleniumTestCase(unittest.TestCase):
@@ -18,10 +19,9 @@ class SeleniumTestCase(unittest.TestCase):
 
     def user_login(self):
         self.open("/account/login/")
-        self.wd.find_css('#id_login').send_keys("cadasta-test-user-1")
-        self.wd.find_css("#id_password").send_keys('XYZ#qwerty')
+        self.wd.find_css('#id_login').send_keys(Credentials().get_test_username())
+        self.wd.find_css("#id_password").send_keys(Credentials().get_test_password())
         self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
-        self.wd.find_elements_by_xpath("//span[contains(text(), 'cadasta-test-user1')]")
 
     def login_as(self, username, password):
         self.open("/account/login/")
@@ -48,6 +48,12 @@ class SeleniumTestCase(unittest.TestCase):
         self.open("/account/profile/")
         self.wd.find_css('#id_full_name').clear()
         self.wd.find_css('#id_full_name').send_keys(fullname)
+        self.wd.find_element_by_xpath('//button[@name="update"]').click()
+
+    def restore_email(self, email):
+        self.open("/account/profile/")
+        self.wd.find_css('#id_email').clear()
+        self.wd.find_css('#id_email').send_keys(email)
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def register_new_user(self):

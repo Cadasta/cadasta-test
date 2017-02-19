@@ -2,6 +2,7 @@ from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium_tests.pages import OrganizationsPage
+from selenium_tests.entities import Organization
 
 
 class ViewMembers(SeleniumTestCase):
@@ -13,7 +14,7 @@ class ViewMembers(SeleniumTestCase):
         organizations_page = OrganizationsPage(self.wd, self)
         organizations_page.go_to()
 
-        self.wd.find_element_by_link_text("organization-1").click()
+        self.wd.find_element_by_link_text(Organization.get_test_org_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_css_selector("span.icon.members").click()
         self.wd.wait_for_css('.table')

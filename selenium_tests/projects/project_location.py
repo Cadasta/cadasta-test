@@ -3,6 +3,7 @@ from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium_tests.pages import ProjectsPage
+from selenium_tests.entities import Project
 
 
 class AddLocation(SeleniumTestCase):
@@ -14,7 +15,7 @@ class AddLocation(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_link_text("Add location").click()
         self.wd.wait_for_xpath("//h3[contains(text(), 'Draw location on map')]")
@@ -53,7 +54,7 @@ class EditLocation(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 
         page_state = self.wd.execute_script('return document.readyState;')
@@ -87,7 +88,7 @@ class DeleteLocation(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_link_text("project-1").click()
+        self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
 
         page_state = self.wd.execute_script('return document.readyState;')
