@@ -1,6 +1,6 @@
 # cadasta-test
 
-#### This repository contains Selenium UI automated test scripts that can be run against a cadasta server run on http://localhost:8000
+#### This repository contains Selenium UI automated test scripts that can be run against a cadasta server.
 
 #### To install the dependencies :
 
@@ -28,7 +28,11 @@ Unzip it and add to PATH variable`
 
 #### To run the tests :
 
+You can run the Selenium test by executing one of the below two commands. If you give `./runtests` without giving a
+server url, the default url http://localhost:8000 will be considered as the server url.
+
 `./runtests`
+`./runtests <server-url>`
 
 
 ### Cleaning the Cadasta DB in a local setup

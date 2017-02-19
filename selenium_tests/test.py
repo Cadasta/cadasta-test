@@ -1,5 +1,5 @@
-# from django.test import LiveServerTestCase
 import unittest
+import sys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
@@ -9,11 +9,11 @@ class SeleniumTestCase(unittest.TestCase):
     A base test case for selenium, providing hepler methods for generating
     clients and logging in profiles.
     """
-    # live_server_url = "https://platform-staging-api.cadasta.org"
     live_server_url = "http://localhost:8000"
 
     def open(self, url):
-        # print (url)
+        if (len(sys.argv)) > 1:
+            self.live_server_url = sys.argv[1]
         self.wd.get("%s%s" % (self.live_server_url, url))
 
     def user_login(self):
