@@ -78,6 +78,7 @@ from selenium_tests.projects.project_parties import (
     EditParty,
     DeleteParty
 )
+# Resources
 from selenium_tests.resources.project_resources import (
     AddResource,
     RemoveResource
@@ -102,6 +103,11 @@ from selenium_tests.resources.party_resources import (
 from selenium_tests.resources.relationship_resources import (
     AddRelationshipResource,
     DetachRelationshipResource
+)
+# Permissions
+from selenium_tests.permissions.anonymous_user_permissions import (
+    AnonymousUserOrganizationView,
+    AnonymousUserProjectView
 )
 
 
@@ -167,6 +173,10 @@ detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLoc
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
 add_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(AddRelationshipResource)
 detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachRelationshipResource)
+
+# Get all tests from permissions test classes
+anonymous_user_organization_view = unittest.TestLoader().loadTestsFromTestCase(AnonymousUserOrganizationView)
+anonymous_user_project_view = unittest.TestLoader().loadTestsFromTestCase(AnonymousUserProjectView)
 
 # Create Cadasta Accounts test suite
 cadasta_accounts_test_suite = unittest.TestSuite([
@@ -237,8 +247,15 @@ cadasta_resources_test_suite = unittest.TestSuite([
     remove_resource
 ])
 
+# Create Cadasta Permissions test suite
+cadasta_permissions_test_suite = unittest.TestSuite([
+    anonymous_user_organization_view,
+    anonymous_user_project_view
+])
+
 # Run the suites
 unittest.TextTestRunner(verbosity=2).run(cadasta_accounts_test_suite)
 unittest.TextTestRunner(verbosity=2).run(cadasta_organizations_test_suite)
 unittest.TextTestRunner(verbosity=2).run(cadasta_projects_test_suite)
 unittest.TextTestRunner(verbosity=2).run(cadasta_resources_test_suite)
+unittest.TextTestRunner(verbosity=2).run(cadasta_permissions_test_suite)
