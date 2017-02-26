@@ -67,7 +67,7 @@ class UsernameChange(SeleniumTestCase):
         self.open("/account/profile/")
 
         self.wd.find_css('#id_username').clear()
-        self.wd.find_css('#id_username').send_keys("cadasta-test-user-11")
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user-Y")
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
         # text = self.wd.find_elements_by_xpath("//span[@class, 'username')]").text
