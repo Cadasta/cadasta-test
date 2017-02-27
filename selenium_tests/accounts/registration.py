@@ -35,6 +35,7 @@ class NewRegistration(SeleniumTestCase):
 
             time.sleep(1)
             elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
+            elems.extend(self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]"))
             if len(elems) == 0:
                 username_available = True
                 Credentials().set_test_username(test_username)

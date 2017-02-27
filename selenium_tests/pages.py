@@ -1,3 +1,4 @@
+import time
 from selenium_tests.entities import Organization, Project
 
 class RegistrationPage:
@@ -79,6 +80,8 @@ class ResourcesPage:
         self.wd.find_element_by_id("id_name").clear()
         self.wd.find_element_by_id("id_name").send_keys(resource_name)
         self.wd.wait_for_xpath("//a[@class='file-link']")
+        while self.wd.find_element_by_name("submit").get_attribute("disabled"):
+            time.sleep(1)
         self.wd.find_element_by_name("submit").click()
 
 
