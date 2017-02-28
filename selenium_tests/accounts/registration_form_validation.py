@@ -162,3 +162,25 @@ class EmptyUsernameInPasswordValidation(SeleniumTestCase):
 
     def tearDown(self):
         self.wd.quit()
+
+class EmptyEmailInPasswordValidation(SeleniumTestCase):
+
+    def setUp(self):
+        self.wd = CustomWebDriver()
+
+    def test_empty_email_in_password(self):
+        self.open("/account/signup/")
+
+        self.wd.find_css('#id_username').send_keys("cadasta-test-user2")
+        self.wd.find_css('#id_email').send_keys("")
+        self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
+        self.wd.find_css("#id_full_name").send_keys('user2-name')
+        action = ActionChains(self.wd)
+        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+
+        text = self.wd.find_elements_by_xpath("//ul[contains(@class, 'parsley-errors-list')]")
+        assert len(text) == 1
+
+    def tearDown(self):
+        self.wd.quit()
