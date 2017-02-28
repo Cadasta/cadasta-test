@@ -15,7 +15,9 @@ from selenium_tests.accounts.registration_form_validation import (
     EmptyUsernameValidation,
     EmptyEmailValidation,
     EmptyPasswordValidation,
-    EmptyConfirmPasswordValidation
+    EmptyConfirmPasswordValidation,
+    EmptyUsernameInPasswordValidation,
+    EmptyEmailInPasswordValidation
 )
 from selenium_tests.accounts.login import (
     Login,
@@ -121,6 +123,8 @@ empty_username_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyUse
 empty_email_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyEmailValidation)
 empty_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyPasswordValidation)
 empty_confirm_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyConfirmPasswordValidation)
+empty_username_in_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyUsernameInPasswordValidation)
+empty_email_in_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyEmailInPasswordValidation)
 login_success = unittest.TestLoader().loadTestsFromTestCase(Login)
 login_failure = unittest.TestLoader().loadTestsFromTestCase(LoginFailure)
 password_reset = unittest.TestLoader().loadTestsFromTestCase(PasswordReset)
@@ -189,6 +193,8 @@ cadasta_accounts_test_suite = unittest.TestSuite([
     empty_email_validation,
     empty_password_validation,
     empty_confirm_password_validation,
+    empty_username_in_password_validation,
+    empty_email_in_password_validation,
     password_reset,
     # password_change,
     username_change,
