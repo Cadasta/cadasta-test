@@ -16,6 +16,8 @@ class PartyResource(SeleniumTestCase):
 
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
+        self.wd.find_element_by_link_text("Resources").click()
+        self.wd.wait_for_xpath("//*[@id=\"resources\"][contains(@class, 'active')]")
         self.wd.find_element_by_link_text("Attach").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
         try :
@@ -42,6 +44,8 @@ class PartyResource(SeleniumTestCase):
 
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
+        self.wd.find_element_by_link_text("Resources").click()
+        self.wd.wait_for_xpath("//*[@id=\"resources\"][contains(@class, 'active')]")
         self.wd.find_element_by_link_text("Attach").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
         self.wd.find_element_by_xpath('//tr/td/label/strong[contains(text(), "resource-1")]').click()
@@ -56,6 +60,8 @@ class PartyResource(SeleniumTestCase):
 
         self.wd.find_element_by_link_text("party-1").click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
+        self.wd.find_element_by_link_text("Resources").click()
+        self.wd.wait_for_xpath("//*[@id=\"resources\"][contains(@class, 'active')]")
         self.wd.find_element_by_xpath("//button[@role='button']").click()
         assert self.wd.wait_for_xpath("//h2[contains(text(), 'Party detail')]")
 
