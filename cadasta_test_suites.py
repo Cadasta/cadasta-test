@@ -196,7 +196,7 @@ cadasta_accounts_test_suite = unittest.TestSuite([
     empty_username_in_password_validation,
     empty_email_in_password_validation,
     password_reset,
-    # password_change,
+    password_change,
     username_change,
     fullname_change,
     # email_change
