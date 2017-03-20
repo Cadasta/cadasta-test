@@ -36,8 +36,9 @@ class PasswordChange(SeleniumTestCase):
         self.wd.find_css('#id_password2').send_keys("XYZ#qwertyA")
         self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
         text = self.wd.find_element_by_xpath("//h1").text
+        assert text == "Update your profile"
+        self.open("/account/logout/")
         self.restore_password("XYZ#qwerty", "XYZ#qwertyA")
-        assert text == "Change your password"
 
     def test_password_change_failure(self):
         self.user_login()
