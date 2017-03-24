@@ -114,5 +114,5 @@ class EmailChange(SeleniumTestCase):
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def tearDown(self):
-        self.restore_username(Credentials.get_test_email())
+        self.restore_email(Credentials.get_test_email())
         self.wd.quit()

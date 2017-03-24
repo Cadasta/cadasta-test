@@ -199,7 +199,7 @@ cadasta_accounts_test_suite = unittest.TestSuite([
     password_change,
     username_change,
     fullname_change,
-    # email_change
+    email_change
 ])
 
 # Create Cadasta Organizations test suite
