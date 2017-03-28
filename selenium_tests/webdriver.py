@@ -12,6 +12,10 @@ web_driver_module = webdriver.Firefox
 class CustomWebDriver(web_driver_module):
     """Our own WebDriver with some helpers added"""
 
+    def __init__(self):
+		super(CustomWebDriver, self).__init__()
+		self.set_window_size(1920, 1080)
+
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or singleton"""
         elems = self.find_elements_by_css_selector(css_selector)
