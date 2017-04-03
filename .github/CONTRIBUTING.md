@@ -14,8 +14,8 @@
 
 ## Submitting your Pull Request
 
-- Make sure all tests pass. You can run the tests locally using `./runtests.py` in the `/vagrant/` directory. 
-- Make sure your changes pass checks for coding style. You run the checks locally using `./runtests.py --lint` in the `/vagrant/` directory.
+- Make sure all tests pass. You can run the tests locally using `./runtests.py` in the `cadasta-test/` directory. 
+- Make sure your changes pass checks for coding style. You run the checks locally using `./runtests.py --lint` in the `cadasta-test/` directory.
 - Give your pull request a meaningful title. The pull request title will end up as the commit message in the commit history. For a bug fix a pull request title could read "Fixes #123 -- Make sure usernames are not case-sensitive". 
 - If this is a bug fix, link the issue you are addressing in the PR description. Github makes this easy when you type `#123` (123 is the number of the issue) the text is automatically linked. 
 - When you open a new pull request, you will find four questions that help you to provide us the information we need to review your PR. You should respond to the first question (_Proposed changes in this pull request_) sufficiently. Please describe the changes you have made and why you had to make those changes. If your PR fixes a bug, please include a description of the cause of the bug as well. 
