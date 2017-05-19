@@ -13,7 +13,8 @@ class ProjectSearch(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys(Project.get_test_proj_name())
+        self.wd.find_element_by_xpath(
+            '//input[@type="search"]').send_keys(Project.get_test_proj_name())
         elems = self.wd.find_elements_by_css_selector(".linked")
         assert len(elems) != 0
 
@@ -21,7 +22,8 @@ class ProjectSearch(SeleniumTestCase):
         projects_page = ProjectsPage(self.wd, self)
         projects_page.go_to()
 
-        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys("project-x")
+        self.wd.find_element_by_xpath(
+            '//input[@type="search"]').send_keys("project-x")
         text = self.wd.find_css(".dataTables_empty").text
         assert text == "No matching records found"
 

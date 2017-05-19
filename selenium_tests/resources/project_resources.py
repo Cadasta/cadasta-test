@@ -18,7 +18,8 @@ class AddResource(SeleniumTestCase):
         file_path = os.path.abspath("resources/pdf_file.pdf")
         resources_page.upload_resource(file_path, "resource-1")
         self.wd.wait_for_xpath("//h2[contains(text(), 'Resources')]")
-        assert self.wd.find_element_by_xpath('//td/div/p/a/strong[contains(text(), "resource-1")]')
+        assert self.wd.find_element_by_xpath(
+            '//td/div/p/a/strong[contains(text(), "resource-1")]')
 
     def tearDown(self):
         self.wd.quit()

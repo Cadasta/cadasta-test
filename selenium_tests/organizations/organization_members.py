@@ -14,8 +14,10 @@ class ViewMembers(SeleniumTestCase):
         organizations_page = OrganizationsPage(self.wd, self)
         organizations_page.go_to()
 
-        self.wd.find_element_by_link_text(Organization.get_test_org_name()).click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
+        self.wd.find_element_by_link_text(
+            Organization.get_test_org_name()).click()
+        self.wd.wait_for_xpath(
+            "//h2[contains(text(), 'Organization Overview')]")
         self.wd.find_element_by_css_selector("span.icon.members").click()
         self.wd.wait_for_css('.table')
         elems = self.wd.find_elements_by_css_selector(".linked")
@@ -58,7 +60,8 @@ class AddMember(SeleniumTestCase):
         self.wd.find_element_by_link_text("Add").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
         self.wd.wait_for_css("#id_identifier")
-        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys("cadasta-test-user-2")
+        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys(
+            "cadasta-test-user-2")
         self.wd.find_element_by_xpath('//button[@type="submit"]').click()
         self.wd.wait_for_css(".member-info")
         text = self.wd.find_css("h2").text
@@ -81,10 +84,13 @@ class AddNonExistingMember(SeleniumTestCase):
         self.wd.find_element_by_link_text("Add").click()
         self.wd.switch_to_window(self.wd.window_handles[-1])
         self.wd.wait_for_css("#id_identifier")
-        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys("cadasta-user-x")
+        self.wd.find_element_by_xpath('//input[@name="identifier"]').send_keys(
+            "cadasta-user-x")
         self.wd.find_element_by_xpath('//button[@type="submit"]').click()
         self.wd.wait_for_css(".has-error")
-        elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'User with username or email cadasta-user-x does not exist')]")
+        elems = self.wd.find_elements_by_xpath(
+            "//*[contains(text(), "
+            "'User with username or email cadasta-user-x does not exist')]")
         assert len(elems) != 0
 
     def tearDown(self):
@@ -126,7 +132,8 @@ class SearchMembers(SeleniumTestCase):
         organizations_page.go_to()
         organizations_page.open_members_page()
 
-        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys("cadasta-test-user")
+        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys(
+            "cadasta-test-user")
         elems = self.wd.find_elements_by_css_selector(".linked")
         assert len(elems) != 0
 
@@ -135,10 +142,10 @@ class SearchMembers(SeleniumTestCase):
         organizations_page.go_to()
         organizations_page.open_members_page()
 
-        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys("user-x")
+        self.wd.find_element_by_xpath('//input[@type="search"]').send_keys(
+            "user-x")
         text = self.wd.find_css(".dataTables_empty").text
         assert text == "No matching records found"
 
     def tearDown(self):
         self.wd.quit()
-

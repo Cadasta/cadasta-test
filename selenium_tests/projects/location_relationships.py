@@ -3,7 +3,6 @@ from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementNotVisibleException
-from selenium.common.exceptions import NoSuchElementException
 from selenium_tests.pages import ProjectsPage
 from selenium_tests.entities import Project
 
@@ -21,12 +20,14 @@ class AddLocationRelationship(SeleniumTestCase):
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_link_text("Add location").click()
 
-        self.wd.wait_for_xpath("//h3[contains(text(), 'Draw location on map')]")
+        self.wd.wait_for_xpath(
+            "//h3[contains(text(), 'Draw location on map')]")
         page_state = self.wd.execute_script('return document.readyState;')
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
 
-        self.wd.find_element_by_css_selector("a.leaflet-draw-draw-marker").click()
+        self.wd.find_element_by_css_selector(
+            "a.leaflet-draw-draw-marker").click()
 
         action = ActionChains(self.wd)
         elem = self.wd.find_element_by_xpath('//div[@id="id_geometry_map"]')
@@ -36,7 +37,9 @@ class AddLocationRelationship(SeleniumTestCase):
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
 
-        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text("Building")
+        Select(
+            self.wd.find_element_by_id("id_type")
+        ).select_by_visible_text("Building")
         self.wd.find_element_by_xpath('//input[@value="Save"]').click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
 
@@ -50,8 +53,12 @@ class AddLocationRelationship(SeleniumTestCase):
         except ElementNotVisibleException:
             self.wd.find_element_by_id("add-party").click()
             self.wd.find_element_by_id("id_name").send_keys("party-1")
-        Select(self.wd.find_element_by_id("id_party_type")).select_by_visible_text("Individual")
-        Select(self.wd.find_element_by_id("id_tenure_type")).select_by_visible_text("Freehold")
+        Select(
+            self.wd.find_element_by_id("id_party_type")
+        ).select_by_visible_text("Individual")
+        Select(
+            self.wd.find_element_by_id("id_tenure_type")
+        ).select_by_visible_text("Freehold")
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath('//a[@href="#relationships"]')
 
@@ -83,8 +90,12 @@ class AddLocationRelationship(SeleniumTestCase):
         except ElementNotVisibleException:
             self.wd.find_element_by_id("add-party").click()
             self.wd.find_element_by_id("id_name").send_keys("party-1")
-        Select(self.wd.find_element_by_id("id_party_type")).select_by_visible_text("Individual")
-        Select(self.wd.find_element_by_id("id_tenure_type")).select_by_visible_text("Freehold")
+        Select(
+            self.wd.find_element_by_id("id_party_type")
+        ).select_by_visible_text("Individual")
+        Select(
+            self.wd.find_element_by_id("id_tenure_type")
+        ).select_by_visible_text("Freehold")
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath('//a[@href="#relationships"]')
 
@@ -114,9 +125,11 @@ class ViewRelationshipDetails(SeleniumTestCase):
         self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath(
+            "//a[contains(text(),'Relationships')]").click()
         self.wd.find_element_by_xpath("//tr/td/a").click()
-        assert self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
+        assert self.wd.wait_for_xpath(
+            '//*[contains(text(), "Relationship Detail")]')
 
     def tearDown(self):
         self.wd.quit()
@@ -144,12 +157,15 @@ class EditRelationshipDetails(SeleniumTestCase):
         self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath(
+            "//a[contains(text(),'Relationships')]").click()
         self.wd.find_element_by_xpath("//tr/td/a").click()
         self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
         self.wd.wait_for_xpath('//a[@title="Edit relationship"]').click()
         self.wd.wait_for_xpath('//*[contains(text(), "Edit Relationship")]')
-        Select(self.wd.find_element_by_id("id_tenure_type")).select_by_visible_text("Leasehold")
+        Select(
+            self.wd.find_element_by_id("id_tenure_type")
+        ).select_by_visible_text("Leasehold")
         self.wd.find_element_by_xpath('//button[@type="submit"]').click()
         self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
         assert self.wd.wait_for_xpath('//*[contains(text(), "Leasehold")]')

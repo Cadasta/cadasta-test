@@ -13,11 +13,15 @@ class DuplicateOrganizationNameValidation(SeleniumTestCase):
         organizations_page = OrganizationsPage(self.wd, self)
         organizations_page.create_new_org_form()
 
-        self.wd.find_css('#id_name').send_keys(Organization.get_test_org_name())
-        self.wd.find_css('#id_description').send_keys("Test organization description.")
+        self.wd.find_css('#id_name').send_keys(
+            Organization.get_test_org_name())
+        self.wd.find_css('#id_description').send_keys(
+            "Test organization description.")
         self.wd.find_element_by_xpath('//button[@name="submit"]').click()
         self.wd.wait_for_css(".errorlist")
-        elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'Organization with this Name already exists.')]")
+        elems = self.wd.find_elements_by_xpath(
+            "//*[contains(text(), "
+            "'Organization with this Name already exists.')]")
         assert len(elems) != 0
 
     def tearDown(self):
@@ -34,11 +38,13 @@ class EmptyOrganizationNameValidation(SeleniumTestCase):
         organizations_page.create_new_org_form()
 
         self.wd.find_css('#id_name').send_keys("")
-        self.wd.find_css('#id_description').send_keys("Test organization description.")
+        self.wd.find_css('#id_description').send_keys(
+            "Test organization description.")
         self.wd.find_element_by_xpath('//button[@name="submit"]').click()
         self.wd.wait_for_css(".has-error")
 
-        elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'This field is required.')]")
+        elems = self.wd.find_elements_by_xpath(
+            "//*[contains(text(), 'This field is required.')]")
         assert len(elems) != 0
 
     def tearDown(self):
@@ -59,7 +65,8 @@ class OrganizationURLValidation(SeleniumTestCase):
         self.wd.find_element_by_xpath('//button[@name="submit"]').click()
         self.wd.wait_for_css(".has-error")
 
-        elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'This value should be a valid url.')]")
+        elems = self.wd.find_elements_by_xpath(
+            "//*[contains(text(), 'This value should be a valid url.')]")
         assert len(elems) != 0
 
     def tearDown(self):

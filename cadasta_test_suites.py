@@ -115,16 +115,26 @@ from selenium_tests.permissions.anonymous_user_permissions import (
 
 # Get all tests from accounts test classes
 new_registration = unittest.TestLoader().loadTestsFromTestCase(NewRegistration)
-registration_attempt_existing_username = unittest.TestLoader().loadTestsFromTestCase(RegistrationAttemptUsernameNotAvailable)
-registration_attempt_existing_email = unittest.TestLoader().loadTestsFromTestCase(RegistrationAttemptEmailNotAvailable)
-password_validation = unittest.TestLoader().loadTestsFromTestCase(PasswordValidation)
-confirm_password_validation = unittest.TestLoader().loadTestsFromTestCase(ConfirmPasswordValidation)
-empty_username_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyUsernameValidation)
-empty_email_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyEmailValidation)
-empty_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyPasswordValidation)
-empty_confirm_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyConfirmPasswordValidation)
-empty_username_in_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyUsernameInPasswordValidation)
-empty_email_in_password_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyEmailInPasswordValidation)
+registration_attempt_existing_username = unittest.TestLoader(
+    ).loadTestsFromTestCase(RegistrationAttemptUsernameNotAvailable)
+registration_attempt_existing_email = unittest.TestLoader(
+    ).loadTestsFromTestCase(RegistrationAttemptEmailNotAvailable)
+password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(PasswordValidation)
+confirm_password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(ConfirmPasswordValidation)
+empty_username_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyUsernameValidation)
+empty_email_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyEmailValidation)
+empty_password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyPasswordValidation)
+empty_confirm_password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyConfirmPasswordValidation)
+empty_username_in_password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyUsernameInPasswordValidation)
+empty_email_in_password_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyEmailInPasswordValidation)
 login_success = unittest.TestLoader().loadTestsFromTestCase(Login)
 login_failure = unittest.TestLoader().loadTestsFromTestCase(LoginFailure)
 password_reset = unittest.TestLoader().loadTestsFromTestCase(PasswordReset)
@@ -134,33 +144,50 @@ fullname_change = unittest.TestLoader().loadTestsFromTestCase(FullnameChange)
 email_change = unittest.TestLoader().loadTestsFromTestCase(EmailChange)
 
 # Get all tests from organizations test classes
-create_organization = unittest.TestLoader().loadTestsFromTestCase(CreateOrganization)
-edit_organization = unittest.TestLoader().loadTestsFromTestCase(EditOrganization)
-archive_organization = unittest.TestLoader().loadTestsFromTestCase(OrganizationArchive)
-search_organization = unittest.TestLoader().loadTestsFromTestCase(OrganizationSearch)
-duplicate_org_name_validation = unittest.TestLoader().loadTestsFromTestCase(DuplicateOrganizationNameValidation)
-empty_org_name_validation = unittest.TestLoader().loadTestsFromTestCase(EmptyOrganizationNameValidation)
-org_url_validation = unittest.TestLoader().loadTestsFromTestCase(OrganizationURLValidation)
+create_organization = unittest.TestLoader(
+    ).loadTestsFromTestCase(CreateOrganization)
+edit_organization = unittest.TestLoader(
+    ).loadTestsFromTestCase(EditOrganization)
+archive_organization = unittest.TestLoader(
+    ).loadTestsFromTestCase(OrganizationArchive)
+search_organization = unittest.TestLoader(
+    ).loadTestsFromTestCase(OrganizationSearch)
+duplicate_org_name_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(DuplicateOrganizationNameValidation)
+empty_org_name_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(EmptyOrganizationNameValidation)
+org_url_validation = unittest.TestLoader(
+    ).loadTestsFromTestCase(OrganizationURLValidation)
 view_members = unittest.TestLoader().loadTestsFromTestCase(ViewMembers)
-view_member_profile = unittest.TestLoader().loadTestsFromTestCase(ViewMemberProfile)
+view_member_profile = unittest.TestLoader(
+    ).loadTestsFromTestCase(ViewMemberProfile)
 add_member = unittest.TestLoader().loadTestsFromTestCase(AddMember)
-add_non_existing_member = unittest.TestLoader().loadTestsFromTestCase(AddNonExistingMember)
+add_non_existing_member = unittest.TestLoader(
+    ).loadTestsFromTestCase(AddNonExistingMember)
 remove_member = unittest.TestLoader().loadTestsFromTestCase(RemoveMember)
 search_member = unittest.TestLoader().loadTestsFromTestCase(SearchMembers)
 
 # Get all tests from projects test classes
-create_public_project = unittest.TestLoader().loadTestsFromTestCase(CreatePublicProject)
-create_private_project = unittest.TestLoader().loadTestsFromTestCase(CreatePrivateProject)
-edit_project_details = unittest.TestLoader().loadTestsFromTestCase(EditProjectDetails)
-project_accessibility = unittest.TestLoader().loadTestsFromTestCase(ProjectAccessibility)
-add_project_with_extent = unittest.TestLoader().loadTestsFromTestCase(AddProjectWithExtent)
+create_public_project = unittest.TestLoader(
+    ).loadTestsFromTestCase(CreatePublicProject)
+create_private_project = unittest.TestLoader(
+    ).loadTestsFromTestCase(CreatePrivateProject)
+edit_project_details = unittest.TestLoader(
+    ).loadTestsFromTestCase(EditProjectDetails)
+project_accessibility = unittest.TestLoader(
+    ).loadTestsFromTestCase(ProjectAccessibility)
+add_project_with_extent = unittest.TestLoader(
+    ).loadTestsFromTestCase(AddProjectWithExtent)
 project_search = unittest.TestLoader().loadTestsFromTestCase(ProjectSearch)
 add_location = unittest.TestLoader().loadTestsFromTestCase(AddLocation)
 edit_location = unittest.TestLoader().loadTestsFromTestCase(EditLocation)
 delete_location = unittest.TestLoader().loadTestsFromTestCase(DeleteLocation)
-add_location_relationship = unittest.TestLoader().loadTestsFromTestCase(AddLocationRelationship)
-view_relationship_details = unittest.TestLoader().loadTestsFromTestCase(ViewRelationshipDetails)
-edit_relationship_details = unittest.TestLoader().loadTestsFromTestCase(EditRelationshipDetails)
+add_location_relationship = unittest.TestLoader(
+    ).loadTestsFromTestCase(AddLocationRelationship)
+view_relationship_details = unittest.TestLoader(
+    ).loadTestsFromTestCase(ViewRelationshipDetails)
+edit_relationship_details = unittest.TestLoader(
+    ).loadTestsFromTestCase(EditRelationshipDetails)
 view_party = unittest.TestLoader().loadTestsFromTestCase(ViewParty)
 edit_party = unittest.TestLoader().loadTestsFromTestCase(EditParty)
 delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
@@ -169,18 +196,27 @@ delete_party = unittest.TestLoader().loadTestsFromTestCase(DeleteParty)
 add_resource = unittest.TestLoader().loadTestsFromTestCase(AddResource)
 remove_resource = unittest.TestLoader().loadTestsFromTestCase(RemoveResource)
 add_gpx_resources = unittest.TestLoader().loadTestsFromTestCase(AddGPXResource)
-load_gpx_file_on_map = unittest.TestLoader().loadTestsFromTestCase(LoadGPXFileOnMap)
-accepted_resource_types = unittest.TestLoader().loadTestsFromTestCase(AcceptedResourceTypes)
-invalid_resource_types = unittest.TestLoader().loadTestsFromTestCase(InvalidFileTypes)
-add_location_resource = unittest.TestLoader().loadTestsFromTestCase(AddLocationResource)
-detach_location_resource = unittest.TestLoader().loadTestsFromTestCase(DetachLocationResource)
+load_gpx_file_on_map = unittest.TestLoader(
+    ).loadTestsFromTestCase(LoadGPXFileOnMap)
+accepted_resource_types = unittest.TestLoader(
+    ).loadTestsFromTestCase(AcceptedResourceTypes)
+invalid_resource_types = unittest.TestLoader(
+    ).loadTestsFromTestCase(InvalidFileTypes)
+add_location_resource = unittest.TestLoader(
+    ).loadTestsFromTestCase(AddLocationResource)
+detach_location_resource = unittest.TestLoader(
+    ).loadTestsFromTestCase(DetachLocationResource)
 party_resource = unittest.TestLoader().loadTestsFromTestCase(PartyResource)
-add_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(AddRelationshipResource)
-detach_relationship_resource = unittest.TestLoader().loadTestsFromTestCase(DetachRelationshipResource)
+add_relationship_resource = unittest.TestLoader(
+    ).loadTestsFromTestCase(AddRelationshipResource)
+detach_relationship_resource = unittest.TestLoader(
+    ).loadTestsFromTestCase(DetachRelationshipResource)
 
 # Get all tests from permissions test classes
-anonymous_user_organization_view = unittest.TestLoader().loadTestsFromTestCase(AnonymousUserOrganizationView)
-anonymous_user_project_view = unittest.TestLoader().loadTestsFromTestCase(AnonymousUserProjectView)
+anonymous_user_organization_view = unittest.TestLoader(
+    ).loadTestsFromTestCase(AnonymousUserOrganizationView)
+anonymous_user_project_view = unittest.TestLoader(
+    ).loadTestsFromTestCase(AnonymousUserProjectView)
 
 # Create Cadasta Accounts test suite
 cadasta_accounts_test_suite = unittest.TestSuite([

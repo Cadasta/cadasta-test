@@ -2,6 +2,7 @@ from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium_tests.entities import Project, Organization
 
+
 class AnonymousUserOrganizationView(SeleniumTestCase):
 
     def setUp(self):
@@ -12,8 +13,10 @@ class AnonymousUserOrganizationView(SeleniumTestCase):
         self.wd.wait_for_css(".organizations")
         self.wd.find_element_by_link_text("Organizations").click()
         self.wd.wait_for_xpath("//h1[contains(text(), 'Organizations')]")
-        self.wd.find_element_by_link_text(Organization.get_test_org_name()).click()
-        self.wd.wait_for_xpath("//h2[contains(text(), 'Organization Overview')]")
+        self.wd.find_element_by_link_text(
+            Organization.get_test_org_name()).click()
+        self.wd.wait_for_xpath(
+            "//h2[contains(text(), 'Organization Overview')]")
         assert self.wd.find_element_by_xpath("//div/section/p")
 
     def tearDown(self):

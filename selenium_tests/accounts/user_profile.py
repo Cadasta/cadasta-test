@@ -2,6 +2,7 @@ from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium_tests.entities import Credentials
 
+
 class PasswordReset(SeleniumTestCase):
 
     def setUp(self):
@@ -12,7 +13,8 @@ class PasswordReset(SeleniumTestCase):
         self.wd.wait_for_css('.btn-user')
         self.open("/account/password/reset/")
         self.wd.find_css('#id_email').send_keys(Credentials.get_test_email())
-        self.wd.find_element_by_xpath('//input[@value="Reset password"]').click()
+        self.wd.find_element_by_xpath(
+            '//input[@value="Reset password"]').click()
         text = self.wd.find_element_by_xpath("//h1").text
         assert text == "Password reset"
 
@@ -34,7 +36,8 @@ class PasswordChange(SeleniumTestCase):
         self.wd.find_css('#id_oldpassword').send_keys("XYZ#qwerty")
         self.wd.find_css('#id_password1').send_keys("XYZ#qwertyA")
         self.wd.find_css('#id_password2').send_keys("XYZ#qwertyA")
-        self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
+        self.wd.find_elements_by_xpath(
+            "//button[contains(text(), 'Change password')]")[0].click()
         text = self.wd.find_element_by_xpath("//h1").text
         assert text == "Update your profile"
         self.open("/account/logout/")
@@ -49,7 +52,8 @@ class PasswordChange(SeleniumTestCase):
         self.wd.find_css('#id_oldpassword').send_keys("abc")
         self.wd.find_css('#id_password1').send_keys("XYZ#qwertyA")
         self.wd.find_css('#id_password2').send_keys("XYZ#qwertyA")
-        self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
+        self.wd.find_elements_by_xpath(
+            "//button[contains(text(), 'Change password')]")[0].click()
         text = self.wd.find_element_by_xpath("//h1").text
         assert text == "Change your password"
 
@@ -71,7 +75,8 @@ class UsernameChange(SeleniumTestCase):
         self.wd.find_css('#id_username').send_keys("cadasta-test-user-Y")
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
-        # text = self.wd.find_elements_by_xpath("//span[@class, 'username')]").text
+        # text = self.wd.find_elements_by_xpath(
+        #     "//span[@class, 'username')]").text
         # print text
         # assert text == "cadasta-test-user-11"
 
@@ -91,7 +96,8 @@ class FullnameChange(SeleniumTestCase):
         self.open("/account/profile/")
 
         self.wd.find_css('#id_full_name').clear()
-        self.wd.find_css('#id_full_name').send_keys("cadasta-test-user-1-fullname")
+        self.wd.find_css('#id_full_name').send_keys(
+            "cadasta-test-user-1-fullname")
         self.wd.find_element_by_xpath('//button[@name="update"]').click()
 
     def tearDown(self):

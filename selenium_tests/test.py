@@ -2,7 +2,7 @@ import unittest
 import sys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
-from  selenium_tests.entities import Credentials
+from selenium_tests.entities import Credentials
 
 
 class SeleniumTestCase(unittest.TestCase):
@@ -19,8 +19,10 @@ class SeleniumTestCase(unittest.TestCase):
 
     def user_login(self):
         self.open("/account/login/")
-        self.wd.find_css('#id_login').send_keys(Credentials().get_test_username())
-        self.wd.find_css("#id_password").send_keys(Credentials().get_test_password())
+        self.wd.find_css('#id_login').send_keys(
+            Credentials().get_test_username())
+        self.wd.find_css("#id_password").send_keys(
+            Credentials().get_test_password())
         self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
 
     def login_as(self, username, password):
@@ -36,7 +38,8 @@ class SeleniumTestCase(unittest.TestCase):
         self.wd.find_css('#id_oldpassword').send_keys(changedPassword)
         self.wd.find_css('#id_password1').send_keys(password)
         self.wd.find_css('#id_password2').send_keys(password)
-        self.wd.find_elements_by_xpath("//button[contains(text(), 'Change password')]")[0].click()
+        self.wd.find_elements_by_xpath(
+            "//button[contains(text(), 'Change password')]")[0].click()
 
     def restore_username(self, username):
         self.open("/account/profile/")
@@ -69,7 +72,11 @@ class SeleniumTestCase(unittest.TestCase):
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
         try:
-            self.wd.find_elements_by_xpath("//*[contains(text(), 'Confirmation email sent to user2@abc.com.')]")
+            self.wd.find_elements_by_xpath(
+                "//*[contains(text(), "
+                "'Confirmation email sent to user2@abc.com.')]")
             self.open("/account/logout/")
         except Exception:
-            self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
+            self.wd.find_elements_by_xpath(
+                "//*[contains(text(), "
+                "'A user with that username already exists.')]")

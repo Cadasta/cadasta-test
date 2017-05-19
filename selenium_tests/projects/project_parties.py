@@ -1,7 +1,5 @@
-import os
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
-from selenium.webdriver.support.ui import Select
 from selenium_tests.pages import ProjectsPage
 
 
@@ -16,13 +14,14 @@ class ViewParty(SeleniumTestCase):
         projects_page.open_parties_page()
 
         self.wd.find_element_by_link_text("party-1").click()
-        text = self.wd.find_element_by_xpath("//div[@class='page-title']/h2").text
+        text = self.wd.find_element_by_xpath(
+            "//div[@class='page-title']/h2").text
         assert text == "PARTY DETAIL"
 
     def tearDown(self):
         self.wd.quit()
 
-        
+
 class EditParty(SeleniumTestCase):
 
     def setUp(self):
@@ -68,4 +67,3 @@ class DeleteParty(SeleniumTestCase):
 
     def tearDown(self):
         self.wd.quit()
-

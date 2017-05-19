@@ -19,12 +19,13 @@ class NewRegistration(SeleniumTestCase):
         index = 1
 
         while not username_available:
-            test_username = "cadasta-test-user-" + `index`
+            test_username = "cadasta-test-user-" + repr(index)
             test_password = "XYZ#qwerty"
             self.wd.find_css('#id_username').clear()
             self.wd.find_css('#id_username').send_keys(test_username)
             self.wd.find_css('#id_email').clear()
-            self.wd.find_css('#id_email').send_keys(test_username + "@example.com")
+            self.wd.find_css('#id_email').send_keys(
+                test_username + "@example.com")
             self.wd.find_css("#id_password1").clear()
             self.wd.find_css("#id_password1").send_keys(test_password)
             self.wd.find_css("#id_password2").clear()
@@ -34,8 +35,12 @@ class NewRegistration(SeleniumTestCase):
             action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
             time.sleep(1)
-            elems = self.wd.find_elements_by_xpath("//*[contains(text(), 'A user with that username already exists.')]")
-            elems.extend(self.wd.find_elements_by_xpath("//*[contains(text(), 'Another user with this email already exists')]"))
+            elems = self.wd.find_elements_by_xpath(
+                "//*[contains(text(), "
+                "'A user with that username already exists.')]")
+            elems.extend(self.wd.find_elements_by_xpath(
+                "//*[contains(text(), "
+                "'Another user with this email already exists')]"))
             if len(elems) == 0:
                 username_available = True
                 Credentials().set_test_username(test_username)
@@ -48,6 +53,7 @@ class NewRegistration(SeleniumTestCase):
     def tearDown(self):
         self.wd.quit()
 
+
 class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
 
     def setUp(self):
@@ -57,7 +63,8 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         registration_page = RegistrationPage(self.wd, self)
         registration_page.go_to()
 
-        self.wd.find_css('#id_username').send_keys(Credentials().get_test_username())
+        self.wd.find_css('#id_username').send_keys(
+            Credentials().get_test_username())
         self.wd.find_css('#id_email').send_keys("user@abc.com")
         self.wd.find_css("#id_password1").send_keys('XYZ#qwerty')
         self.wd.find_css("#id_password2").send_keys('XYZ#qwerty')
@@ -65,10 +72,13 @@ class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        assert self.wd.wait_for_xpath("//*[contains(text(), 'A user with that username already exists.')]")
+        assert self.wd.wait_for_xpath(
+            "//*[contains(text(), "
+            "'A user with that username already exists.')]")
 
     def tearDown(self):
         self.wd.quit()
+
 
 class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
 
@@ -87,8 +97,9 @@ class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        assert self.wd.wait_for_xpath("//*[contains(text(), 'Another user with this email already exists')]")
+        assert self.wd.wait_for_xpath(
+            "//*[contains(text(), "
+            "'Another user with this email already exists')]")
 
     def tearDown(self):
         self.wd.quit()
-

@@ -53,5 +53,3 @@ class Project:
     @staticmethod
     def set_test_proj_name(proj_name):
         Project.test_proj_name = proj_name
-
-
