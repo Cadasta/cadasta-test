@@ -3,7 +3,5 @@ sudo: false
 language: python
 python:
   - '3.5'
-install:
-  - pip install -r requirements.pip
 script:
   - flake8 .
