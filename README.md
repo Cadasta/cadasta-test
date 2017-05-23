@@ -4,7 +4,7 @@
 
 #### To install the dependencies :
 
-`pip install -r requirements.pip`
+`pip install -r requirements.txt`
 
 #### To configure geckodriver (This is required if you run the tests with firefox version > 48):
 
