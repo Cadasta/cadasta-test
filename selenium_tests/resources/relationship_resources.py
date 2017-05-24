@@ -2,7 +2,6 @@ import os
 from selenium_tests.test import SeleniumTestCase
 from selenium_tests.webdriver import CustomWebDriver
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.support.ui import Select
 from selenium_tests.pages import ProjectsPage
 from selenium_tests.entities import Project
 
@@ -29,15 +28,18 @@ class AddRelationshipResource(SeleniumTestCase):
         self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath(
+            "//a[contains(text(),'Relationships')]").click()
         self.wd.find_element_by_xpath("//tr/td/a").click()
         self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
         self.wd.find_element_by_link_text("Attach").click()
 
-        self.wd.find_element_by_xpath('//tr/td/label/strong[contains(text(), "resource-1")]').click()
+        self.wd.find_element_by_xpath(
+            '//tr/td/label/strong[contains(text(), "resource-1")]').click()
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath('//h4[contains(text(), "Resources")]')
-        assert self.wd.find_element_by_xpath('//*[contains(text(), "resource-1")]')
+        assert self.wd.find_element_by_xpath(
+            '//*[contains(text(), "resource-1")]')
 
     def test_attach_new_resource_to_relationship(self):
         projects_page = ProjectsPage(self.wd, self)
@@ -56,7 +58,8 @@ class AddRelationshipResource(SeleniumTestCase):
         self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath(
+            "//a[contains(text(),'Relationships')]").click()
         self.wd.find_element_by_xpath("//tr/td/a").click()
         self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
         self.wd.find_element_by_link_text("Attach").click()
@@ -66,16 +69,19 @@ class AddRelationshipResource(SeleniumTestCase):
 
         path = os.path.abspath("resources/resource-1.pdf")
         self.wd.find_element_by_css_selector("input.file-input").clear()
-        self.wd.find_element_by_css_selector("input.file-input").send_keys(path)
+        self.wd.find_element_by_css_selector(
+            "input.file-input").send_keys(path)
         self.wd.find_element_by_id("id_name").clear()
         self.wd.find_element_by_id("id_name").send_keys("resource-2")
         self.wd.wait_for_xpath("//a[@class='file-link']")
         self.wd.find_element_by_name("submit").click()
         self.wd.wait_for_xpath('//h4[contains(text(), "Resources")]')
-        assert self.wd.find_element_by_xpath('//*[contains(text(), "resource-2")]')
+        assert self.wd.find_element_by_xpath(
+            '//*[contains(text(), "resource-2")]')
 
     def tearDown(self):
         self.wd.quit()
+
 
 class DetachRelationshipResource(SeleniumTestCase):
 
@@ -99,11 +105,11 @@ class DetachRelationshipResource(SeleniumTestCase):
         self.wd.find_element_by_css_selector('img.leaflet-marker-icon').click()
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        self.wd.find_element_by_xpath("//a[contains(text(),'Relationships')]").click()
+        self.wd.find_element_by_xpath(
+            "//a[contains(text(),'Relationships')]").click()
         self.wd.find_element_by_xpath("//tr/td/a").click()
         self.wd.wait_for_xpath('//*[contains(text(), "Relationship Detail")]')
         self.wd.find_element_by_xpath("//button[@type='submit']").click()
 
     def tearDown(self):
         self.wd.quit()
-

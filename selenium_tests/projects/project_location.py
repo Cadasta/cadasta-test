@@ -18,14 +18,16 @@ class AddLocation(SeleniumTestCase):
         self.wd.find_element_by_link_text(Project.get_test_proj_name()).click()
         self.wd.wait_for_xpath("//h2[contains(text(), 'Project Overview')]")
         self.wd.find_element_by_link_text("Add location").click()
-        self.wd.wait_for_xpath("//h3[contains(text(), 'Draw location on map')]")
+        self.wd.wait_for_xpath(
+            "//h3[contains(text(), 'Draw location on map')]")
 
         page_state = self.wd.execute_script('return document.readyState;')
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
-        print page_state
+        print(page_state)
 
-        self.wd.find_element_by_xpath('//a[@class="leaflet-draw-draw-marker"]').click()
+        self.wd.find_element_by_xpath(
+            '//a[@class="leaflet-draw-draw-marker"]').click()
         action = ActionChains(self.wd)
         elem = self.wd.find_element_by_xpath('//div[@id="id_geometry_map"]')
         action.move_to_element(elem).move_by_offset(10, 10).click().perform()
@@ -34,7 +36,8 @@ class AddLocation(SeleniumTestCase):
         while page_state != 'complete':
             page_state = self.wd.execute_script('return document.readyState;')
 
-        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text("Parcel")
+        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text(
+            "Parcel")
         self.wd.find_element_by_xpath('//input[@value="Save"]').click()
 
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
@@ -68,12 +71,15 @@ class EditLocation(SeleniumTestCase):
         self.wd.find_element_by_link_text("Open location").click()
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
         self.wd.find_element_by_xpath("//a[@title='Edit location']").click()
-        self.wd.wait_for_xpath("//h3[contains(text(), 'Draw location on map')]")
-        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text("Apartment")
+        self.wd.wait_for_xpath(
+            "//h3[contains(text(), 'Draw location on map')]")
+        Select(self.wd.find_element_by_id("id_type")).select_by_visible_text(
+            "Apartment")
         self.wd.find_element_by_xpath('//input[@value="Save"]').click()
 
         self.wd.wait_for_xpath("//span[contains(text(), 'Location')]")
-        assert self.wd.find_element_by_xpath("//*[contains(text(), 'Apartment')]")
+        assert self.wd.find_element_by_xpath(
+            "//*[contains(text(), 'Apartment')]")
 
     def tearDown(self):
         self.wd.quit()

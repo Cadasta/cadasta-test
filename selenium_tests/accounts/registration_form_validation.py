@@ -20,8 +20,12 @@ class PasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
-        assert text == "Your password must contain at least 3 of the following: lowercase characters, uppercase characters, special characters, and/or numerical characters."
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
+        assert text == ("Your password must contain at least 3 of the "
+                        "following: lowercase characters, uppercase "
+                        "characters, special characters, and/or numerical "
+                        "characters.")
 
     def tearDown(self):
         self.wd.quit()
@@ -43,7 +47,8 @@ class ConfirmPasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This value should be the same."
 
     def tearDown(self):
@@ -66,7 +71,8 @@ class EmptyUsernameValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
 
     def tearDown(self):
@@ -89,7 +95,8 @@ class EmptyEmailValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
 
     def tearDown(self):
@@ -112,7 +119,8 @@ class EmptyPasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
 
     def tearDown(self):
@@ -135,11 +143,13 @@ class EmptyConfirmPasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.wait_for_xpath("//ul[contains(@class, 'parsley-errors-list')]").text
+        text = self.wd.wait_for_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]").text
         assert text == "This field is required."
 
     def tearDown(self):
         self.wd.quit()
+
 
 class EmptyUsernameInPasswordValidation(SeleniumTestCase):
 
@@ -157,11 +167,13 @@ class EmptyUsernameInPasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.find_elements_by_xpath("//ul[contains(@class, 'parsley-errors-list')]")
+        text = self.wd.find_elements_by_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]")
         assert len(text) == 1
 
     def tearDown(self):
         self.wd.quit()
+
 
 class EmptyEmailInPasswordValidation(SeleniumTestCase):
 
@@ -179,7 +191,8 @@ class EmptyEmailInPasswordValidation(SeleniumTestCase):
         action = ActionChains(self.wd)
         action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
 
-        text = self.wd.find_elements_by_xpath("//ul[contains(@class, 'parsley-errors-list')]")
+        text = self.wd.find_elements_by_xpath(
+            "//ul[contains(@class, 'parsley-errors-list')]")
         assert len(text) == 1
 
     def tearDown(self):

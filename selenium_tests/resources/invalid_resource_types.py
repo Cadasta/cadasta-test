@@ -29,4 +29,3 @@ class InvalidFileTypes(SeleniumTestCase):
 
     def tearDown(self):
         self.wd.quit()
-
