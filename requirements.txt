@@ -1,2 +1,2 @@
-flake8==2.5.4
+flake8==3.3.0
 selenium
