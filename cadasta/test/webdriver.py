@@ -1,10 +1,13 @@
+import os
+
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-# Determine the WebDriver module; default to Firefox
-web_driver_module = webdriver.Firefox
+# Determine the WebDriver module; default to Chrome
+web_driver_module = getattr(
+    webdriver, os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome'))
 
 
 class CustomWebDriver(web_driver_module):

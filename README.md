@@ -33,7 +33,8 @@ You can run the test suite by executing the **runtests.py** script in the
 
 | Argument | Description |
 | --- | --- |
-| `--host <host>` | Specify the scheme, hostname, and/or port of the Cadasta server to be tested. If this argument is omitted, **http://localhost:8000** is used as the default value. If present, this argument must be placed first. |
+| `--host <host>` | Specify the scheme, hostname, and/or port of the Cadasta server to be tested. If omitted, **http://localhost:8000** is used. |
+| `--webdriver {Chrome,Firefox}` | Specify the Selenium WebDriver to use: ChromeDriver (Chrome) or GeckoDriver (Firefox). If omitted, ChromeDriver is used. |
 | `<pytest arguments>` | Optional arguments that will be passed directly to pytest. |
 
 For example, invoking the following command will run a single specific test file
