@@ -28,13 +28,19 @@ Unzip it and add to PATH variable`
 
 #### To run the tests :
 
-You can run the Selenium test by executing one of the below two commands. If you give `./runtests` without giving a
-server url, the default url http://localhost:8000 will be considered as the server url.
+You can run the test suite by executing the **runtests.py** script in the
+**cadasta/test** directory. The optional arguments are as follows:
 
-`./runtests`
+| Argument | Description |
+| --- | --- |
+| `--host <host>` | Specify the scheme, hostname, and/or port of the Cadasta server to be tested. If omitted, **http://localhost:8000** is used. |
+| `--webdriver {Chrome,Firefox}` | Specify the Selenium WebDriver to use: ChromeDriver (Chrome) or GeckoDriver (Firefox). If omitted, ChromeDriver is used. |
+| `<pytest arguments>` | Optional arguments that will be passed directly to pytest. |
 
-`./runtests <server-url>`
+For example, invoking the following command will run a single specific test file
+file against the staging environment in verbose mode.
 
+`./runtests.py --host https://platform-staging.cadasta.org -v account_tests/test_login.py`
 
 ### Cleaning the Cadasta DB in a local setup
 
@@ -57,4 +63,3 @@ In case if you need to run tests on a local setup with a clean DB, please follow
  `./manage.py migrate`
  
  `./manage.py loadstatic`
- 
