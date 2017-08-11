@@ -1,3 +1,4 @@
+import pytest
 import time
 
 from selenium.common.exceptions import WebDriverException
@@ -8,6 +9,8 @@ from selenium.webdriver.support.ui import Select
 from ..base_test import SeleniumTestCase
 from ..entities import Organization
 from ..pages import ProjectsPage
+
+pytestmark = pytest.mark.skip
 
 
 class AddProjectWithExtent(SeleniumTestCase):

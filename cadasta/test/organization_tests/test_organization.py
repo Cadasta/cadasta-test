@@ -1,3 +1,4 @@
+import pytest
 import time
 
 from selenium.common.exceptions import NoSuchElementException
@@ -5,6 +6,8 @@ from selenium.common.exceptions import NoSuchElementException
 from ..base_test import SeleniumTestCase
 from ..entities import Organization
 from ..pages import OrganizationsPage
+
+pytestmark = pytest.mark.skip
 
 
 class CreateOrganization(SeleniumTestCase):
