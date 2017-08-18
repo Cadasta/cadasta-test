@@ -1,4 +1,8 @@
+import pytest
+
 from ..base_test import SeleniumTestCase
+
+pytestmark = pytest.mark.skip
 
 
 class Login(SeleniumTestCase):
@@ -16,8 +20,9 @@ class LoginFailure(SeleniumTestCase):
 
     def test_login_failure(self):
         self.open("/account/login/")
-        self.wd.find_css('#id_login').send_keys("admin")
-        self.wd.find_css("#id_password").send_keys('admin')
-        self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
-        elem = self.wd.find_element_by_xpath("//div[contains(@role, 'alert')]")
-        assert elem != []
+        self.wd.BY_NAME('login').send_keys('admin')
+        self.wd.BY_NAME('password').send_keys('admin')
+        self.wd.BY_NAME('sign-in').click()
+        self.wd.BY_XPATH(
+            '//*[@role="alert" and contains(normalize-space(),'
+            '"The login and/or password you specified are not correct.")]')

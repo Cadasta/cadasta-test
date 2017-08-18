@@ -1,5 +1,9 @@
+import pytest
+
 from ..base_test import SeleniumTestCase
 from ..entities import Project, Organization
+
+pytestmark = pytest.mark.skip
 
 
 class AnonymousUserOrganizationView(SeleniumTestCase):

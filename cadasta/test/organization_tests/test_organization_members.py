@@ -1,8 +1,12 @@
+import pytest
+
 from selenium.common.exceptions import NoSuchElementException
 
 from ..base_test import SeleniumTestCase
 from ..entities import Organization
 from ..pages import OrganizationsPage
+
+pytestmark = pytest.mark.skip
 
 
 class ViewMembers(SeleniumTestCase):

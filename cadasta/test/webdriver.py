@@ -2,7 +2,9 @@ import os
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 # Determine the WebDriver module; default to Chrome
@@ -17,10 +19,20 @@ class CustomWebDriver(web_driver_module):
         super().__init__()
         self.set_window_size(1920, 1080)
 
+        # Helper find-element methods to reduce line lengths
+        self.BY_CLASS = self.find_element_by_class_name
+        self.BY_CSS = self.find_element_by_css_selector
+        self.BYS_CSS = self.find_elements_by_css_selector
+        self.BY_ID = self.find_element_by_id
+        self.BY_NAME = self.find_element_by_name
+        self.BY_TAG = self.find_element_by_tag_name
+        self.BYS_TAG = self.find_elements_by_tag_name
+        self.BY_XPATH = self.find_element_by_xpath
+
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or
         singleton"""
-        elems = self.find_elements_by_css_selector(css_selector)
+        elems = self.BYS_CSS(css_selector)
         found = len(elems)
         if found == 1:
             return elems[0]
@@ -30,19 +42,14 @@ class CustomWebDriver(web_driver_module):
 
     def wait_for_css(self, css_selector, timeout=10):
         """ Shortcut for WebDriverWait"""
-        try:
-            return WebDriverWait(self, timeout).until(
-                lambda driver: driver.find_css(css_selector))
-        except:
-            self.quit()
+        wait = WebDriverWait(self, timeout)
+        return wait.until(EC.presence_of_element_located(
+            (By.CSS_SELECTOR, css_selector)))
 
     def wait_for_xpath(self, xpath, timeout=10):
         """ Shortcut for WebDriverWait"""
-        try:
-            return WebDriverWait(self, timeout).until(
-                lambda driver: driver.find_element_by_xpath(xpath))
-        except:
-            self.quit()
+        wait = WebDriverWait(self, timeout)
+        return wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
 
     def switch_to_modal_dialog(self):
         modal_dialog_window_handle = None
