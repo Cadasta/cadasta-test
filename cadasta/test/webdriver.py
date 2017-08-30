@@ -7,17 +7,22 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-# Determine the WebDriver module; default to Chrome
-web_driver_module = getattr(
-    webdriver, os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome'))
+# Determine the WebDriver module; default to local ChromeDriver
+webdriver_option = os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome')
+if 'BrowserStack' in webdriver_option:
+    webdriver_module = webdriver.Remote
+elif webdriver_option == 'Firefox':
+    webdriver_module = webdriver.Firefox
+else:
+    webdriver_module = webdriver.Chrome
 
 
-class CustomWebDriver(web_driver_module):
+class CustomWebDriver(webdriver_module):
     """Our own WebDriver with some helpers added"""
 
-    def __init__(self):
-        super().__init__()
-        self.set_window_size(1920, 1080)
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.set_window_size(1200, 800)
 
         # Helper find-element methods to reduce line lengths
         self.BY_CLASS = self.find_element_by_class_name
@@ -50,6 +55,9 @@ class CustomWebDriver(web_driver_module):
         """ Shortcut for WebDriverWait"""
         wait = WebDriverWait(self, timeout)
         return wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
+
+    def scroll_element_into_view(self, element):
+        self.execute_script('arguments[0].scrollIntoView()', element)
 
     def switch_to_modal_dialog(self):
         modal_dialog_window_handle = None

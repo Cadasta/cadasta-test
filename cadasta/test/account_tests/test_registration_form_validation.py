@@ -45,7 +45,9 @@ class RegistrationTest(SeleniumTestCase):
         self.wd.BY_NAME('email').send_keys(self.email)
         self.wd.BY_NAME('password').send_keys(self.password)
         self.wd.BY_NAME('full_name').send_keys(self.full_name)
-        self.wd.BY_NAME('register').click()
+        button = self.wd.BY_NAME('register')
+        self.wd.scroll_element_into_view(button)
+        button.click()
 
         self.wd.wait_for_xpath(
             '//*[contains(@class, "form-group") and '
@@ -62,7 +64,9 @@ class RegistrationTest(SeleniumTestCase):
         self.wd.BY_NAME('username').send_keys(self.username)
         self.wd.BY_NAME('password').send_keys(self.password)
         self.wd.BY_NAME('full_name').send_keys(self.full_name)
-        self.wd.BY_NAME('register').click()
+        button = self.wd.BY_NAME('register')
+        self.wd.scroll_element_into_view(button)
+        button.click()
 
         self.wd.wait_for_xpath(
             '//*[contains(@class, "form-group") and '
@@ -79,7 +83,9 @@ class RegistrationTest(SeleniumTestCase):
         self.wd.BY_NAME('username').send_keys(self.username)
         self.wd.BY_NAME('email').send_keys(self.email)
         self.wd.BY_NAME('full_name').send_keys(self.full_name)
-        self.wd.BY_NAME('register').click()
+        button = self.wd.BY_NAME('register')
+        self.wd.scroll_element_into_view(button)
+        button.click()
 
         self.wd.wait_for_xpath(
             '//*[contains(@class, "form-group") and '
