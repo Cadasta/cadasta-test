@@ -1,87 +1,241 @@
 import pytest
-import time
 
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 
 from ..base_test import SeleniumTestCase
-from ..entities import Credentials
-from ..pages import RegistrationPage
-
-pytestmark = pytest.mark.skip
+from ..util import random_string
 
 
-class NewRegistration(SeleniumTestCase):
+class TestRegistration(SeleniumTestCase):
 
-    def test_new_registration(self):
-        registration_page = RegistrationPage(self.wd, self)
-        registration_page.go_to()
-        username_available = False
-        index = 1
+    @pytest.fixture(autouse=True)
+    def setup_test_data(self):
+        self.username = 'functest_tmp_{}'.format(random_string())
+        self.email = 'evillar+tmp_{}@cadasta.org'.format(random_string())
+        self.password = 'XYZ#qwerty'
+        self.full_name = 'John Lennon'
 
-        while not username_available:
-            test_username = "cadasta-test-user-" + repr(index)
-            test_password = "XYZ#qwerty"
-            self.wd.find_css('#id_username').clear()
-            self.wd.find_css('#id_username').send_keys(test_username)
-            self.wd.find_css('#id_email').clear()
-            self.wd.find_css('#id_email').send_keys(
-                test_username + "@example.com")
-            self.wd.find_css("#id_password").clear()
-            self.wd.find_css("#id_password").send_keys(test_password)
-            self.wd.find_css("#id_full_name").send_keys('')
-            action = ActionChains(self.wd)
-            action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+    def click_register_button(self):
+        button = self.wd.BY_NAME('register')
+        self.scroll_element_into_view(button)
+        button.click()
 
-            time.sleep(1)
-            elems = self.wd.find_elements_by_xpath(
-                "//*[contains(text(), "
-                "'A user with that username already exists')]")
-            elems.extend(self.wd.find_elements_by_xpath(
-                "//*[contains(text(), "
-                "'Another user with this email already exists')]"))
-            if len(elems) == 0:
-                username_available = True
-                # Credentials().set_test_username(test_username)
-                # Credentials().set_test_password(test_password)
-                # Credentials().set_test_email(test_username + "@example.com")
-                assert self.wd.wait_for_css('.btn-user')
-            else:
-                index = index + 1
+    def test_user_can_create_account(self):
+        """Verifies User Accounts test case #R1."""
 
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.wd.wait_for_xpath(
+            '//header//*[normalize-space()="{}"]'.format(self.full_name))
+        self.assert_url_path('/dashboard/')
+        try:
+            self.wd.BY_LINK('Sign in')
+            raise AssertionError('Sign in link is present')
+        except NoSuchElementException:
+            pass
+        try:
+            self.wd.BY_LINK('Register')
+            raise AssertionError('Register link is present')
+        except NoSuchElementException:
+            pass
 
-class RegistrationAttemptUsernameNotAvailable(SeleniumTestCase):
+    def test_show_password_button_works(self):
+        """Verifies User Accounts test case #R2."""
 
-    def test_registration_attempt_already_taken_username(self):
-        registration_page = RegistrationPage(self.wd, self)
-        registration_page.go_to()
+        self.wd.BY_LINK('Register').click()
+        password_input = self.wd.BY_NAME('password')
+        password_input.send_keys(self.password)
+        button = self.wd.BY_XPATH(
+            '//*[contains(@class, "form-group") and '
+            '    //*[@name="password"]]//button'
+        )
+        button.click()
+        assert password_input.get_attribute('type') == 'text'
+        button.click()
+        assert password_input.get_attribute('type') == 'password'
 
-        self.wd.find_css('#id_username').send_keys(
-            Credentials().get_test_username())
-        self.wd.find_css('#id_email').send_keys("user@abc.com")
-        self.wd.find_css("#id_password").send_keys('XYZ#qwerty')
-        self.wd.find_css("#id_full_name").send_keys('')
-        action = ActionChains(self.wd)
-        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+    def test_username_is_required(self):
+        """Verifies User Accounts test case #R6."""
 
-        assert self.wd.wait_for_xpath(
-            "//*[contains(text(), "
-            "'A user with that username already exists')]")
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error('username', 'This field is required.')
 
+    def test_username_must_be_unique(self, generic_user):
+        """Verifies User Accounts test case #R7."""
 
-class RegistrationAttemptEmailNotAvailable(SeleniumTestCase):
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', generic_user['username'])
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'username', 'A user with that username already exists')
 
-    def test_registration_attempt_already_taken_email(self):
-        registration_page = RegistrationPage(self.wd, self)
-        registration_page.go_to()
+    def test_username_format_is_validated(self):
+        """Verifies User Accounts test case #R8."""
 
-        self.wd.find_css('#id_username').send_keys("cadasta-test-user")
-        self.wd.find_css('#id_email').send_keys(Credentials().get_test_email())
-        self.wd.find_css("#id_password").send_keys('XYZ#qwerty')
-        self.wd.find_css("#id_full_name").send_keys('')
-        action = ActionChains(self.wd)
-        action.send_keys(Keys.TAB).send_keys(Keys.RETURN).perform()
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        username_input = self.wd.BY_NAME('username')
+        username_input.send_keys('1234567890' * 20)
+        assert username_input.get_attribute('value') == '1234567890' * 15
+        username_input.clear()
+        username_input.send_keys('with space')
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'username',
+            'Enter a valid username. This value may contain '
+            'only letters, numbers, and @/./+/-/_ characters.')
 
-        assert self.wd.wait_for_xpath(
-            "//*[contains(text(), "
-            "'Another user with this email already exists')]")
+    def test_email_address_is_required(self):
+        """Verifies User Accounts test case #R9."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error('email', 'This field is required.')
+
+    def test_email_address_must_be_unique(self, generic_user):
+        """Verifies User Accounts test case #R10."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', generic_user['email'])
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'email', 'Another user with this email already exists')
+
+    def test_email_address_format_is_validated(self):
+        """Verifies User Accounts test case #R11."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', 'invalid')
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'email', 'This field should be a valid email.')
+
+    def test_password_is_required(self):
+        """Verifies User Accounts test case #R12."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error('password', 'This field is required.')
+
+    def test_password_format_is_validated(self):
+        """Verifies User Accounts test case #R13."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('full_name', self.full_name)
+
+        password_help = self.wd.BY_XPATH(
+            '//*[contains(@class, "form-group") and //*[@name="password"]]'
+            '//*[contains(@class, "help-block")]')
+        assert 'hidden' in password_help.get_attribute('class')
+        password_input = self.wd.BY_NAME('password')
+        password_input.click()
+        assert 'hidden' not in password_help.get_attribute('class')
+
+        password_input.send_keys('Aa1+')
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'password',
+            'This field is too short. It should have 10 characters or more.')
+
+        error_msg = (
+            'Your password must contain at least 3 of the following: '
+            'lowercase characters, uppercase characters, special characters, '
+            'and/or numerical characters.')
+
+        def check_invalid_password(password):
+            password_input.clear()
+            password_input.send_keys(password)
+            self.click_register_button()
+            self.assert_form_field_has_error('password', error_msg)
+
+        check_invalid_password('ABCDEFGHIJ')
+        check_invalid_password('abcdefghij')
+        check_invalid_password('1234567890')
+        check_invalid_password('!@#$%^&*()')
+        check_invalid_password('ABCDEabcde')
+        check_invalid_password('ABCDE12345')
+        check_invalid_password('ABCDE!@#$%')
+        check_invalid_password('abcde12345')
+        check_invalid_password('abcde!@#$%')
+        check_invalid_password('12345!@#$%')
+
+    def test_password_must_not_contain_username(self):
+        """Verifies User Accounts test case #R14."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password + self.username)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'password', 'Your password cannot contain your username.')
+
+    def test_password_must_not_contain_email_username(self):
+        """Verifies User Accounts test case #R15."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        email_username = self.email.split('@')[0]
+        self.update_form_field('password', self.password + email_username)
+        self.update_form_field('full_name', self.full_name)
+        self.click_register_button()
+        self.assert_form_field_has_error(
+            'password',
+            'Your password cannot contain your email mailbox name.')
+
+    def test_full_name_is_not_required(self):
+        """Verifies User Accounts test case #R16."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.click_register_button()
+        self.wd.wait_for_xpath(
+            '//header//*[normalize-space()="{}"]'.format(self.username))
+        self.assert_url_path('/dashboard/')
+
+    def test_user_can_select_another_language(self):
+        """Verifies User Accounts test case #R17."""
+
+        self.wd.BY_LINK('Register').click()
+        self.update_form_field('username', self.username)
+        self.update_form_field('email', self.email)
+        self.update_form_field('password', self.password)
+        self.update_form_field('full_name', self.full_name)
+        self.update_form_field('language', 'es')
+        self.click_register_button()
+        self.wd.wait_for_xpath(
+            '//header//*[normalize-space()="{}"]'.format(self.full_name))
+        self.assert_url_path('/dashboard/')
+        self.wd.BY_LINK('Proyectos')
+        self.wd.BY_LINK('Organizaciones')

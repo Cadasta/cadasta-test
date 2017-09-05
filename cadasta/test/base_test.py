@@ -1,20 +1,23 @@
 import os
-import unittest
+import pytest
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
+from urllib.parse import urlparse
 
 from .entities import Credentials
 from .webdriver import CustomWebDriver
 
 
-class SeleniumTestCase(unittest.TestCase):
+class SeleniumTestCase():
     """
-    A base test case for selenium, providing hepler methods for generating
+    A base test case for Selenium, providing helper methods for generating
     clients and logging in profiles.
     """
-    def setUp(self):
-        self.host_url = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
+
+    @pytest.fixture(autouse=True)
+    def webdriver(self):
 
         # Initialize webdriver
         webdriver_option = os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome')
@@ -36,11 +39,48 @@ class SeleniumTestCase(unittest.TestCase):
         else:
             self.wd = CustomWebDriver()
 
-    def tearDown(self):
+        # Set up the Django host URL and load the home page
+        self.host_url = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
+        self.wd.get(self.host_url + '/')
+
+        # Initiate the test
+        yield
+
+        # Clean up after the test
         self.wd.quit()
 
     def open(self, path):
         self.wd.get(self.host_url + path)
+
+    def get_url_path(self):
+        return urlparse(self.wd.current_url).path
+
+    def assert_url_path(self, path):
+        assert self.get_url_path() == path
+
+    def scroll_element_into_view(self, element):
+        self.wd.execute_script('arguments[0].scrollIntoView()', element)
+
+    def wait_for_alert(self, msg):
+        self.wd.wait_for_xpath(
+            '//*[@role="alert" and '
+            'contains(normalize-space(), "{}")]'.format(msg))
+
+    def update_form_field(self, field_name, field_value):
+        field = self.wd.BY_NAME(field_name)
+        if field.tag_name == 'select':
+            Select(field).select_by_value(field_value)
+        else:  # Assume tag_name is 'input' with type 'text' or 'password'
+            field.clear()
+            field.send_keys(field_value)
+
+    def assert_form_field_has_error(self, field_name, error_msg):
+        self.wd.wait_for_xpath((
+            '//*[contains(@class, "form-group") and '
+            '    contains(@class, "has-error") and '
+            '    //*[@name="{}"] and '
+            '    //*[normalize-space()="{}"]]'
+        ).format(field_name, error_msg))
 
     def user_login(self):
         self.open("/account/login/")

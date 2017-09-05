@@ -1,0 +1,24 @@
+[
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$a3dVVjVaTG92V2FU$gR3FjRtiBYflH4UCshayQA",
+    "last_login": "2017-08-01T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_generic_5q6aqy5usyf7d2u69bgt3qw7",
+    "email": "evillar+dccsru66eic33a46jgkcnjda@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-08-01T00:00:00.000Z",
+    "full_name": "Cadasta Generic User",
+    "email_verified": true,
+    "verify_email_by": "2017-08-03T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
