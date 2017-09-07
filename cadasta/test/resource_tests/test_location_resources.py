@@ -1,4 +1,5 @@
 import os
+import pytest
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
@@ -6,6 +7,8 @@ from selenium.webdriver.support.ui import Select
 from ..base_test import SeleniumTestCase
 from ..entities import Project
 from ..pages import ProjectsPage
+
+pytestmark = pytest.mark.skip
 
 
 class AddLocationResource(SeleniumTestCase):

@@ -1,7 +1,10 @@
 import os
+import pytest
 
 from ..base_test import SeleniumTestCase
 from ..pages import ProjectsPage, ResourcesPage
+
+pytestmark = pytest.mark.skip
 
 
 class AddResource(SeleniumTestCase):

@@ -1,6 +1,10 @@
+import pytest
+
 from ..base_test import SeleniumTestCase
 from ..entities import Organization
 from ..pages import OrganizationsPage
+
+pytestmark = pytest.mark.skip
 
 
 class OrganizationSearch(SeleniumTestCase):

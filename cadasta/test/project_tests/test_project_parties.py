@@ -1,5 +1,9 @@
+import pytest
+
 from ..base_test import SeleniumTestCase
 from ..pages import ProjectsPage
+
+pytestmark = pytest.mark.skip
 
 
 class ViewParty(SeleniumTestCase):

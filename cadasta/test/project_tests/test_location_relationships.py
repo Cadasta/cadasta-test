@@ -1,3 +1,5 @@
+import pytest
+
 from selenium.common.exceptions import ElementNotVisibleException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
@@ -5,6 +7,8 @@ from selenium.webdriver.support.ui import Select
 from ..base_test import SeleniumTestCase
 from ..entities import Project
 from ..pages import ProjectsPage
+
+pytestmark = pytest.mark.skip
 
 
 class AddLocationRelationship(SeleniumTestCase):

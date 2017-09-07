@@ -14,8 +14,27 @@ class SeleniumTestCase(unittest.TestCase):
     clients and logging in profiles.
     """
     def setUp(self):
-        self.wd = CustomWebDriver()
         self.host_url = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
+
+        # Initialize webdriver
+        webdriver_option = os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome')
+        if 'BrowserStack' in webdriver_option:
+            url = 'http://{}:{}@hub.browserstack.com:80/wd/hub'.format(
+                os.environ.get('BROWSERSTACK_USERNAME'),
+                os.environ.get('BROWSERSTACK_ACCESS_KEY'))
+            local_identifier = os.environ.get('BROWSERSTACK_LOCAL_IDENTIFIER')
+            caps = {
+                'os': 'Windows',
+                'os_version': '10',
+                'browser': 'Chrome',
+                'browserstack.local': 'true',
+                'browserstack.localIdentifier': local_identifier,
+                'resolution': '1920x1080',
+            }
+            self.wd = CustomWebDriver(command_executor=url,
+                                      desired_capabilities=caps)
+        else:
+            self.wd = CustomWebDriver()
 
     def tearDown(self):
         self.wd.quit()
