@@ -30,6 +30,7 @@ class CustomWebDriver(webdriver_module):
         self.BYS_CSS = self.find_elements_by_css_selector
         self.BY_ID = self.find_element_by_id
         self.BY_NAME = self.find_element_by_name
+        self.BY_LINK = self.find_element_by_link_text
         self.BY_TAG = self.find_element_by_tag_name
         self.BYS_TAG = self.find_elements_by_tag_name
         self.BY_XPATH = self.find_element_by_xpath
@@ -55,9 +56,6 @@ class CustomWebDriver(webdriver_module):
         """ Shortcut for WebDriverWait"""
         wait = WebDriverWait(self, timeout)
         return wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
-
-    def scroll_element_into_view(self, element):
-        self.execute_script('arguments[0].scrollIntoView()', element)
 
     def switch_to_modal_dialog(self):
         modal_dialog_window_handle = None
