@@ -2,7 +2,6 @@
 
 import argparse
 import os
-import re
 import sys
 import pytest
 from subprocess import Popen, DEVNULL
@@ -24,7 +23,7 @@ if __name__ == '__main__':
     )
     parser.add_argument(
         '-w', '--webdriver',
-        choices=['Chrome', 'Firefox', 'BrowserStack-Chrome'],
+        choices=['Chrome', 'Firefox'],
         default='Chrome',
         help="Selenium WebDriver to use",
     )
@@ -43,10 +42,6 @@ if __name__ == '__main__':
     # Ensure virtual frame buffer is running
     xvfb = Popen(["Xvfb", ":1"], stdout=DEVNULL, stderr=DEVNULL)
     os.environ['DISPLAY'] = ':1'
-
-    # Convert any pytest options
-    for i in range(len(args.pyargs)):
-        args.pyargs[i] = re.sub('^\+', '-', args.pyargs[i])
 
     # Run the tests using pytest
     result = pytest.main(args.pyargs)
