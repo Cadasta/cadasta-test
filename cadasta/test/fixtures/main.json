@@ -22,5 +22,199 @@
     "groups": [],
     "user_permissions": []
   }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$SDlVU25iZ2RvemI4$uTqq5TRLEls5Dn1nP4b/6w",
+    "last_login": "2017-09-08T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_org_creator_rffm2jb23w43q4ik4hm9p78y",
+    "email": "evillar+qxjqv8mef7cfc2n6jtj9znbq@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-09-08T00:00:00.000Z",
+    "full_name": "Cadasta Org Creator",
+    "email_verified": true,
+    "verify_email_by": "2017-09-10T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$VVd6d0g2SndNZVRt$Cr74+1BzolNaYCs6GEmZ+Q",
+    "last_login": "2017-09-08T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_org_admin_9y6bf5k395xrezm54h8z4v62",
+    "email": "evillar+aivxr78aregr93buvq3fhsjt@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-09-08T00:00:00.000Z",
+    "full_name": "Cadasta Org Admin",
+    "email_verified": true,
+    "verify_email_by": "2017-09-10T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$WTB6TFFaMExVbmhG$sTVFWGNOljmcz6jsBq+kbA",
+    "last_login": "2017-09-08T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_org_member_ku4hvskari5jzs4peadicqck",
+    "email": "evillar+dga39x49p5k35bq7jydu6x4n@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-09-08T00:00:00.000Z",
+    "full_name": "Cadasta Org Member",
+    "email_verified": true,
+    "verify_email_by": "2017-09-10T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "organization.organization",
+  "pk": "t76ippq854bvzh5uju6tikbw",
+  "fields": {
+    "name": "FuncTest Basic Org",
+    "slug": "functest-basic-org-t76ippq854bvzh5uju6tikbw",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed viverra felis. Integer aliquam elit eu elementum consectetur.",
+    "archived": false,
+    "urls": "[\"http://www.example.com/\"]",
+    "contacts": [
+      {
+        "name": "Contact Person",
+        "email": "contact@example.com",
+        "tel": "1234567890"
+      }
+    ],
+    "logo": null,
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z",
+    "access": "public"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "sh72yitpg38qmpgwsuj78d2y",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
+    ],
+    "admin": true,
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "bqz3zapridkcsvgqn46nn7zh",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_org_member_ku4hvskari5jzs4peadicqck"
+    ],
+    "admin": false,
+    "created_date": "2017-09-08T00:00:00Z",
+    "last_updated": "2017-09-08T00:00:00Z"
+  }
+},
+{
+  "model": "tutelary.permissionset",
+  "pk": 2,
+  "fields": {
+    "anonymous_user": false,
+    "users": [
+      [
+        "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
+      ]
+    ]
+  }
+},
+{
+  "model": "tutelary.permissionset",
+  "pk": 3,
+  "fields": {
+    "anonymous_user": false,
+    "users": [
+      [
+        "functest_org_member_ku4hvskari5jzs4peadicqck"
+      ]
+    ]
+  }
+},
+{
+  "model": "tutelary.policyinstance",
+  "fields": {
+    "policy": 1,
+    "pset": 2,
+    "index": 0,
+    "role": null,
+    "variables": "{}"
+  }
+},
+{
+  "model": "tutelary.policyinstance",
+  "fields": {
+    "policy": 3,
+    "pset": 2,
+    "index": 1,
+    "role": null,
+    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
+  }
+},
+{
+  "model": "tutelary.policyinstance",
+  "fields": {
+    "policy": 4,
+    "pset": 2,
+    "index": 2,
+    "role": null,
+    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
+  }
+},
+{
+  "model": "tutelary.policyinstance",
+  "fields": {
+    "policy": 1,
+    "pset": 3,
+    "index": 0,
+    "role": null,
+    "variables": "{}"
+  }
+},
+{
+  "model": "tutelary.policyinstance",
+  "fields": {
+    "policy": 4,
+    "pset": 3,
+    "index": 1,
+    "role": null,
+    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
+  }
 }
 ]

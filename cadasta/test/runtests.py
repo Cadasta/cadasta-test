@@ -26,7 +26,7 @@ if __name__ == '__main__':
         '-w', '--webdriver',
         choices=['Chrome', 'Firefox', 'BrowserStack-Chrome'],
         default='Chrome',
-        help="Selenium WebDriver to use",
+        help="Selenium WebDriver to use (default: Chrome)",
     )
     parser.add_argument(
         'pyargs',
