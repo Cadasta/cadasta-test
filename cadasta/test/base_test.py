@@ -55,6 +55,9 @@ class SeleniumTestCase():
     def get_url_path(self):
         return urlparse(self.wd.current_url).path
 
+    def get_url_query(self):
+        return urlparse(self.wd.current_url).query
+
     def assert_url_path(self, path):
         assert self.get_url_path() == path
 
