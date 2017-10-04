@@ -71,7 +71,7 @@ class TestCreation(SeleniumTestCase):
         self.assert_form_field_has_error('name', 'This field is required.')
 
     def test_duplicate_name_is_rejected(self, basic_org):
-        """Verifies Organizations test case #C3."""
+        """Verifies Organizations test case #C3, #C11."""
 
         self.log_in()
         self.wd.BY_LINK('Organizations').click()
@@ -82,6 +82,16 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('contacts-0-name', 'Contact Person')
         self.update_form_field('contacts-0-email', 'contact@example.com')
         self.update_form_field('contacts-0-tel', '1234567890')
+        self.click_save_button()
+        self.assert_form_field_has_error(
+            'name', 'Organization with this name already exists.')
+
+        # Clear the previous error by inducing a different error
+        self.update_form_field('name', '')
+        self.click_save_button()
+        self.assert_form_field_has_error('name', 'This field is required.')
+
+        self.update_form_field('name', basic_org['name'].upper())
         self.click_save_button()
         self.assert_form_field_has_error(
             'name', 'Organization with this name already exists.')
@@ -115,7 +125,7 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('contacts-0-tel', '1234567890')
         self.click_save_button()
         self.assert_form_field_has_error(
-            'name', 'This value should be a valid url.')
+            'urls', 'This value should be a valid url.')
 
     def test_contact_name_is_required(self):
         """Verifies Organizations test case #C8."""

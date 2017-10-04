@@ -96,6 +96,30 @@
   }
 },
 {
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$UFNWWlJsWE1nRmlW$QzIf1ZYwbVNENEKHHZJBqw",
+    "last_login": "2017-09-27T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_prj_manager_spj3de5tqkxt3dferaycyhiu",
+    "email": "evillar+gxs6m4gp4sbhf598p3tdev8y@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-09-27T00:00:00.000Z",
+    "full_name": "Cadasta Prj Manager",
+    "email_verified": true,
+    "verify_email_by": "2017-09-29T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-09-27T00:00:00.000Z",
+    "last_updated": "2017-09-27T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "organization.organization",
   "pk": "t76ippq854bvzh5uju6tikbw",
   "fields": {
@@ -118,6 +142,38 @@
   }
 },
 {
+  "model": "organization.organization",
+  "pk": "f5rbbkyeqw8jei44apqhfkrw",
+  "fields": {
+    "name": "FuncTest Another Org",
+    "slug": "functest-another-org-f5rbbkyeqw8jei44apqhfkrw",
+    "description": "",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "logo": null,
+    "created_date": "2017-09-25T00:00:00.000Z",
+    "last_updated": "2017-09-25T00:00:00.000Z",
+    "access": "public"
+  }
+},
+{
+  "model": "organization.organization",
+  "pk": "gqipwy974q4pa5mtc2pa4rbq",
+  "fields": {
+    "name": "FuncTest Archivable Org",
+    "slug": "functest-archivable-org-gqipwy974q4pa5mtc2pa4rbq",
+    "description": "",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "logo": null,
+    "created_date": "2017-10-04T00:00:00.000Z",
+    "last_updated": "2017-10-04T00:00:00.000Z",
+    "access": "public"
+  }
+},
+{
   "model": "organization.organizationrole",
   "pk": "sh72yitpg38qmpgwsuj78d2y",
   "fields": {
@@ -132,6 +188,32 @@
 },
 {
   "model": "organization.organizationrole",
+  "pk": "sccwb9mf7w7n4gardcmg4j8r",
+  "fields": {
+    "organization": "f5rbbkyeqw8jei44apqhfkrw",
+    "user": [
+      "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
+    ],
+    "admin": true,
+    "created_date": "2017-09-25T00:00:00.000Z",
+    "last_updated": "2017-09-25T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "k2zsrkrhdc36b7338rz3wbb4",
+  "fields": {
+    "organization": "gqipwy974q4pa5mtc2pa4rbq",
+    "user": [
+      "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
+    ],
+    "admin": true,
+    "created_date": "2017-10-04T00:00:00.000Z",
+    "last_updated": "2017-10-04T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
   "pk": "bqz3zapridkcsvgqn46nn7zh",
   "fields": {
     "organization": "t76ippq854bvzh5uju6tikbw",
@@ -139,82 +221,100 @@
       "functest_org_member_ku4hvskari5jzs4peadicqck"
     ],
     "admin": false,
-    "created_date": "2017-09-08T00:00:00Z",
-    "last_updated": "2017-09-08T00:00:00Z"
+    "created_date": "2017-09-08T00:00:00.000Z",
+    "last_updated": "2017-09-08T00:00:00.000Z"
   }
 },
 {
-  "model": "tutelary.permissionset",
-  "pk": 2,
+  "model": "organization.organizationrole",
+  "pk": "45ajxr48pwhs3ppbvq3fzeqn",
   "fields": {
-    "anonymous_user": false,
-    "users": [
-      [
-        "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
-      ]
-    ]
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_prj_manager_spj3de5tqkxt3dferaycyhiu"
+    ],
+    "admin": false,
+    "created_date": "2017-09-27T00:00:00.000Z",
+    "last_updated": "2017-09-27T00:00:00.000Z"
   }
 },
 {
-  "model": "tutelary.permissionset",
-  "pk": 3,
+  "model": "organization.project",
+  "pk": "e9v8ezdrtygish5vqcrpkm82",
   "fields": {
-    "anonymous_user": false,
-    "users": [
-      [
-        "functest_org_member_ku4hvskari5jzs4peadicqck"
-      ]
-    ]
+    "name": "FuncTest Basic Prj",
+    "slug": "functest-basic-prj-e9v8ezdrtygish5vqcrpkm82",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed viverra felis. Integer aliquam elit eu elementum consectetur.",
+    "archived": false,
+    "urls": "[\"http://example.com\"]",
+    "contacts": [
+      {
+        "name": "Contact Person",
+        "tel": "1234567890",
+        "email": "contact@example.com"
+      }
+    ],
+    "extent": "SRID=4326;POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))",
+    "access": "public",
+    "current_questionnaire": null,
+    "area": 0.0,
+    "created_date": "2017-09-27T00:00:00.000Z",
+    "last_updated": "2017-09-27T00:00:00.000Z"
   }
 },
 {
-  "model": "tutelary.policyinstance",
+  "model": "organization.project",
+  "pk": "cqptmp935n9qvqj532xb45v5",
   "fields": {
-    "policy": 1,
-    "pset": 2,
-    "index": 0,
-    "role": null,
-    "variables": "{}"
+    "name": "FuncTest Private Prj",
+    "slug": "functest-private-prj-cqptmp935n9qvqj532xb45v5",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": "SRID=4326;POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))",
+    "access": "private",
+    "current_questionnaire": null,
+    "area": 0.0,
+    "created_date": "2017-10-02T00:00:00.000Z",
+    "last_updated": "2017-10-02T00:00:00.000Z"
   }
 },
 {
-  "model": "tutelary.policyinstance",
+  "model": "organization.project",
+  "pk": "b2k5bruyxmh2ynicnzpeqt9k",
   "fields": {
-    "policy": 3,
-    "pset": 2,
-    "index": 1,
-    "role": null,
-    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
+    "name": "FuncTest Another Prj",
+    "slug": "functest-another-prj-b2k5bruyxmh2ynicnzpeqt9k",
+    "organization": "f5rbbkyeqw8jei44apqhfkrw",
+    "country": "",
+    "description": "",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": null,
+    "area": 0.0,
+    "created_date": "2017-09-29T00:00:00.000Z",
+    "last_updated": "2017-09-29T00:00:00.000Z"
   }
 },
 {
-  "model": "tutelary.policyinstance",
+  "model": "organization.projectrole",
+  "pk": "jbkwynqtggew8m5vbvv9ewp4",
   "fields": {
-    "policy": 4,
-    "pset": 2,
-    "index": 2,
-    "role": null,
-    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
-  }
-},
-{
-  "model": "tutelary.policyinstance",
-  "fields": {
-    "policy": 1,
-    "pset": 3,
-    "index": 0,
-    "role": null,
-    "variables": "{}"
-  }
-},
-{
-  "model": "tutelary.policyinstance",
-  "fields": {
-    "policy": 4,
-    "pset": 3,
-    "index": 1,
-    "role": null,
-    "variables": "{\"organization\": \"functest-basic-org-t76ippq854bvzh5uju6tikbw\"}"
+    "project": "e9v8ezdrtygish5vqcrpkm82",
+    "user": [
+      "functest_prj_manager_spj3de5tqkxt3dferaycyhiu"
+    ],
+    "role": "PM",
+    "created_date": "2017-09-27T00:00:00.000Z",
+    "last_updated": "2017-09-27T00:00:00.000Z"
   }
 }
 ]

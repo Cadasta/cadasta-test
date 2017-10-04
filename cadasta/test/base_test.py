@@ -81,8 +81,8 @@ class SeleniumTestCase():
         self.wd.wait_for_xpath((
             '//*[contains(@class, "form-group") and '
             '    contains(@class, "has-error") and '
-            '    //*[@name="{}"] and '
-            '    //*[normalize-space()="{}"]]'
+            '    .//*[@name="{}"] and '
+            '    .//*[normalize-space()="{}"]]'
         ).format(field_name, error_msg))
 
     def user_login(self):

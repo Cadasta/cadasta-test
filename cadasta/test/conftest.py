@@ -52,6 +52,12 @@ def org_member(all_fixtures):
                 if 'functest_org_member_' in user['username'])
 
 
+@pytest.fixture(scope='session')
+def prj_manager(all_fixtures):
+    return next(user for user in all_fixtures['accounts.user']
+                if 'functest_prj_manager_' in user['username'])
+
+
 @pytest.fixture(scope='session',
                 params=['functest_org_admin_', 'functest_org_member_'])
 def any_org_member(request, all_fixtures):
@@ -63,6 +69,36 @@ def any_org_member(request, all_fixtures):
 def basic_org(all_fixtures):
     return next(org for org in all_fixtures['organization.organization']
                 if 'functest-basic-org-' in org['slug'])
+
+
+@pytest.fixture(scope='session')
+def another_org(all_fixtures):
+    return next(org for org in all_fixtures['organization.organization']
+                if 'functest-another-org-' in org['slug'])
+
+
+@pytest.fixture(scope='session')
+def archivable_org(all_fixtures):
+    return next(org for org in all_fixtures['organization.organization']
+                if 'functest-archivable-org-' in org['slug'])
+
+
+@pytest.fixture(scope='session')
+def basic_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-basic-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def private_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-private-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def another_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-another-prj-' in prj['slug'])
 
 
 @pytest.fixture(scope='session')
