@@ -105,14 +105,16 @@ class TestUpdating(SeleniumTestCase):
         assert self.get_url_query() == (
             'next=/organizations/{}/edit/'.format(self.org['slug']))
 
-    def test_org_admin_can_archive_and_unarchive_org(self, org_admin):
+    def test_org_admin_can_archive_and_unarchive_org(
+        self, org_admin, archivable_org
+    ):
         """Verifies Organizations test case #U3, #U4."""
 
         self.log_in(org_admin)
-        name = self.org['name']
+        name = archivable_org['name']
 
         # Test case #U3
-        self.open('/organizations/{}/'.format(self.org['slug']))
+        self.open('/organizations/{}/'.format(archivable_org['slug']))
         self.wd.BY_XPATH('//h1[contains(.,"{}")]'.format(name))
         self.select_org_menu_item('Archive organization')
         selector = (By.LINK_TEXT, 'Yes, archive this organization')
@@ -129,7 +131,7 @@ class TestUpdating(SeleniumTestCase):
             '//*[@id="DataTables_Table_0"]//*[{}]'.format(archived_xpath))
 
         # [REVERSION] and test case #U4
-        self.open('/organizations/{}/'.format(self.org['slug']))
+        self.open('/organizations/{}/'.format(archivable_org['slug']))
         self.select_org_menu_item('Unarchive organization')
         selector = (By.LINK_TEXT, 'Yes, unarchive this organization')
         self.wd.wait_until_clickable(selector).click()
