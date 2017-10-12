@@ -7,7 +7,9 @@ from selenium.webdriver.support.select import Select
 from urllib.parse import urlparse
 
 from .entities import Credentials
-from .webdriver import CustomWebDriver
+
+
+HOST_URL = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
 
 
 class SeleniumTestCase():
@@ -17,40 +19,14 @@ class SeleniumTestCase():
     """
 
     @pytest.fixture(autouse=True)
-    def webdriver(self):
-
-        # Initialize webdriver
-        webdriver_option = os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome')
-        if 'BrowserStack' in webdriver_option:
-            url = 'http://{}:{}@hub.browserstack.com:80/wd/hub'.format(
-                os.environ.get('BROWSERSTACK_USERNAME'),
-                os.environ.get('BROWSERSTACK_ACCESS_KEY'))
-            local_identifier = os.environ.get('BROWSERSTACK_LOCAL_IDENTIFIER')
-            caps = {
-                'os': 'Windows',
-                'os_version': '10',
-                'browser': 'Chrome',
-                'browserstack.local': 'true',
-                'browserstack.localIdentifier': local_identifier,
-                'resolution': '1920x1080',
-            }
-            self.wd = CustomWebDriver(command_executor=url,
-                                      desired_capabilities=caps)
-        else:
-            self.wd = CustomWebDriver()
-
-        # Set up the Django host URL and load the home page
-        self.host_url = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
-        self.wd.get(self.host_url + '/')
-
-        # Initiate the test
+    def wrapper(self, webdriver):
+        self.wd = webdriver
+        self.open('/')
         yield
-
-        # Clean up after the test
-        self.wd.quit()
+        self.open('/account/logout/')
 
     def open(self, path):
-        self.wd.get(self.host_url + path)
+        self.wd.get(HOST_URL + path)
 
     def get_url_path(self):
         return urlparse(self.wd.current_url).path

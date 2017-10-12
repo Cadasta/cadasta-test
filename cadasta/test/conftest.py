@@ -2,6 +2,8 @@ import json
 import os
 import pytest
 
+from .webdriver import CustomWebDriver
+
 
 DEFAULT_PASSWORD = 'XYZ#qwerty'
 
@@ -116,3 +118,32 @@ def all_org_members(all_fixtures, basic_org):
             user['admin'] = roles[user['username']]
             members.append(user)
     return members
+
+
+@pytest.fixture(scope='module')
+def webdriver():
+
+    # Initialize webdriver
+    webdriver_option = os.environ.get('CADASTA_TEST_WEBDRIVER', 'Chrome')
+    if 'BrowserStack' in webdriver_option:
+        url = 'http://{}:{}@hub.browserstack.com:80/wd/hub'.format(
+            os.environ.get('BROWSERSTACK_USERNAME'),
+            os.environ.get('BROWSERSTACK_ACCESS_KEY'))
+        local_identifier = os.environ.get('BROWSERSTACK_LOCAL_IDENTIFIER')
+        caps = {
+            'os': 'Windows',
+            'os_version': '10',
+            'browser': 'Chrome',
+            'browserstack.local': 'true',
+            'browserstack.localIdentifier': local_identifier,
+            'resolution': '1920x1080',
+        }
+        wd = CustomWebDriver(command_executor=url, desired_capabilities=caps)
+    else:
+        wd = CustomWebDriver()
+
+    # Provide the webdriver fixture
+    yield wd
+
+    # Shut down the webdriver
+    wd.quit()
