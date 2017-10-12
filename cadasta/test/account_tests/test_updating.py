@@ -45,7 +45,7 @@ class TestUpdating(SeleniumTestCase):
         self.wd.BY_LINK('Edit profile').click()
         self.assert_url_path('/account/profile/')
 
-    def click_update_profile_button(self, label='Update profile'):
+    def click_update_profile_button(self, label='Save'):
         """Clicks the profile page update button with optional button label
         for multilingual purposes."""
         button = self.wd.BY_XPATH(
@@ -55,7 +55,7 @@ class TestUpdating(SeleniumTestCase):
 
     def invoke_update_profile(
         self,
-        button_label='Update profile',
+        button_label='Save',
         alert_msg='Successfully updated profile information'
     ):
         """Fills in the profile page password field and then submits the
@@ -64,7 +64,7 @@ class TestUpdating(SeleniumTestCase):
         self.update_form_field('password', self.user['password'])
         self.click_update_profile_button(label=button_label)
         self.wait_for_alert(alert_msg)
-        self.assert_url_path('/account/profile/')
+        self.assert_url_path('/account/dashboard/')
 
     def log_out(self):
         """Logs out the current user via the user menu."""
@@ -245,6 +245,7 @@ class TestUpdating(SeleniumTestCase):
         self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(tmp_full_name))
 
         # [REVERSION]
+        self.open('/account/profile/')
         self.update_form_field('full_name', self.user['full_name'])
         self.invoke_update_profile()
         self.wd.wait_for_xpath(
@@ -263,8 +264,9 @@ class TestUpdating(SeleniumTestCase):
         self.wd.BY_LINK('Organizaciones')
 
         # [REVERSION]
+        self.open('/account/profile/')
         self.update_form_field('language', self.user['language'])
-        self.invoke_update_profile(button_label='Actualice el perfil')
+        self.invoke_update_profile(button_label='Guardar')
         self.wd.BY_LINK('Projects')
         self.wd.BY_LINK('Organizations')
 
@@ -277,6 +279,7 @@ class TestUpdating(SeleniumTestCase):
         self.invoke_update_profile()
 
         # [REVERSION]
+        self.open('/account/profile/')
         self.update_form_field('measurement', 'metric')
         self.invoke_update_profile()
 
@@ -308,7 +311,7 @@ class TestUpdating(SeleniumTestCase):
         self.wd.BY_XPATH(file_type_error_xpath)
 
         # Test case #U15
-        self.wd.refresh()
+        self.open('/account/profile/')
         img = self.wd.BY_XPATH(img_xpath)
         assert default_avatar_path in img.get_attribute('src')
         self.wd.BY_XPATH(file_input_xpath).send_keys(
@@ -316,13 +319,15 @@ class TestUpdating(SeleniumTestCase):
         self.wd.wait_for_xpath(remove_xpath)
         assert default_avatar_path not in img.get_attribute('src')
         self.invoke_update_profile()
+
+        self.open('/account/profile/')
         img = self.wd.BY_XPATH(img_xpath)
         src = img.get_attribute('src')
         assert default_avatar_path not in src
         assert re.search('[a-z0-9]{24}\.jpg$', src)
 
         # Test case #U16
-        self.wd.refresh()
+        self.open('/account/profile/')
         self.wd.BY_XPATH(remove_xpath).click()
         img = self.wd.BY_XPATH(img_xpath)
         assert default_avatar_path in img.get_attribute('src')
@@ -331,14 +336,18 @@ class TestUpdating(SeleniumTestCase):
         self.wd.wait_for_xpath(remove_xpath)
         assert default_avatar_path not in img.get_attribute('src')
         self.invoke_update_profile()
+
+        self.open('/account/profile/')
         img = self.wd.BY_XPATH(img_xpath)
         src = img.get_attribute('src')
         assert default_avatar_path not in src
         assert re.search('[a-z0-9]{24}\.png$', src)
 
         # [REVERSION] and test case #U18
-        self.wd.refresh()
+        self.open('/account/profile/')
         self.wd.BY_XPATH(remove_xpath).click()
         self.invoke_update_profile()
+
+        self.open('/account/profile/')
         img = self.wd.BY_XPATH(img_xpath)
         assert default_avatar_path in img.get_attribute('src')
