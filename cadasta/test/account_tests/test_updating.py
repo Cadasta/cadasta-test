@@ -60,7 +60,9 @@ class TestUpdating(SeleniumTestCase):
     ):
         """Fills in the profile page password field and then submits the
         profile page form with optional button and success alert messages for
-        multilingual purposes."""
+        multilingual purposes.
+
+        Also verifies User Accounts test case #U22 if update is successful."""
         self.update_form_field('password', self.user['password'])
         self.click_update_profile_button(label=button_label)
         self.wait_for_alert(alert_msg)
@@ -197,7 +199,7 @@ class TestUpdating(SeleniumTestCase):
         self.invoke_update_profile()
 
     def test_user_can_update_email_address(self):
-        """Verifies User Accounts test case #U9."""
+        """Verifies User Accounts test case #U9, #U21."""
 
         # Create throwaway account because email cannot be verified now
         username = TEST_TMP_USERNAME_FORMAT.format(random_string())
@@ -212,7 +214,7 @@ class TestUpdating(SeleniumTestCase):
         button.click()
         self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(username))
 
-        # Update email address
+        # Test case #U9
         self.open('/account/profile/')
         second_email = TEST_TMP_EMAIL_FORMAT.format(random_string())
         self.update_form_field('email', second_email)
@@ -221,18 +223,29 @@ class TestUpdating(SeleniumTestCase):
         self.wait_for_alert('Successfully updated profile information')
         self.wait_for_alert(
             'Confirmation email sent to {}.'.format(second_email))
-        self.wd.BY_NAME('email').get_attribute('value') == first_email
+        self.open('/account/profile/')
+        assert self.wd.BY_NAME('email').get_attribute('value') == first_email
         self.wd.BY_XPATH(
             '//*[contains(@class, "form-group") and //*[@name="email"]]'
             '//*[contains(normalize-space(), '
             '"The email for this account has been changed recently")]')
 
-        # Can only login with the old email address yet
+        # Test case #U21
         self.open('/account/logout/')
+
+        # Cannot login with the new email address
+        self.update_form_field('login', self.user['username'])
+        self.update_form_field('password', second_email)
+        self.wd.BY_NAME('sign-in').click()
+        self.wait_for_alert(
+            'The username and/or password you specified are not correct.')
+
+        # Can login with the old email address
         self.update_form_field('login', first_email)
         self.update_form_field('password', password)
         self.wd.BY_NAME('sign-in').click()
         self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(username))
+        self.assert_url_path('/account/dashboard/')
 
     def test_user_can_update_full_name(self):
         """Verifies User Accounts test case #U12."""
