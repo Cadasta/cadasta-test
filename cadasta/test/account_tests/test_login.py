@@ -11,7 +11,7 @@ class TestLogin(SeleniumTestCase):
         self.user = generic_user
 
     def test_user_can_login_by_username(self):
-        """Verifies User Accounts test case #L1."""
+        """Verifies User Accounts test case #L1, #L4"""
 
         self.wd.BY_LINK('Sign in').click()
         self.update_form_field('login', self.user['username'])
@@ -21,9 +21,10 @@ class TestLogin(SeleniumTestCase):
             '//header//*[normalize-space()=""]'.format(self.user['full_name']))
         self.wait_for_alert(
             'Successfully signed in as {}.'.format(self.user['username']))
+        self.assert_url_path('/account/dashboard/')
 
     def test_user_can_login_by_email(self):
-        """Verifies User Accounts test case #L3."""
+        """Verifies User Accounts test case #L3, #L4"""
 
         self.wd.BY_LINK('Sign in').click()
         self.update_form_field('login', self.user['email'])
@@ -33,6 +34,7 @@ class TestLogin(SeleniumTestCase):
             '//header//*[normalize-space()=""]'.format(self.user['full_name']))
         self.wait_for_alert(
             'Successfully signed in as {}.'.format(self.user['username']))
+        self.assert_url_path('/account/dashboard/')
 
     def test_user_cannot_log_in(self):
         """Verifies User Accounts test case #L2."""
