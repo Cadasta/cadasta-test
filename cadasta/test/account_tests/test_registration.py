@@ -29,19 +29,9 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('password', self.password)
         self.update_form_field('full_name', self.full_name)
         self.click_register_button()
-        self.wd.wait_for_xpath(
-            '//header//*[normalize-space()="{}"]'.format(self.full_name))
-        self.assert_url_path('/dashboard/')
-        try:
-            self.wd.BY_LINK('Sign in')
-            raise AssertionError('Sign in link is present')
-        except NoSuchElementException:
-            pass
-        try:
-            self.wd.BY_LINK('Register')
-            raise AssertionError('Register link is present')
-        except NoSuchElementException:
-            pass
+        self.wait_for_alert(
+            'Confirmation email sent to {}'.format(self.email))
+        self.assert_url_path('/account/accountverification/')
 
     def test_show_password_button_works(self):
         """Verifies User Accounts test case #R2."""
@@ -118,7 +108,7 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('full_name', self.full_name)
         self.click_register_button()
         self.assert_form_field_has_error(
-            'email', 'Another user with this email already exists')
+            'email', 'User with this Email address already exists.')
 
     def test_email_address_format_is_validated(self):
         """Verifies User Accounts test case #R11."""
@@ -151,8 +141,7 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('full_name', self.full_name)
 
         password_help = self.wd.BY_XPATH(
-            '//*[contains(@class, "form-group") and //*[@name="password"]]'
-            '//*[contains(@class, "help-block")]')
+            '(//*[@for="id_password"])[1]/following-sibling::p')
         assert 'hidden' in password_help.get_attribute('class')
         password_input = self.wd.BY_NAME('password')
         password_input.click()
@@ -220,9 +209,9 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('email', self.email)
         self.update_form_field('password', self.password)
         self.click_register_button()
-        self.wd.wait_for_xpath(
-            '//header//*[normalize-space()="{}"]'.format(self.username))
-        self.assert_url_path('/dashboard/')
+        self.wait_for_alert(
+            'Confirmation email sent to {}'.format(self.email))
+        self.assert_url_path('/account/accountverification/')
 
     def test_user_can_select_another_language(self):
         """Verifies User Accounts test case #R17."""
@@ -234,8 +223,8 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('full_name', self.full_name)
         self.update_form_field('language', 'es')
         self.click_register_button()
-        self.wd.wait_for_xpath(
-            '//header//*[normalize-space()="{}"]'.format(self.full_name))
-        self.assert_url_path('/dashboard/')
-        self.wd.BY_LINK('Proyectos')
-        self.wd.BY_LINK('Organizaciones')
+        self.wait_for_alert(
+            'Confirmation email sent to {}'.format(self.email))
+        self.assert_url_path('/account/accountverification/')
+        self.wd.BY_LINK('Registro')
+        self.wd.BY_LINK('Iniciar sesión')
