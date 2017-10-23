@@ -212,7 +212,8 @@ class TestUpdating(SeleniumTestCase):
         self.wait_for_alert(
             'Confirmation email sent to {}.'.format(second_email))
         self.open('/account/profile/')
-        assert self.wd.BY_NAME('email').get_attribute('value') == self.user['email']
+        assert (self.wd.BY_NAME('email').get_attribute('value') ==
+                self.user['email'])
         self.wd.BY_XPATH(
             '//*[contains(@class, "form-group") and //*[@name="email"]]'
             '//*[contains(normalize-space(), '
@@ -232,7 +233,8 @@ class TestUpdating(SeleniumTestCase):
         self.update_form_field('login', self.user['email'])
         self.update_form_field('password', self.user['password'])
         self.wd.BY_NAME('sign-in').click()
-        self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(self.user['full_name']))
+        self.wd.wait_for_xpath(
+            USER_MENU_XPATH_FORMAT.format(self.user['full_name']))
         self.assert_url_path('/account/dashboard/')
 
     def test_user_can_update_full_name(self):

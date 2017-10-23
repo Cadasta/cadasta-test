@@ -1,7 +1,5 @@
 import pytest
 
-from selenium.common.exceptions import NoSuchElementException
-
 from ..base_test import SeleniumTestCase
 from ..util import random_string
 
