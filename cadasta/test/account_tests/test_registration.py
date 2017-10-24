@@ -222,7 +222,7 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('language', 'es')
         self.click_register_button()
         self.wait_for_alert(
-            'Confirmation email sent to {}'.format(self.email))
+            'Correo de confirmación enviado a {}'.format(self.email))
         self.assert_url_path('/account/accountverification/')
         self.wd.BY_LINK('Registro')
         self.wd.BY_LINK('Iniciar sesión')
