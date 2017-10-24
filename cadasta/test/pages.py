@@ -1,5 +1,7 @@
 import time
 
+from selenium.common.exceptions import NoSuchElementException
+
 from .entities import Organization, Project
 
 
@@ -81,7 +83,7 @@ class ResourcesPage:
         try:
             self.wd.find_element_by_xpath(
                 "//*[contains(text(), 'Select the file to upload')]")
-        except:
+        except NoSuchElementException:
             self.wd.find_element_by_link_text("Upload new").click()
         self.wd.find_element_by_css_selector("input.file-input").clear()
         self.wd.find_element_by_css_selector("input.file-input").send_keys(

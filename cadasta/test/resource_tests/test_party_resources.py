@@ -1,6 +1,8 @@
 import os
 import pytest
 
+from selenium.common.exceptions import NoSuchElementException
+
 from ..base_test import SeleniumTestCase
 from ..pages import ProjectsPage
 
@@ -24,7 +26,7 @@ class PartyResource(SeleniumTestCase):
         try:
             self.wd.find_element_by_xpath(
                 "//*[contains(text(), 'Upload new resource')]")
-        except:
+        except NoSuchElementException:
             self.wd.find_element_by_link_text("Upload new").click()
         self.wd.wait_for_css("input.file-input")
 
