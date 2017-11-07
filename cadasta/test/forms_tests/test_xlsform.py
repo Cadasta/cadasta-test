@@ -40,8 +40,11 @@ class TestXLSForm(SeleniumTestCase):
         self.get_gear_menu_button().click()
         self.wd.BY_LINK(label).click()
 
-    def click_save_button(self):
-        button = self.wd.BY_XPATH('//*[@type="submit" and ./text()="Save"]')
+    def wait_and_click_save_button(self):
+        """Waits until the save button is enabled then clicks it."""
+        button_xpath = '//*[@type="submit" and ./text()="Save"]'
+        self.wd.wait_until_clickable((By.XPATH, button_xpath))
+        button = self.wd.BY_XPATH(button_xpath)
         self.scroll_element_into_view(button)
         button.click()
 
@@ -66,8 +69,7 @@ class TestXLSForm(SeleniumTestCase):
                 remove.click()
 
             self.wd.BY_XPATH(input_xpath).send_keys(join(dir_path, filename))
-            self.wd.wait_until_clickable((By.XPATH, remove_xpath))
-            self.click_save_button()
+            self.wait_and_click_save_button()
             self.assert_url_path(self.prj_dashboard_path + 'edit/details/')
             msg = self.wd.BY_XPATH(error_xpath).text
             assert re.search(msg_pattern, msg)
