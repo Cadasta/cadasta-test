@@ -2,6 +2,7 @@ import pytest
 import re
 
 from os.path import abspath, dirname, join
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from ..base_test import SeleniumTestCase
@@ -307,8 +308,6 @@ class TestUpdating(SeleniumTestCase):
             '//label[normalize-space()="Profile picture"]]')
         img_xpath = avatar_form_group_xpath + '//img'
         file_input_xpath = avatar_form_group_xpath + '//input[@type="file"]'
-        remove_xpath = (
-            avatar_form_group_xpath + '//*[contains(@class, "file-remove")]')
         file_type_error_xpath = (
             avatar_form_group_xpath +
             '//*[normalize-space()="File type not allowed."]')
@@ -329,7 +328,7 @@ class TestUpdating(SeleniumTestCase):
         assert default_avatar_path in img.get_attribute('src')
         self.wd.BY_XPATH(file_input_xpath).send_keys(
             join(files_dir_path, 'user_avatar_1.jpg'))
-        self.wd.wait_for_xpath(remove_xpath)
+        self.wd.wait_until_clickable((By.CLASS_NAME, 'file-remove'))
         assert default_avatar_path not in img.get_attribute('src')
         self.invoke_update_profile()
 
@@ -341,12 +340,12 @@ class TestUpdating(SeleniumTestCase):
 
         # Test case #U16
         self.open('/account/profile/')
-        self.wd.BY_XPATH(remove_xpath).click()
+        self.wd.BY_CLASS('file-remove').click()
         img = self.wd.BY_XPATH(img_xpath)
         assert default_avatar_path in img.get_attribute('src')
         self.wd.BY_XPATH(file_input_xpath).send_keys(
             join(files_dir_path, 'user_avatar_2.png'))
-        self.wd.wait_for_xpath(remove_xpath)
+        self.wd.wait_until_clickable((By.CLASS_NAME, 'file-remove'))
         assert default_avatar_path not in img.get_attribute('src')
         self.invoke_update_profile()
 
@@ -358,7 +357,7 @@ class TestUpdating(SeleniumTestCase):
 
         # [REVERSION] and test case #U18
         self.open('/account/profile/')
-        self.wd.BY_XPATH(remove_xpath).click()
+        self.wd.BY_CLASS('file-remove').click()
         self.invoke_update_profile()
 
         self.open('/account/profile/')
