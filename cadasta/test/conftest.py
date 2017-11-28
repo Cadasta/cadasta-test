@@ -60,6 +60,18 @@ def prj_manager(all_fixtures):
                 if 'functest_prj_manager_' in user['username'])
 
 
+@pytest.fixture(scope='session')
+def data_collector(all_fixtures):
+    return next(user for user in all_fixtures['accounts.user']
+                if 'functest_data_collector_' in user['username'])
+
+
+@pytest.fixture(scope='session')
+def prj_user(all_fixtures):
+    return next(user for user in all_fixtures['accounts.user']
+                if 'functest_prj_user_' in user['username'])
+
+
 @pytest.fixture(scope='session',
                 params=['functest_org_admin_', 'functest_org_member_'])
 def any_org_member(request, all_fixtures):
@@ -98,6 +110,24 @@ def private_prj(all_fixtures):
 
 
 @pytest.fixture(scope='session')
+def records_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-records-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def custom_attrs_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-custom-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def conditional_attrs_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-conditional-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
 def another_prj(all_fixtures):
     return next(prj for prj in all_fixtures['organization.project']
                 if 'functest-another-prj-' in prj['slug'])
@@ -118,6 +148,12 @@ def all_org_members(all_fixtures, basic_org):
             user['admin'] = roles[user['username']]
             members.append(user)
     return members
+
+
+@pytest.fixture(scope='session')
+def basic_individual(all_fixtures):
+    return next(party for party in all_fixtures['party.party']
+                if 'Basic Individual' == party['name'])
 
 
 @pytest.fixture(scope='module')

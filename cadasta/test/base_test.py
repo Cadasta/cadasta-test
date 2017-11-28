@@ -6,10 +6,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.select import Select
 from urllib.parse import urlparse
 
-from .entities import Credentials
-
 
 HOST_URL = os.environ.get('CADASTA_HOST', 'http://localhost:8000')
+USER_MENU_XPATH_FORMAT = '//header//*[normalize-space()="{}"]'
 
 
 class SeleniumTestCase():
@@ -61,19 +60,14 @@ class SeleniumTestCase():
             '    .//*[normalize-space()="{}"]]'
         ).format(field_name, error_msg))
 
-    def user_login(self):
-        self.open("/account/login/")
-        self.wd.find_css('#id_login').send_keys(
-            Credentials().get_test_username())
-        self.wd.find_css("#id_password").send_keys(
-            Credentials().get_test_password())
-        self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
-
-    def login_as(self, username, password):
-        self.open("/account/login/")
-        self.wd.find_css('#id_login').send_keys(username)
-        self.wd.find_css("#id_password").send_keys(password)
-        self.wd.find_element_by_xpath('//button[@name="sign-in"]').click()
+    def log_in(self, user):
+        """Logs in the test user."""
+        self.wd.BY_LINK('Sign in').click()
+        self.update_form_field('login', user['username'])
+        self.update_form_field('password', user['password'])
+        self.wd.BY_NAME('sign-in').click()
+        label = user['full_name'] or user['username']
+        self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(label))
 
     def restore_password(self, password, changedPassword):
         self.login_as("cadasta-test-user-1", changedPassword)
