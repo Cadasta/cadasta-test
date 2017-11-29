@@ -781,10 +781,22 @@
     "project": "pz58z4s2wfvp2sin2z6k3jbv",
     "name": "Basic Individual",
     "type": "IN",
-    "contacts": {},
     "attributes": {},
     "created_date": "2017-11-10T00:00:00.000Z",
     "last_updated": "2017-11-10T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "xqzcnvuy7u9gywqkp2xa3rbn",
+  "fields": {
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "type": "PA",
+    "geometry": "SRID=4326;POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))",
+    "area": 100,
+    "attributes": {},
+    "created_date": "2017-11-23T00:00:00.000Z",
+    "last_updated": "2017-11-23T00:00:00.000Z"
   }
 }
 ]

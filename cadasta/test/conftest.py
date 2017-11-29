@@ -156,6 +156,12 @@ def basic_individual(all_fixtures):
                 if 'Basic Individual' == party['name'])
 
 
+@pytest.fixture(scope='session')
+def basic_parcel(all_fixtures):
+    return next(location for location in all_fixtures['spatial.spatialunit']
+                if 'xqzcnvuy7u9gywqkp2xa3rbn' == location['pk'])
+
+
 @pytest.fixture
 def webdriver():
 
