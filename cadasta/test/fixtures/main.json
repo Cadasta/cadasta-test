@@ -161,6 +161,174 @@
   }
 },
 {
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy1_53t6bsjs8tyrqp6p5p4szbxt",
+    "email": "evillar+53t6bsjs8tyrqp6p5p4szbxt@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 1",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy2_84yz2wmamucz5dnxe4u3c9hw",
+    "email": "evillar+84yz2wmamucz5dnxe4u3c9hw@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 2",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy3_633ev4vcxb6i4rpy2t44xjph",
+    "email": "evillar+633ev4vcxb6i4rpy2t44xjph@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 3",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy4_ib3cvw5a8fztfdmm28it5rzs",
+    "email": "evillar+ib3cvw5a8fztfdmm28it5rzs@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 4",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy5_cmznkihmkcj529eaiayzz28m",
+    "email": "evillar+cmznkihmkcj529eaiayzz28m@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 5",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy6_baxr2knigacj28xcfjsimhj7",
+    "email": "evillar+baxr2knigacj28xcfjsimhj7@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 6",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$ZUZwNTdSQXUxS3Mx$o8MgOiiuH5maArWjNExjDQ",
+    "last_login": "2017-12-05T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_dummy7_bay4rw7jbwkz8knerzcpew46",
+    "email": "evillar+bay4rw7jbwkz8knerzcpew46@cadasta.org",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-05T00:00:00.000Z",
+    "full_name": "Cadasta Dummy User 7",
+    "email_verified": true,
+    "verify_email_by": "2017-12-07T00:00:00.000Z",
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
   "model": "organization.organization",
   "pk": "t76ippq854bvzh5uju6tikbw",
   "fields": {
@@ -303,6 +471,97 @@
     "admin": false,
     "created_date": "2017-11-09T00:00:00.000Z",
     "last_updated": "2017-11-09T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "wce4cxfryha52f5nbgatkjrj",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy1_53t6bsjs8tyrqp6p5p4szbxt"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "eds4vs5hps63wypkhp6yyw66",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy2_84yz2wmamucz5dnxe4u3c9hw"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "7bvwcfdtmtuu33nphsi96vkx",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy3_633ev4vcxb6i4rpy2t44xjph"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "6zjwcr76jkfq979a25bk7g9k",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy4_ib3cvw5a8fztfdmm28it5rzs"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "dqe89z8j9aknn6g4etfd9e8z",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy5_cmznkihmkcj529eaiayzz28m"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "362wfpajyashdb3kyhmcuvxc",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy6_baxr2knigacj28xcfjsimhj7"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "c76m52ympf4nr22wnqq3madk",
+  "fields": {
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "user": [
+      "functest_dummy7_bay4rw7jbwkz8knerzcpew46"
+    ],
+    "admin": false,
+    "created_date": "2017-12-05T00:00:00.000Z",
+    "last_updated": "2017-12-05T00:00:00.000Z"
   }
 },
 {
