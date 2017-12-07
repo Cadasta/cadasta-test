@@ -227,7 +227,8 @@ class TestUserManagement(SeleniumTestCase):
             '//*[@type="submit" and normalize-space()="Save"]').click()
         self.assert_form_field_has_error(
             'identifier',
-            'User with username or email {} does not exist'.format(nonsense))
+            'User with username or email or phone {} does not exist'.format(
+                nonsense))
 
     def test_non_org_admin_cannot_add_a_member(self, org_member):
         """Verifies Organizations test case #M10."""

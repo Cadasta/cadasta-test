@@ -84,8 +84,7 @@ class TestUpdating(SeleniumTestCase):
         self.wd.BY_LINK('Forgotten password?').click()
         self.assert_url_path('/account/password/reset/')
         self.update_form_field('email', self.user['email'])
-        self.wd.BY_XPATH(
-            '//*[@type="submit" and @value="Reset password"]').click()
+        self.wd.BY_XPATH('//*[@type="submit"]').click()
         self.wd.wait_for_xpath('//h1[normalize-space()="Password reset"]')
         self.assert_url_path('/account/password/reset/done/')
 
@@ -202,30 +201,19 @@ class TestUpdating(SeleniumTestCase):
     def test_user_can_update_email_address(self):
         """Verifies User Accounts test case #U9, #U21."""
 
-        # Create throwaway account because email cannot be verified now
-        username = TEST_TMP_USERNAME_FORMAT.format(random_string())
-        first_email = TEST_TMP_EMAIL_FORMAT.format(random_string())
-        password = 'XYZ#qwerty'
-        self.wd.BY_LINK('Register').click()
-        self.update_form_field('username', username)
-        self.update_form_field('email', first_email)
-        self.update_form_field('password', password)
-        button = self.wd.BY_NAME('register')
-        self.scroll_element_into_view(button)
-        button.click()
-        self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(username))
-
         # Test case #U9
+        self.log_in()
         self.open('/account/profile/')
         second_email = TEST_TMP_EMAIL_FORMAT.format(random_string())
         self.update_form_field('email', second_email)
-        self.update_form_field('password', password)
-        self.click_update_profile_button()
+        self.invoke_update_profile()
+
         self.wait_for_alert('Successfully updated profile information')
         self.wait_for_alert(
             'Confirmation email sent to {}.'.format(second_email))
         self.open('/account/profile/')
-        assert self.wd.BY_NAME('email').get_attribute('value') == first_email
+        assert (self.wd.BY_NAME('email').get_attribute('value') ==
+                self.user['email'])
         self.wd.BY_XPATH(
             '//*[contains(@class, "form-group") and //*[@name="email"]]'
             '//*[contains(normalize-space(), '
@@ -242,10 +230,11 @@ class TestUpdating(SeleniumTestCase):
             'The username and/or password you specified are not correct.')
 
         # Can login with the old email address
-        self.update_form_field('login', first_email)
-        self.update_form_field('password', password)
+        self.update_form_field('login', self.user['email'])
+        self.update_form_field('password', self.user['password'])
         self.wd.BY_NAME('sign-in').click()
-        self.wd.wait_for_xpath(USER_MENU_XPATH_FORMAT.format(username))
+        self.wd.wait_for_xpath(
+            USER_MENU_XPATH_FORMAT.format(self.user['full_name']))
         self.assert_url_path('/account/dashboard/')
 
     def test_user_can_update_full_name(self):
