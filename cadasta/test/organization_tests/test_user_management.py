@@ -46,6 +46,8 @@ class TestUserManagement(SeleniumTestCase):
                 '//*[.="{}"]'.format(member['username']))
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Members"]').click()
+        select = Select(self.wd.BY_CSS('.dataTables_length select'))
+        select.select_by_value('25')
         for member in all_org_members:
             self.wd.BY_XPATH(
                 '//*[@id="DataTables_Table_0"]'
@@ -133,6 +135,8 @@ class TestUserManagement(SeleniumTestCase):
         self.log_in(org_admin)
         for member in all_org_members:
             self.open('/organizations/{}/members/'.format(self.org['slug']))
+            select = Select(self.wd.BY_CSS('.dataTables_length select'))
+            select.select_by_value('25')
             label = member['full_name'] or member['username']
             self.wd.BY_LINK(label).click()
             content = self.wd.BY_CLASS('content-single')
@@ -169,6 +173,8 @@ class TestUserManagement(SeleniumTestCase):
                 "You don't have permission to edit roles of this organization")
 
             self.open('/organizations/{}/members/'.format(self.org['slug']))
+            select = Select(self.wd.BY_CSS('.dataTables_length select'))
+            select.select_by_value('25')
             label = member['full_name'] or member['username']
             self.wd.BY_LINK(label).click()
             self.wait_for_alert(

@@ -47,7 +47,7 @@ class TestCreation(SeleniumTestCase):
     # ------ Test cases ------
 
     def test_org_admin_can_create_public_project(self):
-        """Verifies Projects test case #C1, #C11"""
+        """Verifies Projects test case #C1, #C11, #C18"""
 
         self.log_in()
         self.wd.BY_LINK('Projects').click()
