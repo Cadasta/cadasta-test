@@ -11,6 +11,7 @@ from ..util import random_string
 USER_MENU_XPATH_FORMAT = '//header//*[normalize-space()="{}"]'
 
 
+@pytest.mark.batch1
 class TestUserManagement(SeleniumTestCase):
 
     @pytest.fixture(autouse=True)

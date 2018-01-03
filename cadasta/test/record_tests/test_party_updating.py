@@ -5,6 +5,7 @@ from selenium.common.exceptions import NoSuchElementException
 from ..base_test import SeleniumTestCase
 
 
+@pytest.mark.batch2
 class TestPartyUpdating(SeleniumTestCase):
 
     @pytest.fixture

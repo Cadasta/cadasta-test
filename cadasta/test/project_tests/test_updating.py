@@ -11,6 +11,7 @@ from ..base_test import SeleniumTestCase
 USER_MENU_XPATH_FORMAT = '//header//*[normalize-space()="{}"]'
 
 
+@pytest.mark.batch1
 class TestUpdating(SeleniumTestCase):
 
     @pytest.fixture(autouse=True)

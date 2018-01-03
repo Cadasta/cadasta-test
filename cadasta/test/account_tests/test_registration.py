@@ -4,6 +4,7 @@ from ..base_test import SeleniumTestCase
 from ..util import random_string
 
 
+@pytest.mark.batch1
 class TestRegistration(SeleniumTestCase):
 
     @pytest.fixture(autouse=True)
