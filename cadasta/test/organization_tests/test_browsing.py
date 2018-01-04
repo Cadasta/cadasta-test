@@ -1,7 +1,10 @@
+import pytest
+
 from ..base_test import SeleniumTestCase
 from ..util import random_string
 
 
+@pytest.mark.batch1
 class TestBrowsing(SeleniumTestCase):
 
     def test_search_for_an_existing_org_works(self, basic_org):

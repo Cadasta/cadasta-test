@@ -1,3 +1,5 @@
+import pytest
+
 from selenium.common.exceptions import NoSuchElementException
 
 from ..base_test import SeleniumTestCase
@@ -7,6 +9,7 @@ from ..util import random_string
 USER_MENU_XPATH_FORMAT = '//header//*[normalize-space()="{}"]'
 
 
+@pytest.mark.batch1
 class TestBrowsing(SeleniumTestCase):
 
     # ------ Utility functions ------
