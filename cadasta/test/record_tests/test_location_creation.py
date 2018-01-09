@@ -7,6 +7,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from ..base_test import SeleniumTestCase
 
 
+@pytest.mark.batch2
 class TestLocationCreation(SeleniumTestCase):
 
     @pytest.fixture
