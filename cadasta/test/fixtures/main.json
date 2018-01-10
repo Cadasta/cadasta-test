@@ -25,6 +25,31 @@
 {
   "model": "accounts.user",
   "fields": {
+    "password": "argon2$argon2i$v=19$m=512,t=2,p=2$RVRVME1kVWF1Zkhn$8rEEeBt1Ib26ECFMoNuhMA",
+    "last_login": "2017-12-22T00:00:00.000Z",
+    "is_superuser": false,
+    "username": "functest_genericphone_5q6aqy5usyf7d2u69bgt3qw7",
+    "email": null,
+    "phone": "+16428345185481",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2017-12-22T00:00:00.000Z",
+    "full_name": "Cadasta Generic Phone User",
+    "email_verified": false,
+    "phone_verified": true,
+    "change_pw": true,
+    "language": "en",
+    "measurement": "metric",
+    "avatar": "",
+    "created_date": "2017-12-22T00:00:00.000Z",
+    "last_updated": "2017-12-22T00:00:00.000Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "accounts.user",
+  "fields": {
     "password": "argon2$argon2i$v=19$m=512,t=2,p=2$SDlVU25iZ2RvemI4$uTqq5TRLEls5Dn1nP4b/6w",
     "last_login": "2017-09-08T00:00:00.000Z",
     "is_superuser": false,

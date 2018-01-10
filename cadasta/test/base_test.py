@@ -60,10 +60,10 @@ class SeleniumTestCase():
             '    .//*[normalize-space()="{}"]]'
         ).format(field_name, error_msg))
 
-    def log_in(self, user):
+    def log_in(self, user, field='username'):
         """Logs in the test user."""
         self.wd.BY_LINK('Sign in').click()
-        self.update_form_field('login', user['username'])
+        self.update_form_field('login', user[field])
         self.update_form_field('password', user['password'])
         self.wd.BY_NAME('sign-in').click()
         label = user['full_name'] or user['username']
