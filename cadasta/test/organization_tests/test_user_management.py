@@ -139,7 +139,9 @@ class TestUserManagement(SeleniumTestCase):
             select = Select(self.wd.BY_CSS('.dataTables_length select'))
             select.select_by_value('25')
             label = member['full_name'] or member['username']
-            self.wd.BY_LINK(label).click()
+            link = self.wd.BY_LINK(label)
+            self.scroll_element_into_view(link)
+            link.click()
             content = self.wd.BY_CLASS('content-single')
 
             def content_contains_text(text):
@@ -177,7 +179,9 @@ class TestUserManagement(SeleniumTestCase):
             select = Select(self.wd.BY_CSS('.dataTables_length select'))
             select.select_by_value('25')
             label = member['full_name'] or member['username']
-            self.wd.BY_LINK(label).click()
+            link = self.wd.BY_LINK(label)
+            self.scroll_element_into_view(link)
+            link.click()
             self.wait_for_alert(
                 "You don't have permission to edit roles of this organization")
 
