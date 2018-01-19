@@ -62,6 +62,10 @@ class CustomWebDriver(webdriver_module):
         wait = WebDriverWait(self, timeout)
         return wait.until(EC.element_to_be_clickable(selector))
 
+    def wait_until_gone(self, selector, timeout=10):
+        wait = WebDriverWait(self, timeout)
+        return wait.until(EC.invisibility_of_element_located(selector))
+
     def switch_to_modal_dialog(self):
         modal_dialog_window_handle = None
         main_window_handle = self.current_window_handle

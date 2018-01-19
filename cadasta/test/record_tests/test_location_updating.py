@@ -1,7 +1,7 @@
 import pytest
-import time
 
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 from ..base_test import SeleniumTestCase
 
@@ -32,8 +32,9 @@ class TestLocationUpdating(SeleniumTestCase):
         self.log_in(data_collector)
         self.open(self.prj_dashboard_path + 'records/locations/{}/'.format(
             basic_parcel['pk']))
+        self.wd.wait_until_gone((By.ID, 'loading'))
         self.wd.BY_CSS('[title="Edit location"]').click()
-        time.sleep(1)  # Wait for the map editing to finish setting up
+        self.wd.wait_until_clickable((By.NAME, 'type'))
         self.update_form_field('type', 'BU')
         self.click_save_button()
         self.wd.BY_XPATH('//h2[contains(.,"Location")]')
@@ -41,7 +42,9 @@ class TestLocationUpdating(SeleniumTestCase):
         self.wd.BY_XPATH('//*[@id="overview"]//td[contains(.,"Building")]')
 
         # [REVERSION]
+        self.wd.wait_until_gone((By.ID, 'loading'))
         self.wd.BY_CSS('[title="Edit location"]').click()
+        self.wd.wait_until_clickable((By.NAME, 'type'))
         self.update_form_field('type', basic_parcel['type'])
         self.click_save_button()
 

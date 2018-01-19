@@ -3,6 +3,7 @@ import re
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
 
 from ..base_test import SeleniumTestCase
 
@@ -79,6 +80,7 @@ class TestLocationCreation(SeleniumTestCase):
         self.wd.BY_XPATH('//*[@id="overview"]//td[contains(.,"Parcel")]')
 
         # [REVERSION] and test case #LD1
+        self.wd.wait_until_gone((By.ID, 'loading'))
         self.wd.BY_CSS('[title="Delete location"]').click()
         self.wd.BY_XPATH(
             '//button[contains(., "Yes, delete this location")]').click()
@@ -113,6 +115,7 @@ class TestLocationCreation(SeleniumTestCase):
         self.wd.BY_XPATH('//*[@id="overview"]//td[contains(.,"Spain")]')
 
         # Test case #LU4
+        self.wd.wait_until_gone((By.ID, 'loading'))
         self.wd.BY_CSS('[title="Edit location"]').click()
         self.update_form_field('type', 'BU')
         self.update_form_field('spatialunit::default::location_name', 'Italy')
@@ -123,6 +126,7 @@ class TestLocationCreation(SeleniumTestCase):
         self.wd.BY_XPATH('//*[@id="overview"]//td[contains(.,"Italy")]')
 
         # [REVERSION]
+        self.wd.wait_until_gone((By.ID, 'loading'))
         self.wd.BY_CSS('[title="Delete location"]').click()
         self.wd.BY_XPATH(
             '//button[contains(., "Yes, delete this location")]').click()
