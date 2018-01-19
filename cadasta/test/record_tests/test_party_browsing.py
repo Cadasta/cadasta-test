@@ -46,6 +46,6 @@ class TestPartyBrowsing(SeleniumTestCase):
         search_input = self.wd.BY_XPATH(
             '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
         search_input.send_keys(random_string())
-        self.wd.BY_XPATH(
+        self.wd.wait_for_xpath(
             '//*[@id="DataTables_Table_0"]'
             '//*[normalize-space()="No matching records found"]')
