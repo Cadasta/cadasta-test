@@ -59,12 +59,12 @@ class TestPartyCreation(SeleniumTestCase):
         expected_path = self.prj_dashboard_path + 'records/parties/'
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Individual")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Individual")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(name))
@@ -76,10 +76,10 @@ class TestPartyCreation(SeleniumTestCase):
             '//button[contains(., "Yes, delete this party")]').click()
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]'
+            '//*[@id="paginated-table"]'
             '//*[normalize-space()="No matching records found" or'
             '    normalize-space()="No data available in table"]')
 
@@ -100,12 +100,12 @@ class TestPartyCreation(SeleniumTestCase):
         expected_path = self.prj_dashboard_path + 'records/parties/'
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Individual")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Individual")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(name))
@@ -148,12 +148,12 @@ class TestPartyCreation(SeleniumTestCase):
         expected_path = self.prj_dashboard_path + 'records/parties/'
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Individual")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Individual")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(name))
@@ -199,12 +199,12 @@ class TestPartyCreation(SeleniumTestCase):
         expected_path = self.prj_dashboard_path + 'records/parties/'
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Corporation")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Corporation")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(name))
@@ -235,12 +235,12 @@ class TestPartyCreation(SeleniumTestCase):
         expected_path = self.prj_dashboard_path + 'records/parties/'
         assert self.get_url_path() == expected_path
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Group")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Group")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(name))
