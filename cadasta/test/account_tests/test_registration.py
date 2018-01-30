@@ -139,13 +139,7 @@ class TestRegistration(SeleniumTestCase):
         self.update_form_field('email', self.email)
         self.update_form_field('full_name', self.full_name)
 
-        password_help = self.wd.BY_XPATH(
-            '(//*[@for="id_password"])[1]/following-sibling::p')
-        assert 'hidden' in password_help.get_attribute('class')
         password_input = self.wd.BY_NAME('password')
-        password_input.click()
-        assert 'hidden' not in password_help.get_attribute('class')
-
         password_input.send_keys('Aa1+')
         self.click_register_button()
         self.assert_form_field_has_error(
