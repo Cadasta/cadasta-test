@@ -61,9 +61,9 @@ class TestPartyCreation(SeleniumTestCase):
         search_input = self.wd.BY_XPATH(
             '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(name)
-        self.wd.BY_XPATH(
+        self.wd.wait_for_xpath(
             '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
-        self.wd.BY_XPATH(
+        self.wd.wait_for_xpath(
             '//*[@id="paginated-table"]//td[contains(.,"Individual")]')
         self.wd.BY_LINK(name).click()
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(name))
