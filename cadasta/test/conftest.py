@@ -156,7 +156,7 @@ def basic_individual(all_fixtures):
                 if 'Basic Individual' == party['name'])
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture
 def webdriver():
 
     # Initialize webdriver
