@@ -26,13 +26,13 @@ class TestPartyBrowsing(SeleniumTestCase):
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Parties"]').click()
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         name = basic_individual['name']
         search_input.send_keys(name)
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"{}")]'.format(name))
+            '//*[@id="paginated-table"]//td[contains(.,"{}")]'.format(name))
         self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]//td[contains(.,"Individual")]')
+            '//*[@id="paginated-table"]//td[contains(.,"Individual")]')
 
     def test_search_that_results_in_no_party_works(
         self, records_org_prj, prj_user
@@ -44,8 +44,8 @@ class TestPartyBrowsing(SeleniumTestCase):
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Parties"]').click()
         search_input = self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0_filter"]//input[@type="search"]')
+            '//*[@id="paginated-table-filter"]//input[@type="search"]')
         search_input.send_keys(random_string())
-        self.wd.BY_XPATH(
-            '//*[@id="DataTables_Table_0"]'
+        self.wd.wait_for_xpath(
+            '//*[@id="paginated-table"]'
             '//*[normalize-space()="No matching records found"]')
