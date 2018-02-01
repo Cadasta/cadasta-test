@@ -6,7 +6,7 @@ from ..base_test import SeleniumTestCase
 from ..util import random_string
 
 
-@pytest.mark.batch2
+@pytest.mark.batch3
 class TestPartyCreation(SeleniumTestCase):
 
     @pytest.fixture
