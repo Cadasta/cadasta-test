@@ -200,13 +200,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
         self.update_form_field('password', self.password)
         self.update_form_field('full_name', self.full_name)
 
-        phone_help = self.wd.BY_XPATH(
-            '(//*[@for="id_phone"])[1]/following-sibling::p')
-        assert 'hidden' in phone_help.get_attribute('class')
         phone_input = self.wd.BY_NAME('phone')
-        phone_input.click()
-        assert 'hidden' not in phone_help.get_attribute('class')
-
         error_msg = (
             'Phone numbers must start with a +, followed by a country code '
             'and phone number without spaces or punctuation. Phone numbers '
