@@ -17,3 +17,8 @@ def byte_to_base32_chr(byte):
 def random_string():
     rand_bytes = [random.randint(0, 0xFF) for i in range(STRING_LENGTH)]
     return ''.join(map(byte_to_base32_chr, rand_bytes))
+
+
+def random_us_number():
+    rand_digits = [str(random.randint(0, 9)) for i in range(13)]
+    return '+1' + ''.join(rand_digits)

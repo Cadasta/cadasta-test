@@ -37,6 +37,12 @@ def generic_user(all_fixtures):
 
 
 @pytest.fixture(scope='session')
+def generic_phone_user(all_fixtures):
+    return next(user for user in all_fixtures['accounts.user']
+                if 'functest_genericphone_' in user['username'])
+
+
+@pytest.fixture(scope='session')
 def org_creator(all_fixtures):
     return next(user for user in all_fixtures['accounts.user']
                 if 'functest_org_creator_' in user['username'])
