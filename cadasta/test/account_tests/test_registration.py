@@ -1,6 +1,7 @@
 import pytest
 
-from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.common.exceptions import (
+    ElementNotInteractableException, NoSuchElementException, TimeoutException)
 
 from ..base_test import SeleniumTestCase
 from ..util import random_string, random_us_number
@@ -380,7 +381,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
 
         try:
             self.wd.BY_LINK('I want to verify my email').click()
-        except NoSuchElementException:
+        except ElementNotInteractableException:
             pass
         self.update_form_field('email', self.email)
         self.wd.BY_XPATH('//button[contains(.,"Send Verification")]').click()
@@ -399,7 +400,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
         try:
             self.wd.BY_NAME('token').click()
             raise AssertionError('Token field is shown.')
-        except NoSuchElementException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
         self.assert_url_path('/account/accountverification/')
 
@@ -422,7 +423,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
 
         try:
             self.wd.BY_LINK('I want to verify my phone').click()
-        except NoSuchElementException:
+        except ElementNotInteractableException:
             pass
         self.update_form_field('phone', self.phone)
         self.wd.BY_XPATH('//button[contains(.,"Send Verification")]').click()
