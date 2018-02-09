@@ -261,8 +261,7 @@ class TestPartyCreation(SeleniumTestCase):
         self.select_prj_add_menu_item('Add party')
         self.update_form_field('type', 'IN')
         self.click_save_button()
-        self.assert_form_field_has_error(
-            'name', 'This field is required.')
+        self.assert_form_field_has_error('name', 'This field is required.')
 
     def test_party_type_is_required(self, basic_org_prj, data_collector):
         """Verifies Records test case #PC7."""
@@ -272,8 +271,7 @@ class TestPartyCreation(SeleniumTestCase):
         self.select_prj_add_menu_item('Add party')
         self.update_form_field('name', 'Party name')
         self.click_save_button()
-        self.assert_form_field_has_error(
-            'type', 'This field is required.')
+        self.assert_form_field_has_error('type', 'This field is required.')
 
     def test_unauthorized_user_cannot_create_party(
         self, basic_org_prj, prj_user

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx
+    xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+    xmlns:wptx1="http://www.garmin.com/xmlschemas/WaypointExtension/v1"
+    xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+    creator="GPSMAP 64s"
+    version="1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www8.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackStatsExtension/v1 http://www8.garmin.com/xmlschemas/TrackStatsExtension.xsd http://www.garmin.com/xmlschemas/WaypointExtension/v1 http://www8.garmin.com/xmlschemas/WaypointExtensionv1.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+    <metadata>
+        <link href="http://www.garmin.com">
+            <text>Garmin International</text>
+        </link>
+        <time>2015-11-26T13:41:27Z</time>
+    </metadata>
+    <wpt lat="6.462206" lon="3.356425">
+        <ele>7.829525</ele>
+        <time>2015-11-26T13:51:15Z</time>
+        <name>DAR001</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lat="6.463082" lon="3.356254">
+        <ele>10.461362</ele>
+        <time>2015-11-26T14:25:41Z</time>
+        <name>DAR002</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lat="6.463735" lon="3.356248">
+        <ele>10.939612</ele>
+        <time>2015-11-26T14:30:11Z</time>
+        <name>DAR003</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lat="6.464090" lon="3.356078">
+        <ele>10.251385</ele>
+        <time>2015-11-26T14:32:26Z</time>
+        <name>DAR004</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+    <wpt lat="6.464386" lon="3.355974">
+        <ele>9.324635</ele>
+        <time>2015-11-26T14:33:55Z</time>
+        <name>DAR005</name>
+        <sym>Flag, Blue</sym>
+    </wpt>
+</gpx>
