@@ -258,8 +258,9 @@ class TestAttaching(SeleniumTestCase):
         (expected_min_date, expected_max_date) = self.get_min_max_date()
         expected_min_date = expected_min_date.replace(' ', '. ', 1)
         expected_max_date = expected_max_date.replace(' ', '. ', 1)
+        # DataTables Table 0 is tenure relationships; Table 1 is resources
         self.do_table_search(
-            resource['name'], filter_id='DataTables_Table_0_filter')
+            resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
         row_febx('//*[contains(.,"{}")]'.format(resource['name']))
@@ -315,8 +316,9 @@ class TestAttaching(SeleniumTestCase):
         self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename)).click()
         self.wd.BY_XPATH(
             '//button[@type="submit" and contains(.,"Save")]').click()
+        # DataTables Table 0 is tenure relationships; Table 1 is resources
         self.do_table_search(
-            resource['name'], filter_id='DataTables_Table_0_filter')
+            resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
         row.find_element_by_xpath(
             '//button[contains(.,"Detach")]')
@@ -329,8 +331,9 @@ class TestAttaching(SeleniumTestCase):
             basic_individual['pk']))
         self.wd.BY_XPATH(
             '//a[@role="tab" and normalize-space()="Resources"]').click()
+        # DataTables Table 0 is tenure relationships; Table 1 is resources
         self.do_table_search(
-            resource['name'], filter_id='DataTables_Table_0_filter')
+            resource['name'], filter_id='DataTables_Table_1_filter')
         self.wd.BY_XPATH(
             '//tr[contains(.,"{}")]'
             '//button[contains(.,"Detach")]'.format(filename)).click()

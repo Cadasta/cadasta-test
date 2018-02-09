@@ -50,6 +50,8 @@ class SeleniumTestCase():
             Select(field).select_by_value(field_value)
         else:  # Assume tag_name is 'input' with type 'text' or 'password'
             field.clear()
+            if not isinstance(field_value, str):
+                field_value = str(field_value)
             field.send_keys(field_value)
 
     def assert_form_field_has_error(self, field_name, error_msg):
