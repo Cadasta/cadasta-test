@@ -1,4 +1,5 @@
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import (ElementNotInteractableException,
+                                        NoSuchElementException)
 
 from ..base_test import SeleniumTestCase
 
@@ -20,5 +21,5 @@ class RegistrationUtil(SeleniumTestCase):
         try:
             self.wd.BY_LINK(
                 'I want to register with my {}'.format(field)).click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
