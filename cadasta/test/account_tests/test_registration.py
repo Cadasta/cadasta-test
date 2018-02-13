@@ -381,7 +381,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
 
         try:
             self.wd.BY_LINK('I want to verify my email').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
         self.update_form_field('email', self.email)
         self.wd.BY_XPATH('//button[contains(.,"Send Verification")]').click()
@@ -423,7 +423,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
 
         try:
             self.wd.BY_LINK('I want to verify my phone').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
         self.update_form_field('phone', self.phone)
         self.wd.BY_XPATH('//button[contains(.,"Send Verification")]').click()

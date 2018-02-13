@@ -2,7 +2,8 @@ import pytest
 import re
 
 from os.path import abspath, dirname, join
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import (ElementNotInteractableException,
+                                        NoSuchElementException)
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -85,7 +86,7 @@ class TestUpdating(SeleniumTestCase):
         self.assert_url_path('/account/password/reset/')
         try:
             self.wd.BY_LINK('I want to reset password with my email').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
         self.update_form_field('email', self.email_user['email'])
         self.wd.BY_XPATH('//*[@type="submit"]').click()
@@ -100,7 +101,7 @@ class TestUpdating(SeleniumTestCase):
         self.assert_url_path('/account/password/reset/')
         try:
             self.wd.BY_LINK('I want to reset password with my phone').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, NoSuchElementException):
             pass
         self.update_form_field('phone', self.phone_user['phone'])
         self.wd.BY_XPATH('//*[@type="submit"]').click()
