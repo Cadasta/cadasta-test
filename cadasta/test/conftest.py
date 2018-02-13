@@ -134,6 +134,24 @@ def conditional_attrs_prj(all_fixtures):
 
 
 @pytest.fixture(scope='session')
+def custom_party_attrs_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-custom-party-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def custom_tenure_attrs_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-custom-tenure-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def custom_conditional_attrs_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-custom-conditional-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
 def another_prj(all_fixtures):
     return next(prj for prj in all_fixtures['organization.project']
                 if 'functest-another-prj-' in prj['slug'])
@@ -156,16 +174,83 @@ def all_org_members(all_fixtures, basic_org):
     return members
 
 
+# Under FuncTest Records Prj
+@pytest.fixture(scope='session')
+def basic_parcel(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'xqzcnvuy7u9gywqkp2xa3rbn' == location['pk'])
+    loc['type_label'] = 'Parcel'
+    return loc
+
+
+# Under FuncTest Custom Attrs Prj
+@pytest.fixture(scope='session')
+def custom_building(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'tcqrxxaep8jcf83xnynh6pxi' == location['pk'])
+    loc['type_label'] = 'Building'
+    return loc
+
+
+# Under FuncTest Conditional Attrs Prj
+@pytest.fixture(scope='session')
+def basic_apartment(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'szcmfx455yt3r3q43thxk2mr' == location['pk'])
+    loc['type_label'] = 'Apartment'
+    return loc
+
+
+# Under FuncTest Custom Party Attrs Prj
+@pytest.fixture(scope='session')
+def basic_rightofway(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'wdxgeavx3q95vmtr8xkyu2ac' == location['pk'])
+    loc['type_label'] = 'Right-of-way'
+    return loc
+
+
+# Under FuncTest Custom Tenure Attrs Prj
+@pytest.fixture(scope='session')
+def basic_national_park(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'sq8nvq4syhy7zdf4tsrwia54' == location['pk'])
+    loc['type_label'] = 'National Park Boundary'
+    return loc
+
+
+# Under FuncTest Custom-Conditional Attrs Prj
+@pytest.fixture(scope='session')
+def basic_community_boundary(all_fixtures):
+    loc = next(location for location in all_fixtures['spatial.spatialunit']
+               if 'zw27euyqjmvnvxfedh4s7qae' == location['pk'])
+    loc['type_label'] = 'Community Boundary'
+    return loc
+
+
+# Under FuncTest Records Prj
 @pytest.fixture(scope='session')
 def basic_individual(all_fixtures):
     return next(party for party in all_fixtures['party.party']
                 if 'Basic Individual' == party['name'])
 
 
+# Under FuncTest Custom Tenure Attrs Prj
 @pytest.fixture(scope='session')
-def basic_parcel(all_fixtures):
-    return next(location for location in all_fixtures['spatial.spatialunit']
-                if 'xqzcnvuy7u9gywqkp2xa3rbn' == location['pk'])
+def basic_group(all_fixtures):
+    return next(party for party in all_fixtures['party.party']
+                if 'Basic Group' == party['name'])
+
+
+# Under FuncTest Records Prj
+@pytest.fixture(scope='session')
+def basic_water_rights(all_fixtures, basic_parcel, basic_individual):
+    tenure_rel = next(rel for rel in all_fixtures['party.tenurerelationship']
+                      if 'yku4hjxu5rka882n84jyw5wj' == rel['pk'])
+    tenure_rel['location'] = basic_parcel
+    tenure_rel['party'] = basic_individual
+    tenure_rel['type_label'] = 'Water Rights'
+    return tenure_rel
 
 
 @pytest.fixture

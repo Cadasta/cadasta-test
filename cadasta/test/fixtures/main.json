@@ -590,7 +590,7 @@
     "slug": "functest-basic-prj-e9v8ezdrtygish5vqcrpkm82",
     "organization": "t76ippq854bvzh5uju6tikbw",
     "country": "",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed viverra felis. Integer aliquam elit eu elementum consectetur.",
+    "description": "Project without a questionnaire. Needs to be empty of records and resources.",
     "archived": false,
     "urls": "[\"http://example.com\"]",
     "contacts": [
@@ -616,7 +616,7 @@
     "slug": "functest-private-prj-cqptmp935n9qvqj532xb45v5",
     "organization": "t76ippq854bvzh5uju6tikbw",
     "country": "",
-    "description": "",
+    "description": "Private project without a questionnaire.",
     "archived": false,
     "urls": "[]",
     "contacts": [],
@@ -636,7 +636,7 @@
     "slug": "functest-records-prj-pz58z4s2wfvp2sin2z6k3jbv",
     "organization": "t76ippq854bvzh5uju6tikbw",
     "country": "",
-    "description": "",
+    "description": "Project without a questionnaire. Contains a location, a party, and 2 tenure relationships. Default project to be used for records test cases.",
     "archived": false,
     "urls": "[]",
     "contacts": [],
@@ -656,7 +656,7 @@
     "slug": "functest-custom-attrs-prj-9zz5r4cn7kkhgbutnpdc3i4d",
     "organization": "t76ippq854bvzh5uju6tikbw",
     "country": "",
-    "description": "",
+    "description": "Project with a questionnaire having custom attributes for locations, parties, and tenure relationships, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
     "contacts": [],
@@ -676,7 +676,7 @@
     "slug": "functest-conditional-attrs-prj-m6bv5m6jux2j",
     "organization": "t76ippq854bvzh5uju6tikbw",
     "country": "",
-    "description": "",
+    "description": "Project with a questionnaire having conditional attributes for parties, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
     "contacts": [],
@@ -690,13 +690,73 @@
 },
 {
   "model": "organization.project",
+  "pk": "scjycvu5ggq3r967i98iu8q2",
+  "fields": {
+    "name": "FuncTest Custom Party Attrs Prj",
+    "slug": "functest-custom-party-attrs-prj-scjycvu5ggq3r967i9",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "Project with a questionnaire having custom attributes only for parties, and having English and Tagalog (using Indonesian code) labels. Contains a location to be used for creating tenure relationships.",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": "xbebfzync9gks3vzae7vu3fj",
+    "area": 0.0,
+    "created_date": "2018-02-01T00:00:00.000Z",
+    "last_updated": "2018-02-01T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.project",
+  "pk": "4q4hv5ynyhg3mruy688kmxmm",
+  "fields": {
+    "name": "FuncTest Custom Tenure Attrs Prj",
+    "slug": "functest-custom-tenure-attrs-prj-4q4hv5ynyhg3mruy6",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "Project with a questionnaire having custom attributes only for tenure relationships, and having English and Tagalog (using Indonesian code) labels. Contains a location and a party to be used for creating tenure relationships.",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": "p6tzp85tcdmtwnpy7k5cic97",
+    "area": 0.0,
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.project",
+  "pk": "3yjh9qnv9f7x2p2zvc43b8zf",
+  "fields": {
+    "name": "FuncTest Custom-Conditional Attrs Prj",
+    "slug": "functest-custom-conditional-attrs-prj-3yjh9qnv9f7x",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "Project with a questionnaire having conditional attributes for parties and custom attributes for tenure relationships, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": "7gk2345dmrpm3t36ygtx8z7d",
+    "area": 0.0,
+    "created_date": "2018-02-07T00:00:00.000Z",
+    "last_updated": "2018-02-07T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.project",
   "pk": "b2k5bruyxmh2ynicnzpeqt9k",
   "fields": {
     "name": "FuncTest Another Prj",
     "slug": "functest-another-prj-b2k5bruyxmh2ynicnzpeqt9k",
     "organization": "f5rbbkyeqw8jei44apqhfkrw",
     "country": "",
-    "description": "",
+    "description": "Project without a questionnaire in a different organization.",
     "archived": false,
     "urls": "[]",
     "contacts": [],
@@ -800,15 +860,42 @@
   }
 },
 {
-  "model": "party.party",
-  "pk": "ve8cg328dtnm93rd3yb4tifw",
+  "model": "organization.projectrole",
+  "pk": "f8sxi24uzhtitnpa76dfqnuj",
   "fields": {
-    "project": "pz58z4s2wfvp2sin2z6k3jbv",
-    "name": "Basic Individual",
-    "type": "IN",
-    "attributes": {},
-    "created_date": "2017-11-10T00:00:00.000Z",
-    "last_updated": "2017-11-10T00:00:00.000Z"
+    "project": "scjycvu5ggq3r967i98iu8q2",
+    "user": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "role": "DC",
+    "created_date": "2018-02-01T00:00:00.000Z",
+    "last_updated": "2018-02-01T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "9fj9e6iwms5sn7b8qx7i593j",
+  "fields": {
+    "project": "4q4hv5ynyhg3mruy688kmxmm",
+    "user": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "role": "DC",
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "cwdrbejtwirbaw498ikjg5dg",
+  "fields": {
+    "project": "3yjh9qnv9f7x2p2zvc43b8zf",
+    "user": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "role": "DC",
+    "created_date": "2018-02-07T00:00:00.000Z",
+    "last_updated": "2018-02-07T00:00:00.000Z"
   }
 },
 {
@@ -822,6 +909,121 @@
     "attributes": {},
     "created_date": "2017-11-23T00:00:00.000Z",
     "last_updated": "2017-11-23T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "tcqrxxaep8jcf83xnynh6pxi",
+  "fields": {
+    "project": "9zz5r4cn7kkhgbutnpdc3i4d",
+    "type": "BU",
+    "geometry": "SRID=4326;POLYGON ((2 2, 2 3, 3 3, 3 2, 2 2))",
+    "area": 200,
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "szcmfx455yt3r3q43thxk2mr",
+  "fields": {
+    "project": "m6bv5m6jux2jw2pammsacpgp",
+    "type": "AP",
+    "geometry": "SRID=4326;POLYGON ((3 3, 3 4, 4 4, 4 3, 3 3))",
+    "area": 300,
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "wdxgeavx3q95vmtr8xkyu2ac",
+  "fields": {
+    "project": "scjycvu5ggq3r967i98iu8q2",
+    "type": "RW",
+    "geometry": "SRID=4326;POLYGON ((4 4, 4 5, 5 5, 5 4, 4 4))",
+    "area": 400,
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "sq8nvq4syhy7zdf4tsrwia54",
+  "fields": {
+    "project": "4q4hv5ynyhg3mruy688kmxmm",
+    "type": "NP",
+    "geometry": "SRID=4326;POLYGON ((5 5, 5 6, 6 6, 6 5, 5 5))",
+    "area": 500,
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "spatial.spatialunit",
+  "pk": "zw27euyqjmvnvxfedh4s7qae",
+  "fields": {
+    "project": "3yjh9qnv9f7x2p2zvc43b8zf",
+    "type": "CB",
+    "geometry": "SRID=4326;POLYGON ((6 6, 6 7, 7 7, 7 6, 6 6))",
+    "area": 600,
+    "attributes": {},
+    "created_date": "2018-02-07T00:00:00.000Z",
+    "last_updated": "2018-02-07T00:00:00.000Z"
+  }
+},
+{
+  "model": "party.party",
+  "pk": "ve8cg328dtnm93rd3yb4tifw",
+  "fields": {
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "name": "Basic Individual",
+    "type": "IN",
+    "attributes": {},
+    "created_date": "2017-11-10T00:00:00.000Z",
+    "last_updated": "2017-11-10T00:00:00.000Z"
+  }
+},
+{
+  "model": "party.party",
+  "pk": "tegnj6ux8iure2s5dkarhd9g",
+  "fields": {
+    "project": "4q4hv5ynyhg3mruy688kmxmm",
+    "name": "Basic Group",
+    "type": "GR",
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
+  }
+},
+{
+  "model": "party.tenurerelationship",
+  "pk": "yku4hjxu5rka882n84jyw5wj",
+  "fields": {
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "party": "ve8cg328dtnm93rd3yb4tifw",
+    "spatial_unit": "xqzcnvuy7u9gywqkp2xa3rbn",
+    "tenure_type": "WR",
+    "attributes": {},
+    "created_date": "2018-01-31T00:00:00.000Z",
+    "last_updated": "2018-01-31T00:00:00.000Z"
+  }
+},
+{
+  "model": "party.tenurerelationship",
+  "pk": "c5ckdxh9qjh5be5e8dqpkbjy",
+  "fields": {
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "party": "ve8cg328dtnm93rd3yb4tifw",
+    "spatial_unit": "xqzcnvuy7u9gywqkp2xa3rbn",
+    "tenure_type": "UC",
+    "attributes": {},
+    "created_date": "2018-02-05T00:00:00.000Z",
+    "last_updated": "2018-02-05T00:00:00.000Z"
   }
 }
 ]
