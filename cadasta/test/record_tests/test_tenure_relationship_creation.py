@@ -2,7 +2,8 @@ import pytest
 import re
 
 from selenium.common.exceptions import (NoSuchElementException,
-                                        ElementNotInteractableException)
+                                        ElementNotInteractableException,
+                                        ElementNotVisibleException)
 from selenium.webdriver.common.by import By
 
 from ..base_test import SeleniumTestCase
@@ -273,7 +274,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_rightofway)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -321,7 +322,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_apartment)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -371,7 +372,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_apartment)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -422,7 +423,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_apartment)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -562,7 +563,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(custom_building)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -644,7 +645,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_community_boundary)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -704,7 +705,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_community_boundary)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])
@@ -765,7 +766,7 @@ class TestTenureRelationshipCreation(SeleniumTestCase):
         self.go_to_add_tenure_relationship_form(basic_community_boundary)
         try:
             self.wd.BY_ID('add-party').click()
-        except ElementNotInteractableException:
+        except (ElementNotInteractableException, ElementNotVisibleException):
             pass
         self.update_form_field('name', temp_party['name'])
         self.update_form_field('party_type', temp_party['type'])

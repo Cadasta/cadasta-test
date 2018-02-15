@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from ..base_test import SeleniumTestCase
 
 
-@pytest.mark.batch3
+@pytest.mark.batch2
 class TestLocationUpdating(SeleniumTestCase):
 
     @pytest.fixture
