@@ -314,7 +314,7 @@ class TestRegistration(RegistrationUtil, SeleniumTestCase):
             password_input.send_keys(password)
             self.click_register_button()
             self.assert_form_field_has_error(
-                'password', 'Passwords cannot contain your phone.')
+                'password', 'Your password cannot contain your phone number.')
 
         check_invalid_password('A' + self.phone)
         check_invalid_password('A#' + self.phone[1:])
