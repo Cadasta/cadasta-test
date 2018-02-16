@@ -20,5 +20,5 @@ def random_string():
 
 
 def random_us_number():
-    rand_digits = [str(random.randint(0, 9)) for i in range(13)]
-    return '+1' + ''.join(rand_digits)
+    rand_digits = [str(random.randint(0, 9)) for i in range(7)]
+    return '+1628' + ''.join(rand_digits)
