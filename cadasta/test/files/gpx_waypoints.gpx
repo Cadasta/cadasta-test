@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx
+    xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpxx="http://www.garmin.com/xmlschemas/WaypointExtension/v1"
+    xmlns:gpxtrx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+    xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+    creator="Oregon 550"
+    version="1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/WaypointExtension/v1 http://www8.garmin.com/xmlschemas/WaypointExtensionv1.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">
+    <metadata>
+        <link href="http://www.garmin.com">
+            <text>Garmin International</text>
+        </link>
+        <time>2016-05-18T09:20:06Z</time>
+    </metadata>
+    <wpt lat="52.941277" lon="-8.034792">
+        <ele>159.297363</ele>
+        <time>2016-05-18T09:20:06Z</time>
+        <name>Waypoint 1</name>
+        <sym>Lodging</sym>
+    </wpt>
+    <wpt lat="52.946419" lon="-8.039001">
+        <ele>88.808327</ele>
+        <time>2016-05-18T10:04:17Z</time>
+        <name>Waypoint 2</name>
+        <sym>Lodging</sym>
+    </wpt>
+    <wpt lat="52.946421" lon="-8.039008">
+        <ele>89.445007</ele>
+        <time>2016-05-18T10:06:58Z</time>
+        <name>Waypoint 3</name>
+        <sym>Crossing</sym>
+    </wpt>
+    <wpt lat="52.946064" lon="-8.038319">
+        <ele>87.765770</ele>
+        <time>2016-05-18T10:08:56Z</time>
+        <name>Waypoint 4</name>
+        <sym>Crossing</sym>
+    </wpt>
+</gpx>
