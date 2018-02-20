@@ -53,7 +53,7 @@ class TestXLSForm(SeleniumTestCase):
 
     @pytest.mark.uploads
     def test_xlsform_with_invalid_field_is_not_allowed(self, prj_manager):
-        """Verifies Forms test case #X1,#X2,#X3,#X4,#X5,#X6,#X7,#X9,#X10."""
+        """Verifies Forms test cases #X1,#X2,#X3,#X4,#X5,#X6,#X7,#X9,#X10."""
 
         self.log_in(prj_manager)
         self.open(self.prj_dashboard_path)
@@ -124,3 +124,29 @@ class TestXLSForm(SeleniumTestCase):
         verify_invalid_xlsform(
             'XLSForm X10 missing end group.xlsx',
             "^Unmatched begin statement: group$")
+
+    @pytest.mark.uploads
+    def test_xlsform_with_resource_in_group_is_allowed(self, prj_manager):
+        """Verifies Forms test case #X8."""
+
+        self.log_in(prj_manager)
+        self.open(self.prj_dashboard_path)
+        self.wd.BY_LINK("Upload XLS Form").click()
+        dir_path = join(dirname(dirname(abspath(__file__))), 'files')
+        input_xpath = '//input[@type="file"]'
+        path = join(
+            dir_path, 'XLSForm X8 image, audio, video type in group.xlsx')
+        self.wd.BY_XPATH(input_xpath).send_keys(path)
+        self.wait_and_click_save_button()
+        self.assert_url_path(self.prj_dashboard_path)
+        self.wd.BY_LINK("Upload new XLS Form")
+        self.wd.BY_LINK("Download current XLS Form")
+
+        # [REVERSION]
+        self.wd.BY_LINK("Upload new XLS Form").click()
+        link = self.wd.BY_XPATH('//a[contains(@class, "file-remove")]')
+        self.scroll_element_into_view(link)
+        link.click()
+        self.wait_and_click_save_button()
+        self.assert_url_path(self.prj_dashboard_path)
+        self.wd.BY_LINK("Upload XLS Form")
