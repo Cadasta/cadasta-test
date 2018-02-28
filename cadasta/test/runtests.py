@@ -9,9 +9,9 @@ from subprocess import Popen, DEVNULL
 
 
 if __name__ == '__main__':
-    # cadasta-test does not require Django
-    if 'DJANGO_SETTINGS_MODULE' in os.environ:
-        del os.environ['DJANGO_SETTINGS_MODULE']
+    # For Dev VM, explicitly point to the Django project root to avoid
+    # pytest-django not configured error
+    sys.path.append('/opt/cadasta/cadasta-platform/cadasta')
 
     # Declare valid command-line arguments
     parser = argparse.ArgumentParser(

@@ -176,40 +176,25 @@ class TestCreation(SeleniumTestCase):
         """Verifies Projects test case #C7, #C16, #C17."""
 
         self.log_in()
-        self.open('/projects/new/')
-        self.click_wizard_next_button()
-        self.update_form_field('details-organization', self.org['slug'])
-        self.update_form_field('details-name', basic_prj['name'])
-        self.update_form_field('details-description', "Project description.")
-        self.update_form_field('details-url', 'http://example.com')
-        self.update_form_field('details-contacts-0-name', 'Contact Person')
-        self.update_form_field('details-contacts-0-email', 'cp@example.com')
-        self.update_form_field('details-contacts-0-tel', '1234567890')
-        self.click_wizard_next_button()
-        self.assert_form_field_has_error(
-            'details-name', 'Project with this name already exists')
 
-        # Clear the previous error by inducing a different error
-        self.update_form_field('details-name', '')
-        self.click_wizard_next_button()
-        self.assert_form_field_has_error(
-            'details-name', 'This field is required.')
+        def check_duplicate_name(name):
+            self.open('/projects/new/')
+            self.click_wizard_next_button()
+            self.update_form_field('details-organization', self.org['slug'])
+            self.update_form_field('details-description', "Description.")
+            self.update_form_field('details-url', 'http://example.com')
+            self.update_form_field('details-contacts-0-name', 'Contact Person')
+            self.update_form_field('details-contacts-0-email', 'c@example.com')
+            self.update_form_field('details-contacts-0-tel', '1234567890')
+            self.update_form_field('details-name', name)
+            self.click_wizard_next_button()
+            self.assert_form_field_has_error(
+                'details-name', 'Project with this name already exists')
 
-        self.update_form_field('details-name', basic_prj['name'].upper())
-        self.click_wizard_next_button()
-        self.assert_form_field_has_error(
-            'details-name', 'Project with this name already exists')
-
-        # Clear the previous error by inducing a different error
-        self.update_form_field('details-name', '')
-        self.click_wizard_next_button()
-        self.assert_form_field_has_error(
-            'details-name', 'This field is required.')
-
-        self.update_form_field('details-name', another_prj['name'].upper())
-        self.click_wizard_next_button()
-        self.assert_form_field_has_error(
-            'details-name', 'Project with this name already exists')
+        check_duplicate_name(basic_prj['name'])
+        check_duplicate_name(basic_prj['name'].upper())
+        check_duplicate_name(another_prj['name'])
+        check_duplicate_name(another_prj['name'].upper())
 
     def test_invalid_url_is_rejected(self):
         """Verifies Projects test case #C10."""
