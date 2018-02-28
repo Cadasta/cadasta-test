@@ -1025,5 +1025,214 @@
     "created_date": "2018-02-05T00:00:00.000Z",
     "last_updated": "2018-02-05T00:00:00.000Z"
   }
+},
+{
+  "model": "resources.resource",
+  "pk": "t3ud4tpd6h46gggs4v4n7j2a",
+  "fields": {
+    "name": "FuncTest Dummy Resource 1",
+    "description": "Lorem ipsum 1",
+    "file": "",
+    "original_file": "functest_dummy_resource_1.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "cxhuuvw8c5g4winmkuhraqxw",
+  "fields": {
+    "name": "FuncTest Dummy Resource 2",
+    "description": "Lorem ipsum 2",
+    "file": "",
+    "original_file": "functest_dummy_resource_2.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "zys3e7qezarr2sxxr8kau48f",
+  "fields": {
+    "name": "FuncTest Dummy Resource 3",
+    "description": "Lorem ipsum 3",
+    "file": "",
+    "original_file": "functest_dummy_resource_3.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "8hqihsdfa6gx29y4vfhqaam6",
+  "fields": {
+    "name": "FuncTest Dummy Resource 4",
+    "description": "Lorem ipsum 4",
+    "file": "",
+    "original_file": "functest_dummy_resource_4.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "r6az7db5tkjjiaffqfqhwbei",
+  "fields": {
+    "name": "FuncTest Dummy Resource 5",
+    "description": "Lorem ipsum 5",
+    "file": "",
+    "original_file": "functest_dummy_resource_5.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "bzhcg8nqbygdr42ihyxihg7q",
+  "fields": {
+    "name": "FuncTest Dummy Resource 6",
+    "description": "Lorem ipsum 6",
+    "file": "",
+    "original_file": "functest_dummy_resource_6.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "k5n262sddpi7cwbbrwnnexur",
+  "fields": {
+    "name": "FuncTest Dummy Resource 7",
+    "description": "Lorem ipsum 7",
+    "file": "",
+    "original_file": "functest_dummy_resource_71.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "tvrbc4njxas7tt98cu2hnydk",
+  "fields": {
+    "name": "FuncTest Dummy Resource 8",
+    "description": "Lorem ipsum 8",
+    "file": "",
+    "original_file": "functest_dummy_resource_8.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "n828chjbjxehjh2qzcabuud6",
+  "fields": {
+    "name": "FuncTest Dummy Resource 9",
+    "description": "Lorem ipsum 9",
+    "file": "",
+    "original_file": "functest_dummy_resource_9.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "3zqvp5hwd67tu4vpz9ess39p",
+  "fields": {
+    "name": "FuncTest Dummy Resource 10",
+    "description": "Lorem ipsum 10",
+    "file": "",
+    "original_file": "functest_dummy_resource_10.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
+},
+{
+  "model": "resources.resource",
+  "pk": "vh3x2vqendh4id3bfg5hhqyu",
+  "fields": {
+    "name": "FuncTest Dummy Resource 11",
+    "description": "Lorem ipsum 11",
+    "file": "",
+    "original_file": "functest_dummy_resource_11.jpg",
+    "file_versions": null,
+    "mime_type": "image/jpeg",
+    "archived": false,
+    "contributor": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "project": "pz58z4s2wfvp2sin2z6k3jbv",
+    "created_date": "2018-02-27T00:00:00.000Z",
+    "last_updated": "2018-02-27T00:00:00.000Z"
+  }
 }
 ]

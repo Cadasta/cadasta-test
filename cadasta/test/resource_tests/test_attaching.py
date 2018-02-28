@@ -853,48 +853,20 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
 
     @pytest.mark.uploads
     def test_multiple_existing_resources_from_different_pages_can_be_attached(
-        self, basic_org_prj, data_collector
+        self, records_org_prj, data_collector
     ):
         """Verifies Resources test case #A26."""
 
-        # Set-up 11 unattached resources
-        resources = []
         self.log_in(data_collector)
-        self.open(self.prj_dashboard_path + 'resources/')
-        for i in range(1, 12):
-            filename = 'resource_file_{}.csv'.format(i)
-            resource = self.get_test_resource_data(filename)
-            resources.append(resource)
-            button = self.wd.BY_LINK('Attach')
-            self.scroll_element_into_view(button)
-            button.click()
-            try:
-                self.wd.BY_LINK('Upload new').click()
-            except NoSuchElementException:
-                pass
-            self.wd.BY_XPATH(
-                '//input[@type="file"]').send_keys(resource['path'])
-            self.wd.wait_until_clickable((By.CLASS_NAME, 'file-remove'))
-            self.update_form_field('name', resource['name'])
-            self.wd.BY_XPATH(
-                '//button[@type="submit" and contains(.,"Save")]').click()
-            self.do_table_search(resource['name'])
-            button = self.wd.wait_for_xpath(
-                '//tr[contains(.,"{}")]'
-                '//button[contains(.,"Detach")]'.format(filename))
-            self.scroll_element_into_view(button)
-            button.click()
-
-        # Test case #A26
         self.open(self.prj_dashboard_path + 'resources/')
         self.wd.BY_LINK('Attach').click()
         tr = self.wd.BY_XPATH('//*[@id="DataTables_Table_0"]//tbody//tr')
-        name = re.search('File [a-z0-9]{24}', tr.text).group(0)
+        name = re.search('FuncTest Dummy Resource [0-9]+', tr.text).group(0)
         attached_resource_names = [name]
         tr.click()
         self.wd.BY_XPATH('//*[@id="DataTables_Table_0_next"]//a').click()
         tr = self.wd.BY_XPATH('//*[@id="DataTables_Table_0"]//tbody//tr')
-        name = re.search('File [a-z0-9]{24}', tr.text).group(0)
+        name = re.search('FuncTest Dummy Resource [0-9]+', tr.text).group(0)
         attached_resource_names.append(name)
         tr.click()
         self.wd.BY_XPATH(
@@ -908,8 +880,16 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
             self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(self.prj['name']))
 
         # [REVERSION]
-        for resource in resources:
-            self.delete_resource(resource, is_on_resource_page=False)
+        for name in attached_resource_names:
+            self.open(self.prj_dashboard_path + 'resources/')
+            self.do_table_search(name)
+            self.wd.wait_for_xpath(
+                '//tr[contains(.,"{}")]'.format(name)).click()
+            row = self.wd.BY_XPATH(
+                '//tr[contains(.,"{}")]'.format(self.prj['name']))
+            detach_button = row.find_element_by_tag_name('button')
+            self.scroll_element_into_view(detach_button)
+            detach_button.click()
 
     @pytest.mark.uploads
     def test_large_resource_file_cannot_be_uploaded(
