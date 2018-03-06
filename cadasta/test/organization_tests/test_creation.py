@@ -50,11 +50,11 @@ class TestCreation(SeleniumTestCase):
         assert self.get_url_path() == expected_path
         self.wd.BY_XPATH('//h1[contains(.,"{}")]'.format(name))
         about = self.wd.BY_CLASS('panel-about')
-        about.find_element_by_xpath('//*[.="Organization description."]')
-        about.find_element_by_xpath('//*[@href="http://example.com"]')
-        about.find_element_by_xpath('//*[text()="Contact Person"]')
-        about.find_element_by_xpath('//*[@href="mailto:contact@example.com"]')
-        about.find_element_by_xpath('//*[@href="tel:1234567890"]')
+        about.find_element_by_xpath('.//*[.="Organization description."]')
+        about.find_element_by_xpath('.//*[@href="http://example.com"]')
+        about.find_element_by_xpath('.//*[text()="Contact Person"]')
+        about.find_element_by_xpath('.//*[@href="mailto:contact@example.com"]')
+        about.find_element_by_xpath('.//*[@href="tel:1234567890"]')
         self.wd.BY_XPATH('//*[contains(.,"Now add your first project.")]')
 
     def test_name_is_required(self):
@@ -141,7 +141,7 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('contacts-0-tel', '1234567890')
         self.click_save_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="Please provide a name."]')
+            './/*[.="Please provide a name."]')
 
     def test_contact_email_or_phone_is_required(self):
         """Verifies Organizations test case #C9."""
@@ -155,7 +155,7 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('contacts-0-name', 'Contact Person')
         self.click_save_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="Please provide either an email address '
+            './/*[.="Please provide either an email address '
             'or a phone number."]')
 
     def test_invalid_contact_email_address_is_rejected(self):
@@ -172,4 +172,4 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('contacts-0-tel', '1234567890')
         self.click_save_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="This field should be a valid email."]')
+            './/*[.="This field should be a valid email."]')

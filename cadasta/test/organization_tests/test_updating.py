@@ -52,15 +52,15 @@ class TestUpdating(SeleniumTestCase):
         self.wd.BY_XPATH('//h1[normalize-space()="FuncTest Temp Name"]')
         about = self.wd.BY_CLASS('panel-about')
         about.find_element_by_xpath(
-            '//*[.="{}"]'.format(self.org['description']))
+            './/*[.="{}"]'.format(self.org['description']))
         about.find_element_by_xpath(
-            '//*[@href="{}"]'.format(json.loads(self.org['urls'])[0]))
+            './/*[@href="{}"]'.format(json.loads(self.org['urls'])[0]))
         contact = self.org['contacts'][0]
-        about.find_element_by_xpath('//*[.="{}"]'.format(contact['name']))
+        about.find_element_by_xpath('.//*[.="{}"]'.format(contact['name']))
         about.find_element_by_xpath(
-            '//*[@href="mailto:{}"]'.format(contact['email']))
+            './/*[@href="mailto:{}"]'.format(contact['email']))
         about.find_element_by_xpath(
-            '//*[@href="tel:{}"]'.format(contact['tel']))
+            './/*[@href="tel:{}"]'.format(contact['tel']))
 
         # [REVERSION]
         self.select_org_menu_item('Edit organization')

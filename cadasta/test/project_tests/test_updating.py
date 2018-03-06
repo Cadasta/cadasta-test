@@ -63,15 +63,15 @@ class TestUpdating(SeleniumTestCase):
                 self.org['name']))
         about = self.wd.BY_CLASS('panel-about')
         about.find_element_by_xpath(
-            '//*[.="{}"]'.format(self.prj['description']))
+            './/*[.="{}"]'.format(self.prj['description']))
         about.find_element_by_xpath(
-            '//*[@href="{}"]'.format(json.loads(self.prj['urls'])[0]))
+            './/*[@href="{}"]'.format(json.loads(self.prj['urls'])[0]))
         contact = self.prj['contacts'][0]
-        about.find_element_by_xpath('//*[.="{}"]'.format(contact['name']))
+        about.find_element_by_xpath('.//*[.="{}"]'.format(contact['name']))
         about.find_element_by_xpath(
-            '//*[@href="mailto:{}"]'.format(contact['email']))
+            './/*[@href="mailto:{}"]'.format(contact['email']))
         about.find_element_by_xpath(
-            '//*[@href="tel:{}"]'.format(contact['tel']))
+            './/*[@href="tel:{}"]'.format(contact['tel']))
 
         # [REVERSION]
         self.select_prj_menu_item('Edit project details')

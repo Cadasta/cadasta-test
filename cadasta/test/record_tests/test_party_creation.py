@@ -282,7 +282,7 @@ class TestPartyCreation(SeleniumTestCase):
         self.open(self.prj_dashboard_path)
         try:
             self.wd.BY_CSS('.page-header .btn-group').find_element_by_xpath(
-                '//*[normalize-space()="Add location"]')
+                './/*[normalize-space()="Add location"]')
             self.wd.BY_CSS('.page-header .btn-group .dropdown-toggle')
             raise AssertionError('Project add location/menu is present')
         except NoSuchElementException:

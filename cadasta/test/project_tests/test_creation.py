@@ -71,11 +71,11 @@ class TestCreation(SeleniumTestCase):
         assert self.get_url_path() == expected_path
         self.wd.BY_XPATH('//h1[contains(.,"{}")]'.format(name))
         about = self.wd.BY_CLASS('panel-about')
-        about.find_element_by_xpath('//*[.="Project description."]')
-        about.find_element_by_xpath('//*[@href="http://example.com"]')
-        about.find_element_by_xpath('//*[text()="Contact Person"]')
-        about.find_element_by_xpath('//*[@href="mailto:cp@example.com"]')
-        about.find_element_by_xpath('//*[@href="tel:1234567890"]')
+        about.find_element_by_xpath('.//*[.="Project description."]')
+        about.find_element_by_xpath('.//*[@href="http://example.com"]')
+        about.find_element_by_xpath('.//*[text()="Contact Person"]')
+        about.find_element_by_xpath('.//*[@href="mailto:cp@example.com"]')
+        about.find_element_by_xpath('.//*[@href="tel:1234567890"]')
 
     def test_org_admin_can_create_private_project(self):
         """Verifies Projects test case #C2."""
@@ -103,11 +103,11 @@ class TestCreation(SeleniumTestCase):
         self.wd.BY_XPATH(
             '//h1[contains(normalize-space(),"{} Private")]'.format(name))
         about = self.wd.BY_CLASS('panel-about')
-        about.find_element_by_xpath('//*[.="Project description."]')
-        about.find_element_by_xpath('//*[@href="http://example.com"]')
-        about.find_element_by_xpath('//*[text()="Contact Person"]')
-        about.find_element_by_xpath('//*[@href="mailto:cp@example.com"]')
-        about.find_element_by_xpath('//*[@href="tel:1234567890"]')
+        about.find_element_by_xpath('.//*[.="Project description."]')
+        about.find_element_by_xpath('.//*[@href="http://example.com"]')
+        about.find_element_by_xpath('.//*[text()="Contact Person"]')
+        about.find_element_by_xpath('.//*[@href="mailto:cp@example.com"]')
+        about.find_element_by_xpath('.//*[@href="tel:1234567890"]')
 
     def test_non_org_admin_cannot_create_project(self, org_member):
         """Verifies Projects test case #C3."""
@@ -138,7 +138,7 @@ class TestCreation(SeleniumTestCase):
         assert self.get_url_path() == expected_path
         self.wd.BY_XPATH('//h1[contains(.,"{}")]'.format(name))
         self.wd.BY_CLASS('panel-about').find_element_by_xpath(
-            '//*[contains(.,"This project needs a description.")]')
+            './/*[contains(.,"This project needs a description.")]')
 
     def test_org_is_required(self):
         """Verifies Projects test case #C5."""
@@ -227,7 +227,7 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('details-contacts-0-tel', '1234567890')
         self.click_wizard_next_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="Please provide a name."]')
+            './/*[.="Please provide a name."]')
 
     def test_contact_email_or_phone_is_required(self):
         """Verifies Projects test case #C14."""
@@ -242,7 +242,7 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('details-contacts-0-name', 'Contact Person')
         self.click_wizard_next_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="Please provide either an email address '
+            './/*[.="Please provide either an email address '
             'or a phone number."]')
 
     def test_invalid_contact_email_address_is_rejected(self):
@@ -260,4 +260,4 @@ class TestCreation(SeleniumTestCase):
         self.update_form_field('details-contacts-0-tel', '1234567890')
         self.click_wizard_next_button()
         self.wd.BY_CLASS('contacts-form').find_element_by_xpath(
-            '//*[.="This field should be a valid email."]')
+            './/*[.="This field should be a valid email."]')
