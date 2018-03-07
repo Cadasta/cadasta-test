@@ -49,13 +49,14 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(resource['name'])
         row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//*[contains(.,"{}")]'.format(resource['type']))
-        row_febx('//*[contains(.,"{}")]'.format(user['username']))
-        row_febx('//*[contains(.,"{}")]'.format(user['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date, expected_max_date))
-        row_febx('//button[contains(.,"Detach")]')
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(resource['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(user['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(user['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
+            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
+            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
+        row_febx('.//button[contains(.,"Detach")]')
         row.click()
 
         self.wd.wait_for_xpath(
@@ -65,8 +66,7 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
                 '//p[contains(.,"{}")]'.format(resource['description']))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(filename))
         self.wd.BY_XPATH('//td[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date.replace(' ', '. ', 1),
-            expected_max_date.replace(' ', '. ', 1)))
+            expected_min_date, expected_max_date))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(user['full_name']))
         row = self.wd.BY_XPATH(
             '//tr[contains(.,"{}")]'.format(self.prj['name']))
@@ -110,15 +110,17 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
 
         (expected_min_date, expected_max_date) = self.get_min_max_date()
         self.do_table_search(resource['name'])
-        row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
+        row = self.wd.wait_for_xpath(
+            '//tr[contains(.,"{}")]'.format(resource['name']))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//*[contains(.,"{}")]'.format(resource['type']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['username']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date, expected_max_date))
-        row_febx('//button[contains(.,"Detach")]')
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(resource['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
+            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
+            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
+        row_febx('.//button[contains(.,"Detach")]')
 
         # Continuation of test case #A1
         row.click()
@@ -127,8 +129,7 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
             '//p[contains(.,"{}")]'.format(resource['description']))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(filename))
         self.wd.BY_XPATH('//td[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date.replace(' ', '. ', 1),
-            expected_max_date.replace(' ', '. ', 1)))
+            expected_min_date, expected_max_date))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(
             data_collector['full_name']))
         row = self.wd.BY_XPATH(
@@ -147,25 +148,26 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Resources"]').click()
         self.do_table_search(resource['name'])
-        row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
+        row = self.wd.wait_for_xpath(
+            '//tr[contains(.,"{}")]'.format(resource['name']))
         try:
-            row.find_element_by_xpath(
-                '//button[contains(.,"Detach")]')
+            row.find_element_by_xpath('.//button[contains(.,"Detach")]')
             raise AssertionError('Resource is still attached to project')
         except NoSuchElementException:
             pass
 
         # Test case #A2
         self.wd.BY_LINK('Attach').click()
-        self.do_table_search(resource['name'])
-        self.wd.wait_for_xpath(
-            '//tr[contains(.,"{}")]'.format(filename)).click()
+        self.do_table_search(
+            resource['name'], filter_id='DataTables_Table_0_filter')
+        self.wd.BY_XPATH(
+            '//tr[contains(.,"{}")]'.format(resource['name'])).click()
         self.wd.BY_XPATH(
             '//button[@type="submit" and contains(.,"Save")]').click()
         self.do_table_search(resource['name'])
-        row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
-        row.find_element_by_xpath(
-            '//button[contains(.,"Detach")]')
+        row = self.wd.wait_for_xpath(
+            '//tr[contains(.,"{}")]'.format(resource['name']))
+        row.find_element_by_xpath('.//button[contains(.,"Detach")]')
         row.click()
         self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(self.prj['name']))
 
@@ -175,11 +177,12 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(resource['name'])
         self.wd.wait_for_xpath(
             '//tr[contains(.,"{}")]'
-            '//button[contains(.,"Detach")]'.format(filename)).click()
+            '//button[contains(.,"Detach")]'.format(resource['name'])).click()
         self.do_table_search(resource['name'])
-        row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
+        row = self.wd.wait_for_xpath(
+            '//tr[contains(.,"{}")]'.format(resource['name']))
         try:
-            row.find_element_by_xpath('//button[contains(.,"Detach")]')
+            row.find_element_by_xpath('.//button[contains(.,"Detach")]')
             raise AssertionError('Resource is still attached to project')
         except NoSuchElementException:
             pass
@@ -225,15 +228,13 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH(
             '//button[@type="submit" and contains(.,"Save")]').click()
         (expected_min_date, expected_max_date) = self.get_min_max_date()
-        expected_min_date = expected_min_date.replace(' ', '. ', 1)
-        expected_max_date = expected_max_date.replace(' ', '. ', 1)
         # DataTables Table 0 is tenure relationships; Table 1 is resources
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//button[contains(.,"Detach")]')
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//button[contains(.,"Detach")]')
         row.click()
 
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(resource['name']))
@@ -296,7 +297,7 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
-        row.find_element_by_xpath('//button[contains(.,"Detach")]')
+        row.find_element_by_xpath('.//button[contains(.,"Detach")]')
         row.click()
         self.wd.BY_XPATH(
             '//tr['
@@ -373,20 +374,18 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH(
             '//button[@type="submit" and contains(.,"Save")]').click()
         (expected_min_date, expected_max_date) = self.get_min_max_date()
-        expected_min_date = expected_min_date.replace(' ', '. ', 1)
-        expected_max_date = expected_max_date.replace(' ', '. ', 1)
         # DataTables Table 0 is tenure relationships; Table 1 is resources
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//*[contains(.,"{}")]'.format(resource['type']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['username']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(resource['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
             expected_min_date, expected_max_date))
-        row_febx('//button[contains(.,"Detach")]')
+        row_febx('.//button[contains(.,"Detach")]')
         row.click()
 
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(resource['name']))
@@ -449,7 +448,7 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_1_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
-        row.find_element_by_xpath('//button[contains(.,"Detach")]')
+        row.find_element_by_xpath('.//button[contains(.,"Detach")]')
         row.click()
         self.wd.BY_XPATH(
             '//tr['
@@ -524,14 +523,12 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH(
             '//button[@type="submit" and contains(.,"Save")]').click()
         (expected_min_date, expected_max_date) = self.get_min_max_date()
-        expected_min_date = expected_min_date.replace(' ', '. ', 1)
-        expected_max_date = expected_max_date.replace(' ', '. ', 1)
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_0_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//button[contains(.,"Detach")]')
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//button[contains(.,"Detach")]')
         row.click()
 
         self.wd.BY_XPATH('//h2[contains(.,"{}")]'.format(resource['name']))
@@ -595,7 +592,7 @@ class TestAttaching(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(
             resource['name'], filter_id='DataTables_Table_0_filter')
         row = self.wd.BY_XPATH('//tr[contains(.,"{}")]'.format(filename))
-        row.find_element_by_xpath('//button[contains(.,"Detach")]')
+        row.find_element_by_xpath('.//button[contains(.,"Detach")]')
         row.click()
         self.wd.BY_XPATH(
             '//tr['

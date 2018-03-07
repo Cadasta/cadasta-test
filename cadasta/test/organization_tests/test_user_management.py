@@ -44,7 +44,7 @@ class TestUserManagement(SeleniumTestCase):
             '         normalize-space()="Members"]]')
         for member in all_org_members:
             panel.find_element_by_xpath(
-                '//*[.="{}"]'.format(member['username']))
+                './/*[.="{}"]'.format(member['username']))
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Members"]').click()
         select = Select(self.wd.BY_CSS('.dataTables_length select'))
@@ -146,7 +146,7 @@ class TestUserManagement(SeleniumTestCase):
 
             def content_contains_text(text):
                 content.find_element_by_xpath(
-                    '//*[text()[contains(.,"{}")]]'.format(text))
+                    './/*[text()[contains(.,"{}")]]'.format(text))
 
             content_contains_text(member['username'])
             if member['full_name']:
@@ -155,7 +155,7 @@ class TestUserManagement(SeleniumTestCase):
 
             if member['username'] == org_admin['username']:
                 content.find_element_by_xpath(
-                    '//*[contains(@class,"member-role")]'
+                    './/*[contains(@class,"member-role")]'
                     '//*[text()[contains(.,"Administrator")]]')
             else:
                 role_value = 'A' if member['admin'] else 'M'

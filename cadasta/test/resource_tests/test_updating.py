@@ -1,4 +1,5 @@
 import pytest
+import re
 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
@@ -66,8 +67,7 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH('//p[contains(.,"{}")]'.format(temp_description))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(filename1))
         self.wd.BY_XPATH('//td[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date.replace(' ', '. ', 1),
-            expected_max_date.replace(' ', '. ', 1)))
+            expected_min_date, expected_max_date))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(
             data_collector['full_name']))
 
@@ -76,12 +76,13 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         row = self.wd.wait_for_xpath(
             '//tr[contains(.,"{}")]'.format(filename1))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(temp_name))
-        row_febx('//*[contains(.,"{}")]'.format(resource1['type']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['username']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date, expected_max_date))
+        row_febx('.//*[contains(.,"{}")]'.format(temp_name))
+        row_febx('.//*[contains(.,"{}")]'.format(resource1['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
+            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
+            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
 
         # Test case #U2
         self.do_table_search(temp_name)
@@ -102,8 +103,7 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         self.wd.BY_XPATH('//p[contains(.,"{}")]'.format(temp_description))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(filename2))
         self.wd.BY_XPATH('//td[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date.replace(' ', '. ', 1),
-            expected_max_date.replace(' ', '. ', 1)))
+            expected_min_date, expected_max_date))
         self.wd.BY_XPATH('//td[contains(.,"{}")]'.format(
             data_collector['full_name']))
 
@@ -112,12 +112,13 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         row = self.wd.wait_for_xpath(
             '//tr[contains(.,"{}")]'.format(filename2))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource2['name']))
-        row_febx('//*[contains(.,"{}")]'.format(resource2['type']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['username']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date, expected_max_date))
+        row_febx('.//*[contains(.,"{}")]'.format(resource2['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(resource2['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
+            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
+            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
 
         # [REVERSION] and test case #X2
         row.click()
@@ -178,12 +179,13 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         self.do_table_search(resource['name'])
         row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
         row_febx = row.find_element_by_xpath
-        row_febx('//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('//*[contains(.,"{}")]'.format(resource['type']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['username']))
-        row_febx('//*[contains(.,"{}")]'.format(data_collector['full_name']))
-        row_febx('//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            expected_min_date, expected_max_date))
+        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(resource['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
+        row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
+            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
+            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
 
         # Test case #B2
         self.do_table_search(random_string())
