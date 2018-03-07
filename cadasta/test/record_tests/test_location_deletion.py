@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from ..base_test import SeleniumTestCase
 
 
-@pytest.mark.batch2
+@pytest.mark.batch3
 class TestLocationDeletion(SeleniumTestCase):
 
     @pytest.fixture

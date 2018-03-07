@@ -8,7 +8,7 @@ from ..base_test import SeleniumTestCase
 from .resources_util import ResourcesUtil
 
 
-@pytest.mark.batch3
+@pytest.mark.batch4
 class TestSpatialResources(ResourcesUtil, SeleniumTestCase):
 
     @pytest.fixture

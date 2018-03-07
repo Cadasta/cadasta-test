@@ -7,7 +7,7 @@ from ..util import random_string
 USER_MENU_XPATH_FORMAT = '//header//*[normalize-space()="{}"]'
 
 
-@pytest.mark.batch1
+@pytest.mark.batch2
 class TestCreation(SeleniumTestCase):
 
     @pytest.fixture(autouse=True)
