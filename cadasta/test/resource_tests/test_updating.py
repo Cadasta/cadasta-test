@@ -9,7 +9,7 @@ from .resources_util import ResourcesUtil
 from ..util import random_string
 
 
-@pytest.mark.batch3
+@pytest.mark.batch4
 class TestUpdating(ResourcesUtil, SeleniumTestCase):
 
     @pytest.fixture
