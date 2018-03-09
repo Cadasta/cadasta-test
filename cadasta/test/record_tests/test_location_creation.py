@@ -182,3 +182,8 @@ class TestLocationCreation(SeleniumTestCase):
         self.open(self.get_url_path() + 'new')
         self.wait_for_alert(
             "You don't have permission to add locations to this project.")
+
+    @pytest.mark.uploads
+    def test_dummy_upload(self):
+        """Dummy passing test for Travis-BrowserStack builds."""
+        pass

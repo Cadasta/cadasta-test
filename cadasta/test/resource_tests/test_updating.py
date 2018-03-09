@@ -1,6 +1,7 @@
 import pytest
 import re
 
+from datetime import timedelta
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
@@ -148,44 +149,28 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
                 '//*[normalize-space()="No matching records found"]')
 
     def test_project_user_cannot_update_resource(
-        self, records_org_prj, prj_user, data_collector
+        self, records_org_prj, dummy_resource_1, prj_user, data_collector
     ):
         """Verifies Resources test case #B1, #B2, #U3."""
-
-        # Attach a resource to the project
-        filename = 'user_avatar_3.gif'
-        resource = self.get_test_resource_data(filename)
-        self.log_in(data_collector)
-        self.open(self.prj_dashboard_path + 'resources/')
-        self.wd.BY_LINK('Attach').click()
-        try:
-            self.wd.BY_LINK('Upload new').click()
-        except NoSuchElementException:
-            pass
-        self.wd.BY_XPATH('//input[@type="file"]').send_keys(resource['path'])
-        self.wd.wait_until_clickable((By.CLASS_NAME, 'file-remove'))
-        self.update_form_field('name', resource['name'])
-        self.update_form_field('description', resource['description'])
-        self.wd.BY_XPATH(
-            '//button[@type="submit" and contains(.,"Save")]').click()
-        (expected_min_date, expected_max_date) = self.get_min_max_date()
-        self.open('/account/logout/')
 
         # Test case #B1
         self.log_in(prj_user)
         self.open(self.prj_dashboard_path)
         self.wd.BY_XPATH(
             '//*[@id="sidebar"]//a[normalize-space()="Resources"]').click()
-        self.do_table_search(resource['name'])
-        row = self.wd.wait_for_xpath('//tr[contains(.,"{}")]'.format(filename))
+        self.do_table_search(dummy_resource_1['name'])
+        row = self.wd.wait_for_xpath(
+            '//tr[contains(.,"{}")]'.format(dummy_resource_1['original_file']))
         row_febx = row.find_element_by_xpath
-        row_febx('.//*[contains(.,"{}")]'.format(resource['name']))
-        row_febx('.//*[contains(.,"{}")]'.format(resource['type']))
+        row_febx('.//*[contains(.,"{}")]'.format(dummy_resource_1['name']))
+        row_febx('.//*[contains(.,"{}")]'.format(dummy_resource_1['type']))
         row_febx('.//*[contains(.,"{}")]'.format(data_collector['username']))
         row_febx('.//*[contains(.,"{}")]'.format(data_collector['full_name']))
+        max_date = dummy_resource_1['last_updated'].strftime('%b %-d, %Y')
+        min_date = dummy_resource_1['last_updated'] + timedelta(days=-1)
+        min_date = min_date.strftime('%b %-d, %Y')
         row_febx('.//*[contains(.,"{}") or contains(.,"{}")]'.format(
-            re.sub(r'^(...).*? ', r'\1 ', expected_min_date),
-            re.sub(r'^(...).*? ', r'\1 ', expected_max_date)))
+            max_date, min_date))
 
         # Test case #B2
         self.do_table_search(random_string())
@@ -194,9 +179,10 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
             '//*[normalize-space()="No matching records found"]')
 
         # Test case #U3
-        self.do_table_search(resource['name'])
+        self.do_table_search(dummy_resource_1['name'])
         self.wd.wait_for_xpath(
-            '//tr[contains(.,"{}")]'.format(filename)).click()
+            '//tr[contains(.,"{}")]'.format(
+                dummy_resource_1['original_file'])).click()
         try:
             self.wd.BY_CSS('[title="Edit resource"]').click()
             raise AssertionError('Edit resource button is present')
@@ -206,13 +192,3 @@ class TestUpdating(ResourcesUtil, SeleniumTestCase):
         self.wait_for_alert(
             "You don't have permission to edit this resource.")
         self.open('/account/logout/')
-
-        # [REVERSION]
-        self.log_in(data_collector)
-        self.open(self.prj_dashboard_path + 'resources/')
-        self.do_table_search(resource['name'])
-        self.wd.wait_for_xpath(
-            '//tr[contains(.,"{}")]'.format(filename)).click()
-        self.wd.BY_CSS('[title="Delete resource"]').click()
-        self.wd.BY_LINK('Yes, delete this resource').click()
-        assert self.get_url_path() == self.prj_dashboard_path + 'resources/'
