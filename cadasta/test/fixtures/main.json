@@ -401,6 +401,22 @@
   }
 },
 {
+  "model": "organization.organization",
+  "pk": "rr2smxg2duyy7ika5js2zt4p",
+  "fields": {
+    "name": "FuncTest Archived Org",
+    "slug": "functest-archived-org-rr2smxg2duyy7ika5js2zt4p",
+    "description": "",
+    "archived": true,
+    "urls": "[]",
+    "contacts": [],
+    "logo": null,
+    "created_date": "2018-03-10T00:00:00.000Z",
+    "last_updated": "2018-03-10T00:00:00.000Z",
+    "access": "public"
+  }
+},
+{
   "model": "organization.organizationrole",
   "pk": "sh72yitpg38qmpgwsuj78d2y",
   "fields": {
@@ -441,6 +457,19 @@
 },
 {
   "model": "organization.organizationrole",
+  "pk": "q844vjbimwdtcf9dbt7xusy8",
+  "fields": {
+    "organization": "rr2smxg2duyy7ika5js2zt4p",
+    "user": [
+      "functest_org_admin_9y6bf5k395xrezm54h8z4v62"
+    ],
+    "admin": true,
+    "created_date": "2018-03-10T00:00:00.000Z",
+    "last_updated": "2018-03-10T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
   "pk": "bqz3zapridkcsvgqn46nn7zh",
   "fields": {
     "organization": "t76ippq854bvzh5uju6tikbw",
@@ -450,6 +479,32 @@
     "admin": false,
     "created_date": "2017-09-08T00:00:00.000Z",
     "last_updated": "2017-09-08T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "94hqkcjrjdiyctwpmc5i6tk4",
+  "fields": {
+    "organization": "gqipwy974q4pa5mtc2pa4rbq",
+    "user": [
+      "functest_org_member_ku4hvskari5jzs4peadicqck"
+    ],
+    "admin": false,
+    "created_date": "2018-03-10T00:00:00.000Z",
+    "last_updated": "2018-03-10T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.organizationrole",
+  "pk": "qti2tk7gum5b83xpqrkhsdrn",
+  "fields": {
+    "organization": "rr2smxg2duyy7ika5js2zt4p",
+    "user": [
+      "functest_org_member_ku4hvskari5jzs4peadicqck"
+    ],
+    "admin": false,
+    "created_date": "2018-03-10T00:00:00.000Z",
+    "last_updated": "2018-03-10T00:00:00.000Z"
   }
 },
 {
@@ -589,7 +644,7 @@
     "name": "FuncTest Basic Prj",
     "slug": "functest-basic-prj-e9v8ezdrtygish5vqcrpkm82",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "US",
     "description": "Project without a questionnaire. Needs to be empty of records and resources.",
     "archived": false,
     "urls": "[\"http://example.com\"]",
@@ -615,7 +670,7 @@
     "name": "FuncTest Private Prj",
     "slug": "functest-private-prj-cqptmp935n9qvqj532xb45v5",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "GB",
     "description": "Private project without a questionnaire.",
     "archived": false,
     "urls": "[]",
@@ -630,12 +685,32 @@
 },
 {
   "model": "organization.project",
+  "pk": "ah8irfhs8aghteynnp79ytw6",
+  "fields": {
+    "name": "FuncTest Archived Prj",
+    "slug": "functest-archived-prj-ah8irfhs8aghteynnp79ytw6",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "",
+    "archived": true,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": null,
+    "area": 0.0,
+    "created_date": "2018-03-13T00:00:00.000Z",
+    "last_updated": "2018-03-13T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.project",
   "pk": "pz58z4s2wfvp2sin2z6k3jbv",
   "fields": {
     "name": "FuncTest Records Prj",
     "slug": "functest-records-prj-pz58z4s2wfvp2sin2z6k3jbv",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "DE",
     "description": "Project without a questionnaire. Contains a location, a party, and 2 tenure relationships. Default project to be used for records test cases.",
     "archived": false,
     "urls": "[]",
@@ -655,7 +730,7 @@
     "name": "FuncTest Custom Attrs Prj",
     "slug": "functest-custom-attrs-prj-9zz5r4cn7kkhgbutnpdc3i4d",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "FR",
     "description": "Project with a questionnaire having custom attributes for locations, parties, and tenure relationships, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
@@ -675,7 +750,7 @@
     "name": "FuncTest Conditional Attrs Prj",
     "slug": "functest-conditional-attrs-prj-m6bv5m6jux2j",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "ES",
     "description": "Project with a questionnaire having conditional attributes for parties, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
@@ -695,7 +770,7 @@
     "name": "FuncTest Custom Party Attrs Prj",
     "slug": "functest-custom-party-attrs-prj-scjycvu5ggq3r967i9",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "NL",
     "description": "Project with a questionnaire having custom attributes only for parties, and having English and Tagalog (using Indonesian code) labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
@@ -715,7 +790,7 @@
     "name": "FuncTest Custom Tenure Attrs Prj",
     "slug": "functest-custom-tenure-attrs-prj-4q4hv5ynyhg3mruy6",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "BE",
     "description": "Project with a questionnaire having custom attributes only for tenure relationships, and having English and Tagalog (using Indonesian code) labels. Contains a location and a party to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
@@ -735,7 +810,7 @@
     "name": "FuncTest Custom-Conditional Attrs Prj",
     "slug": "functest-custom-conditional-attrs-prj-3yjh9qnv9f7x",
     "organization": "t76ippq854bvzh5uju6tikbw",
-    "country": "",
+    "country": "IT",
     "description": "Project with a questionnaire having conditional attributes for parties and custom attributes for tenure relationships, and having English and Spanish labels. Contains a location to be used for creating tenure relationships.",
     "archived": false,
     "urls": "[]",
@@ -755,7 +830,7 @@
     "name": "FuncTest Another Prj",
     "slug": "functest-another-prj-b2k5bruyxmh2ynicnzpeqt9k",
     "organization": "f5rbbkyeqw8jei44apqhfkrw",
-    "country": "",
+    "country": "PH",
     "description": "Project without a questionnaire in a different organization.",
     "archived": false,
     "urls": "[]",
@@ -805,6 +880,45 @@
     "role": "PU",
     "created_date": "2017-11-09T00:00:00.000Z",
     "last_updated": "2017-11-09T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "wrnujcnjudzfmztkg7jdzip8",
+  "fields": {
+    "project": "ah8irfhs8aghteynnp79ytw6",
+    "user": [
+      "functest_prj_manager_spj3de5tqkxt3dferaycyhiu"
+    ],
+    "role": "PM",
+    "created_date": "2018-03-13T00:00:00.000Z",
+    "last_updated": "2018-03-13T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "4cg3imxf3yn6dt2rr8ixdaut",
+  "fields": {
+    "project": "ah8irfhs8aghteynnp79ytw6",
+    "user": [
+      "functest_data_collector_q2gwagxrxanav2j6h8bih393"
+    ],
+    "role": "DC",
+    "created_date": "2018-03-13T00:00:00.000Z",
+    "last_updated": "2018-03-13T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "kz8edte9tdvi5shqq8ay24rh",
+  "fields": {
+    "project": "ah8irfhs8aghteynnp79ytw6",
+    "user": [
+      "functest_prj_user_5xjg9xz4m9xmz2gx8b78hqqz"
+    ],
+    "role": "PU",
+    "created_date": "2018-03-13T00:00:00.000Z",
+    "last_updated": "2018-03-13T00:00:00.000Z"
   }
 },
 {
