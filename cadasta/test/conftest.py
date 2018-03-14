@@ -97,11 +97,30 @@ def any_org_member(request, all_fixtures):
                         'functest_data_collector_',
                         'functest_prj_user_'])
 def any_user(request, all_fixtures):
+    """
+    This Pytest fixture function is intended for the user dashboard test and it
+    provides the listed users in the params argument above one at a time to the
+    test. For each user, the function extracts the corresponding organization,
+    organization role, project, and project role information from the test
+    fixtures and appends them to the user dict. The function also generates
+    other roles such as administrator and public user roles for projects which
+    are not explicitly represented in the database.
+
+    The appended org and project data has the following structure:
+    - list of org 3-tuples:
+      - dict of core org data (straight from the fixture file)
+      - bool of org admin role
+      - list of project 2-tuples:
+        - dict of core project data (straight from the fixture file)
+        - 2-char string representing the project role (OA/PM/DC/PU/PB)
+    """
     user = next(user for user in all_fixtures['accounts.user']
                 if request.param in user['username'])
+
     # Convert string date-time into Python datetime object
     user['created_date'] = datetime.strptime(
         user['created_date'], '%Y-%m-%dT%H:%M:%S.000Z')
+
     # Collect orgs, projects, and roles for the user
     user['orgs'] = []
     for org_role in all_fixtures['organization.organizationrole']:
@@ -127,6 +146,7 @@ def any_user(request, all_fixtures):
                 if not role_is_found:
                     prj_data.append((prj, 'PB'))
             user['orgs'].append((org, org_role['admin'], prj_data))
+
     return user
 
 
