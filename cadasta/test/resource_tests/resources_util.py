@@ -2,6 +2,7 @@ import re
 
 from datetime import date, timedelta
 from os.path import abspath, dirname, join
+from selenium.webdriver.common.by import By
 
 from ..base_test import SeleniumTestCase
 from ..util import random_string
@@ -46,5 +47,6 @@ class ResourcesUtil(SeleniumTestCase):
             self.wd.wait_for_xpath(
                 '//tr[contains(.,"{}")]'.format(resource['filename'])).click()
         self.wd.BY_CSS('[title="Delete resource"]').click()
-        self.wd.BY_LINK('Yes, delete this resource').click()
+        selector = (By.LINK_TEXT, 'Yes, delete this resource')
+        self.wd.wait_until_clickable(selector).click()
         assert self.get_url_path() == self.prj_dashboard_path + 'resources/'

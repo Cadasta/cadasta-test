@@ -1,6 +1,9 @@
 import json
 import os
 import pytest
+import re
+
+from datetime import datetime
 
 from .webdriver import CustomWebDriver
 
@@ -251,6 +254,18 @@ def basic_water_rights(all_fixtures, basic_parcel, basic_individual):
     tenure_rel['party'] = basic_individual
     tenure_rel['type_label'] = 'Water Rights'
     return tenure_rel
+
+
+# Under FuncTest Records Prj
+@pytest.fixture(scope='session')
+def dummy_resource_1(all_fixtures):
+    resource = next(res for res in all_fixtures['resources.resource']
+                    if 'FuncTest Dummy Resource 1' == res['name'])
+    resource['type'] = re.split('\.', resource['original_file'])[-1]
+    # Convert string date-time into Python datetime object
+    resource['last_updated'] = datetime.strptime(
+        resource['last_updated'], '%Y-%m-%dT%H:%M:%S.000Z')
+    return resource
 
 
 @pytest.fixture
