@@ -88,6 +88,68 @@ def any_org_member(request, all_fixtures):
                 if request.param in user['username'])
 
 
+@pytest.fixture(scope='session',
+                params=['functest_generic_',
+                        'functest_genericphone_',
+                        'functest_org_admin_',
+                        'functest_org_member_',
+                        'functest_prj_manager_',
+                        'functest_data_collector_',
+                        'functest_prj_user_'])
+def any_user(request, all_fixtures):
+    """
+    This Pytest fixture function is intended for the user dashboard test and it
+    provides the listed users in the params argument above one at a time to the
+    test. For each user, the function extracts the corresponding organization,
+    organization role, project, and project role information from the test
+    fixtures and appends them to the user dict. The function also generates
+    other roles such as administrator and public user project roles which are
+    not explicitly represented in the database.
+
+    The appended org and project data has the following structure:
+    - list of org 3-tuples:
+      - dict of core org data (straight from the fixture file)
+      - bool of org admin role
+      - list of project 2-tuples:
+        - dict of core project data (straight from the fixture file)
+        - 2-char string representing the project role (OA/PM/DC/PU/PB)
+    """
+    user = next(user for user in all_fixtures['accounts.user']
+                if request.param in user['username'])
+
+    # Convert string date-time into Python datetime object
+    user['created_date'] = datetime.strptime(
+        user['created_date'], '%Y-%m-%dT%H:%M:%S.000Z')
+
+    # Collect orgs, projects, and roles for the user
+    user['orgs'] = []
+    for org_role in all_fixtures['organization.organizationrole']:
+        if org_role['user'][0] != user['username']:
+            continue
+        for org in all_fixtures['organization.organization']:
+            if org_role['organization'] != org['pk']:
+                continue
+            prj_data = []
+            for prj in all_fixtures['organization.project']:
+                if prj['organization'] != org['pk']:
+                    continue
+                if org_role['admin']:
+                    prj_data.append((prj, 'OA'))
+                    continue
+                role_is_found = False
+                for prj_role in all_fixtures['organization.projectrole']:
+                    if prj_role['project'] != prj['pk']:
+                        continue
+                    if prj_role['user'][0] == user['username']:
+                        prj_data.append((prj, prj_role['role']))
+                        role_is_found = True
+                if not role_is_found:
+                    prj_data.append((prj, 'PB'))
+            user['orgs'].append((org, org_role['admin'], prj_data))
+
+    return user
+
+
 @pytest.fixture(scope='session')
 def basic_org(all_fixtures):
     return next(org for org in all_fixtures['organization.organization']
