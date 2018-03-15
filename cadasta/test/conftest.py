@@ -103,8 +103,8 @@ def any_user(request, all_fixtures):
     test. For each user, the function extracts the corresponding organization,
     organization role, project, and project role information from the test
     fixtures and appends them to the user dict. The function also generates
-    other roles such as administrator and public user roles for projects which
-    are not explicitly represented in the database.
+    other roles such as administrator and public user project roles which are
+    not explicitly represented in the database.
 
     The appended org and project data has the following structure:
     - list of org 3-tuples:
