@@ -89,6 +89,15 @@ def any_org_member(request, all_fixtures):
 
 
 @pytest.fixture(scope='session',
+                params=['functest_org_member_',
+                        'functest_data_collector_',
+                        'functest_prj_user_'])
+def any_non_pm_user(request, all_fixtures):
+    return next(user for user in all_fixtures['accounts.user']
+                if request.param in user['username'])
+
+
+@pytest.fixture(scope='session',
                 params=['functest_generic_',
                         'functest_genericphone_',
                         'functest_org_admin_',
@@ -170,8 +179,41 @@ def archivable_org(all_fixtures):
 
 @pytest.fixture(scope='session')
 def basic_prj(all_fixtures):
-    return next(prj for prj in all_fixtures['organization.project']
-                if 'functest-basic-prj-' in prj['slug'])
+    """
+    This Pytest fixture function returns the dict corresponding to the Basic
+    Prj with an additional key 'members' having a value which is a list of
+    tuple of the project's members (users with project role in the project and
+    users with an admin org role in the project's organization).
+
+    The member tuple has the following structure:
+    - dict of core user data (straight from the fixture file)
+    - 2-char string representing the project role (OA/PM/DC/PU)
+    """
+
+    project = next(prj for prj in all_fixtures['organization.project']
+                   if 'functest-basic-prj-' in prj['slug'])
+    project['members'] = []
+
+    # Extract non-org admins
+    for prj_role in all_fixtures['organization.projectrole']:
+        if prj_role['project'] != project['pk']:
+            continue
+        for user in all_fixtures['accounts.user']:
+            if prj_role['user'][0] == user['username']:
+                project['members'].append((user, prj_role['role']))
+
+    # Extract org admins
+    for org in all_fixtures['organization.organization']:
+        if org['pk'] != project['organization']:
+            continue
+        for org_role in all_fixtures['organization.organizationrole']:
+            if org_role['organization'] != org['pk'] or not org_role['admin']:
+                continue
+            for user in all_fixtures['accounts.user']:
+                if org_role['user'][0] == user['username']:
+                    project['members'].append((user, 'OA'))
+
+    return project
 
 
 @pytest.fixture(scope='session')
@@ -182,14 +224,34 @@ def private_prj(all_fixtures):
 
 @pytest.fixture(scope='session')
 def records_prj(all_fixtures):
-    return next(prj for prj in all_fixtures['organization.project']
-                if 'functest-records-prj-' in prj['slug'])
+    """This Pytest fixture function returns the dict corresponding to the
+    Records Prj with statistics keys added."""
+    project = next(prj for prj in all_fixtures['organization.project']
+                   if 'functest-records-prj-' in prj['slug'])
+    project['num_locations'] = len(
+        [loc for loc in all_fixtures['spatial.spatialunit']
+         if loc['project'] == project['pk']])
+    project['num_parties'] = len(
+        [party for party in all_fixtures['party.party']
+         if party['project'] == project['pk']])
+    project['num_resources'] = len(
+        [res for res in all_fixtures['resources.resource']
+         if res['project'] == project['pk']])
+    return project
 
 
 @pytest.fixture(scope='session')
 def custom_attrs_prj(all_fixtures):
-    return next(prj for prj in all_fixtures['organization.project']
-                if 'functest-custom-attrs-prj-' in prj['slug'])
+    """This Pytest fixture function returns the dict corresponding to the
+    Custom Attrs Prj with an additional 'questionnaire' key added with a value
+    corresponding to the questionnaire fixture data."""
+    project = next(prj for prj in all_fixtures['organization.project']
+                   if 'functest-custom-attrs-prj-' in prj['slug'])
+    for questionnaire in all_fixtures['questionnaires.questionnaire']:
+        if questionnaire['pk'] != project['current_questionnaire']:
+            continue
+        project['questionnaire'] = questionnaire
+    return project
 
 
 @pytest.fixture(scope='session')
@@ -214,6 +276,12 @@ def custom_tenure_attrs_prj(all_fixtures):
 def custom_conditional_attrs_prj(all_fixtures):
     return next(prj for prj in all_fixtures['organization.project']
                 if 'functest-custom-conditional-attrs-prj-' in prj['slug'])
+
+
+@pytest.fixture(scope='session')
+def empty_prj(all_fixtures):
+    return next(prj for prj in all_fixtures['organization.project']
+                if 'functest-empty-prj-' in prj['slug'])
 
 
 @pytest.fixture(scope='session')
