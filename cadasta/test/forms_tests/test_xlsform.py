@@ -127,7 +127,7 @@ class TestXLSForm(SeleniumTestCase):
 
     @pytest.mark.uploads
     def test_xlsform_with_resource_in_group_is_allowed(self, prj_manager):
-        """Verifies Forms test case #X8."""
+        """Verifies Forms test case #X8 and Projects test case #B13."""
 
         self.log_in(prj_manager)
         self.open(self.prj_dashboard_path)
@@ -139,7 +139,15 @@ class TestXLSForm(SeleniumTestCase):
         self.wd.BY_XPATH(input_xpath).send_keys(path)
         self.wait_and_click_save_button()
         self.assert_url_path(self.prj_dashboard_path)
-        self.wd.BY_LINK("Upload new XLS Form")
+        self.wd.BY_XPATH(
+            '//*[contains(normalize-space(),"You have designed a data '
+            'collection for this project but have not collected any data. '
+            'You can still change your schema.")]')
+        self.wd.BY_XPATH(
+            '//a[@href="{}edit/details/" and'
+            '    contains(@class,"btn-primary") and'
+            '    contains(.,"Upload new XLS Form")]'.format(
+                self.prj_dashboard_path))
         self.wd.BY_LINK("Download current XLS Form")
 
         # [REVERSION]

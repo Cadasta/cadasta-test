@@ -24,7 +24,10 @@ class CustomWebDriver(webdriver_module):
         super().__init__(**kwargs)
         self.set_window_size(1200, 800)
 
-        # Helper find-element methods to reduce line lengths
+        # Method aliases to reduce line lengths.
+        # Naming convention: "BY_*" returns the first element found while
+        #   "BYS_*" returns a list of all elements found. These correspond to
+        #   the "find_element_by_*" and "find_elements_by_*" WebDriver methods.
         self.BY_CLASS = self.find_element_by_class_name
         self.BY_CSS = self.find_element_by_css_selector
         self.BYS_CSS = self.find_elements_by_css_selector
@@ -34,6 +37,7 @@ class CustomWebDriver(webdriver_module):
         self.BY_TAG = self.find_element_by_tag_name
         self.BYS_TAG = self.find_elements_by_tag_name
         self.BY_XPATH = self.find_element_by_xpath
+        self.BYS_XPATH = self.find_elements_by_xpath
 
     def find_css(self, css_selector):
         """Shortcut to find elements by CSS. Returns either a list or

@@ -650,9 +650,19 @@
     "urls": "[\"http://example.com\"]",
     "contacts": [
       {
-        "name": "Contact Person",
-        "tel": "1234567890",
-        "email": "contact@example.com"
+        "name": "John Lennon",
+        "tel": "12345",
+        "email": "lennon@example.com"
+      },
+      {
+        "name": "Paul McCartney",
+        "tel": null,
+        "email": "mccartney@example.com"
+      },
+      {
+        "name": "Ringo Starr",
+        "tel": "13579",
+        "email": null
       }
     ],
     "extent": "SRID=4326;POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))",
@@ -825,6 +835,26 @@
 },
 {
   "model": "organization.project",
+  "pk": "nyxs9bqvr3gjgj9nxbu7fk7k",
+  "fields": {
+    "name": "FuncTest Empty Prj",
+    "slug": "functest-empty-prj-nyxs9bqvr3gjgj9nxbu7fk7k",
+    "organization": "t76ippq854bvzh5uju6tikbw",
+    "country": "",
+    "description": "",
+    "archived": false,
+    "urls": "[]",
+    "contacts": [],
+    "extent": null,
+    "access": "public",
+    "current_questionnaire": "",
+    "area": 0.0,
+    "created_date": "2018-03-17T00:00:00.000Z",
+    "last_updated": "2018-03-17T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.project",
   "pk": "b2k5bruyxmh2ynicnzpeqt9k",
   "fields": {
     "name": "FuncTest Another Prj",
@@ -949,6 +979,19 @@
 },
 {
   "model": "organization.projectrole",
+  "pk": "jfbtzefxcumqccr45ekywk8y",
+  "fields": {
+    "project": "9zz5r4cn7kkhgbutnpdc3i4d",
+    "user": [
+      "functest_prj_manager_spj3de5tqkxt3dferaycyhiu"
+    ],
+    "role": "PM",
+    "created_date": "2018-03-19T00:00:00.000Z",
+    "last_updated": "2018-03-19T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
   "pk": "abqfhm789xpfc27zjska7c65",
   "fields": {
     "project": "9zz5r4cn7kkhgbutnpdc3i4d",
@@ -1010,6 +1053,19 @@
     "role": "DC",
     "created_date": "2018-02-07T00:00:00.000Z",
     "last_updated": "2018-02-07T00:00:00.000Z"
+  }
+},
+{
+  "model": "organization.projectrole",
+  "pk": "c4se35jqhtesy5yrccpybakk",
+  "fields": {
+    "project": "nyxs9bqvr3gjgj9nxbu7fk7k",
+    "user": [
+      "functest_prj_manager_spj3de5tqkxt3dferaycyhiu"
+    ],
+    "role": "PM",
+    "created_date": "2018-03-17T00:00:00.000Z",
+    "last_updated": "2018-03-17T00:00:00.000Z"
   }
 },
 {
