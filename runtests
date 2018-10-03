@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ $# = 1 ];
-then
-   exec ./cadasta_test_suites.py  $1
-else
-   exec ./cadasta_test_suites.py
-fi
