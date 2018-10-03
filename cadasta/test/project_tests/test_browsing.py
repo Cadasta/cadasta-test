@@ -507,3 +507,17 @@ class TestBrowsing(SeleniumTestCase):
             raise AssertionError('Project members are shown')
         except NoSuchElementException:
             pass
+
+    def test_public_user_cannot_view_project_data(
+        self, org_member, basic_org, basic_prj
+    ):
+        """Verifies Projects test case #B6."""
+
+        self.log_in(org_member)
+        self.open('/organizations/{}/projects/{}/'.format(
+            basic_org['slug'], basic_prj['slug']))
+        try:
+            self.wd.BY_ID('sidebar')
+            raise AssertionError('Project sidebar is present')
+        except NoSuchElementException:
+            pass
